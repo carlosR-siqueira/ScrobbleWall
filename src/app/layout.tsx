@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="min-h-screen flex flex-col">
           {/* Header será exibido em todas as páginas */}
-          <Header />
+          <Header/>
           {/* O conteúdo específico de cada página será renderizado aqui */}
           <main className="flex-1">{children}</main>
         </div>

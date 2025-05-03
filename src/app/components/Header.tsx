@@ -1,11 +1,15 @@
 // components/Header.tsx
 import React from 'react';
+import Image from 'next/image'
+import styles from '../page.module.css';
+
 
 const Header: React.FC = () => {
   return (
-    <header className="w-full bg-cyan-600 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-3xl font-bold">🎵 ScrobbleWall</h1>
+    <header className={styles.header}>
+      <div className={styles.headerContentContainer}>
+        <Image src={'/scrobblewalllogo.png'} alt={'Logo'} width={'250'} height={'50'} style={{padding: '1px'}}/>
+      
        
       </div>
     </header>
