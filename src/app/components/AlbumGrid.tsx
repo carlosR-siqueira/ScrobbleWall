@@ -18,7 +18,7 @@ interface AlbumGridProps {
 const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) => {
   return (
     <div
-      ref={collageRef} 
+      ref={collageRef}
       className={styles.collageContainer}
       style={{
         gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
@@ -27,8 +27,8 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
       {albums.map((album, idx) => (
         <div key={idx} className={styles.collageItem}>
           <motion.img
-            src={album.image}
-            alt={album.name}
+            src={album.image || '/fallback1.png'} 
+            alt={album.name || 'Album sem nome'}
             className={styles.collageImage}
             width={100}
             height={100}
@@ -45,7 +45,5 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
     </div>
   );
 };
-
-
 
 export default AlbumGrid;

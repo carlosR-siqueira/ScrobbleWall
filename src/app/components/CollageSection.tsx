@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from '../page.module.css';
 
 interface CollageSectionProps {
@@ -11,10 +11,11 @@ interface CollageSectionProps {
   fetchAlbums: () => void;
   loading: boolean;
   error: string;
-  downloadImage: (collageRef: React.RefObject<HTMLDivElement | null>) => void; // Alterado para permitir null
-  albums: any[]; 
+  downloadImage: (includeInfo: boolean) => void;
+  albums: any[];
+  includeInfo: boolean;
+  setIncludeInfo: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 
 
 const CollageSection: React.FC<CollageSectionProps> = ({
@@ -29,70 +30,83 @@ const CollageSection: React.FC<CollageSectionProps> = ({
   error,
   downloadImage,
   albums,
+  includeInfo,        // 👈 props corretos
+  setIncludeInfo,
 }) => {
   const collageRef = useRef<HTMLDivElement | null>(null);
+  
 
   return (
-   <div ref={collageRef} className={styles.collageContainer}> 
-    <section className={styles.inputContainer}>
-      <input
-        type="text"
-        placeholder="Digite seu usuário do Last.fm"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className={styles.inputField}
-      />
-      
-      <select
-        value={period}
-        onChange={(e) => setPeriod(e.target.value)}
-        className={styles.selectField}
-      >
-        <option value="7day">7 Dias</option>
-        <option value="1month">1 Mês</option>
-        <option value="3month">3 Meses</option>
-        <option value="12month">12 Meses</option>
-        <option value="overall">Todos os tempos</option>
-      </select>
+    <div ref={collageRef} className={styles.collageContainer}>
+      <section className={styles.inputContainer}>
+        <input
+          type="text"
+          placeholder="Digite seu usuário do Last.fm"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className={styles.inputField}
+        />
 
-      <select
-        value={gridSize}
-        onChange={(e) => setGridSize(Number(e.target.value))}
-        className={styles.selectField}
-      >
-        <option value={3}>3x3</option>
-        <option value={4}>4x4</option>
-        <option value={5}>5x5</option>
-      </select>
+        <select
+          value={period}
+          onChange={(e) => setPeriod(e.target.value)}
+          className={styles.selectField}
+        >
+          <option value="7day">7 Dias</option>
+          <option value="1month">1 Mês</option>
+          <option value="3month">3 Meses</option>
+          <option value="12month">12 Meses</option>
+          <option value="overall">Todos os tempos</option>
+        </select>
 
-      <button
-        onClick={fetchAlbums}
-        disabled={loading}
-        className={styles.button}
-      >
-        {loading ? 'Carregando...' : 'Gerar Collage'}
-      </button>
+        <select
+          value={gridSize}
+          onChange={(e) => setGridSize(Number(e.target.value))}
+          className={styles.selectField}
+        >
+          <option value={3}>3x3</option>
+          <option value={4}>4x4</option>
+          <option value={5}>5x5</option>
+        </select>
 
-      {albums.length > 0 && (
         <button
-        onClick={() => {
-          console.log("Triggering downloadImage...");
-          downloadImage(collageRef);  
-        }}
-        className={styles.button}
-      >
-        Baixar como PNG
-      </button>
-      
-      )}
+          onClick={fetchAlbums}
+          disabled={loading}
+          className={styles.button}
+        >
+          {loading ? 'Carregando...' : 'Gerar Collage'}
+        </button>
 
-      {error && (
-        <div className="bg-red-500/20 text-red-300 border border-red-500/50 p-3 rounded-md text-sm">
-          {error}
-        </div>
-      )}
-    </section>
-  </div>
+        {albums.length > 0 && (
+          <>
+
+            <button
+              onClick={() => downloadImage(includeInfo)}
+              className={styles.button}
+            >
+              Baixar como PNG
+            </button>
+            <div className={styles.checkboxContainer}>
+              <label className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  checked={includeInfo}
+                  onChange={(e) => setIncludeInfo(e.target.checked)}
+                />
+                Incluir nome do álbum e artista
+              </label>
+
+            </div>
+          </>
+        )}
+
+        {error && (
+          <div className="bg-red-500/20 text-red-300 border border-red-500/50 p-3 rounded-md text-sm">
+            {error}
+          </div>
+        )}
+      </section>
+    </div>
   );
 };
 
