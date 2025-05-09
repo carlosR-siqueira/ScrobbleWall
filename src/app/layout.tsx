@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Underdog, Fredericka_the_Great } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header"; // Certifique-se de que o caminho está correto
 
@@ -11,6 +11,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const underdog = Underdog({
+  variable: "--font-underdog",
+  subsets: ["latin"],
+  weight: "400", // Underdog só tem peso 400
+});
+
+const fredericka = Fredericka_the_Great({
+  variable: "--font-fredericka",
+  subsets: ["latin"],
+  weight: "400", // Essa fonte só possui peso 400
 });
 
 export const metadata: Metadata = {
@@ -25,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
         <div className="min-h-screen flex flex-col">
           {/* Header será exibido em todas as páginas */}
           <Header/>

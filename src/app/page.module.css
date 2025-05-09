@@ -19,6 +19,85 @@
   letter-spacing: 2px;
 }
 
+.welcome {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  width: 90%;
+  padding: 20px;
+  opacity: 0.95;
+  background-color: #000;
+  height: 50vh;
+  box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+  -webkit-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+  -moz-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+}
+
+.resultActions {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-evenly;
+  border-radius: 10px;
+  width: 80%;
+  padding: 20px;
+  opacity: 0.95;
+  background-color: #000;
+  box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+  -webkit-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+  -moz-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+}
+.resultActions .button:nth-child(1){
+  height: fit-content;
+  width: fit-content;
+  padding: 7px;
+  font-size: 1rem;
+  position: absolute;
+  left: 12%;
+  top: 17%
+}
+
+.downloadBtnContainer{
+  display: flex;
+  width: 100%;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleWelcome{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 0 0 0 60px;
+  flex-direction: column;
+  width: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.logo {
+  /* align-self:flex-start; */
+  width: 80%;
+  margin: 0 0 0 30px;
+}
+.descriptionContainer{
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.6rem;
+  gap: 20px;
+}
+
+.description{
+  color: #ff9f00;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+}
+
 /* Container principal */
 .container {
   background-image: url('../../public/tijolo-brasil.jpg');
@@ -62,13 +141,13 @@
   border-radius: 8px;
   border: 1px solid #ddd;
   background-color: #181818;
-  color: #fff;
-  font-size: 1rem;
+  color: #ff9f00;
+  font-size: 1.3rem;
 }
 
 .button {
-  background-color: #626263;
-  color: #fff;
+  background-color: #353535;
+  color: #b6b6b6;
   padding: 12px 20px;
   border-radius: 8px;
   width: 50%;
@@ -76,11 +155,13 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .button:hover {
-  background-color: #3700b3;
+  background-color: #ffffffe5;
+  color: #D0021B
 }
 
 /* Collage container responsiva */
@@ -128,9 +209,74 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
+
+  .welcome {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 15px;
+  }
+  
+  .logo {
+    width: 75%;
+    margin: 0 auto 20px auto;
+  }
+  
+  .titleWelcome {
+    width: 100%;
+    margin: 0;
+    font-size: 1rem;
+    align-items: flex-start;
+    text-align: center;
+  }
+  
+  .descriptionContainer {
+    width: 100%;
+    padding-top: 10px;
+    font-size: 1.2rem;
+    gap: 12px;
+  }
+
+  .resultActions {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    padding: 15px;
+    gap: 15px;
+    text-align: center;
+    /* position: relative; */
+    margin: 55px 0 0 0;
+  }
+  
+  .resultActions .button:nth-child(1) {
+    position: relative;
+    left: auto;
+    top: auto;
+    align-self: center;
+    width: 80%;
+  }
+  
+
+  .resultActions .button {
+    font-size: 1rem;
+    padding: 10px 16px;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .downloadBtnContainer {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  
+  
   .container {
     padding: 15px;
     width: 100%;
+  }
+
+  .collageContainer{
+    margin-top: 20px !important;
   }
 
   .header img {
@@ -139,7 +285,13 @@
   }
 
   .albumInfo {
+    opacity: 0;
     font-size: 0.75rem;
+  }
+
+  .albumInfo:hover{
+    opacity: 1;
+    
   }
 
   .inputContainer {
@@ -162,6 +314,15 @@
 }
 
 @media (max-width: 480px) {
+
+  .descriptionContainer {
+    font-size: 1rem;
+  }
+  
+  .logo {
+    width: 100%;
+  }
+  
   .siteTitle {
     font-size: 1.5rem;
   }
@@ -169,6 +330,10 @@
 
   .albumInfo {
     font-size: 0.65rem;
+  }
+
+  .albumInfo:hover{
+    opacity: 1;
   }
 
   .button,

@@ -77,29 +77,6 @@ const CollageSection: React.FC<CollageSectionProps> = ({
           {loading ? 'Carregando...' : 'Gerar Collage'}
         </button>
 
-        {albums.length > 0 && (
-          <>
-
-            <button
-              onClick={() => downloadImage(includeInfo)}
-              className={styles.button}
-            >
-              Baixar como PNG
-            </button>
-            <div className={styles.checkboxContainer}>
-              <label className={styles.checkboxLabel}>
-                <input
-                  type="checkbox"
-                  checked={includeInfo}
-                  onChange={(e) => setIncludeInfo(e.target.checked)}
-                />
-                Incluir nome do álbum e artista
-              </label>
-
-            </div>
-          </>
-        )}
-
         {error && (
           <div className="bg-red-500/20 text-red-300 border border-red-500/50 p-3 rounded-md text-sm">
             {error}
