@@ -1,9 +1,14 @@
 "use client"
+import * as React from 'react';
 import { useState, useRef } from 'react';
 import CollageSection from './components/CollageSection';
 import AlbumGrid from './components/AlbumGrid';
 import ErrorMessage from './components/ErrorMessage';
+import Switch from '@mui/material/Switch';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
 import styles from './page.module.css';
+import { styled } from '@mui/material/styles';
 
 
 export default function Home() {
@@ -15,6 +20,8 @@ export default function Home() {
   const [error, setError] = useState('');
   const [includeInfo, setIncludeInfo] = useState(false);
   const [etapa, setEtapa] = useState<'inicio' | 'formulario' | 'resultado'>('inicio');
+
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   const collageRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +45,22 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  const CustomSwitch = styled(Switch)(({ theme }) => ({
+    '& .MuiSwitch-switchBase': {
+      color: '#ccc', // cor do "pino" no modo off
+      '&.Mui-checked': {
+        color: '#D0021B', // cor do "pino" no modo on
+      },
+      '&.Mui-checked + .MuiSwitch-track': {
+        backgroundColor: '#D0021B', // cor do "fundo" quando ligado
+      },
+    },
+    '& .MuiSwitch-track': {
+      backgroundColor: '#444', // cor do "fundo" quando desligado
+    },
+  }));
+  
 
   const fallbackImage = '/fallback1.png';
 
@@ -145,18 +168,27 @@ export default function Home() {
         {etapa === 'resultado' && (
           <>
             <div className={styles.resultActions}>
-                <button onClick={() => setEtapa('formulario')} className={styles.button}>
-                  Voltar
-                </button>
+              <div className={styles.VoltarButton}>
+                <IconButton
+                  onClick={() => setEtapa('formulario')}
+                  aria-label="Voltar"
+                  sx={{ color: '#ff9f00' }}
+                >
+                  <ArrowBackIcon />
+                  <span className={styles.voltar}>Voltar</span>
+                    </IconButton>
+              </div>
+
                 <div className={styles.downloadBtnContainer}>
-                  <label className={styles.checkboxLabel}>
-                    <input
-                      type="checkbox"
-                      checked={includeInfo}
-                      onChange={(e) => setIncludeInfo(e.target.checked)}
-                      />
-                    Incluir nome do álbum e artista
-                  </label>
+                  <div className={styles.switchContainer}>
+                  <CustomSwitch
+                    checked={includeInfo}
+                    onChange={(e) => setIncludeInfo(e.target.checked)}
+                    inputProps={{ 'aria-label': 'Incluir informações dos álbuns' }}
+                  />
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>Incluir nome do álbum e artista</span>
+                  </div>
+
                   <button onClick={downloadImage} className={styles.button}>
                     Baixar Collage
                   </button>

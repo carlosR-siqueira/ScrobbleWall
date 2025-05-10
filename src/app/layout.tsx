@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Underdog, Fredericka_the_Great } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header"; // Certifique-se de que o caminho está correto
+import Header from "./components/Header";
+import Footer from './components/Footer';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +45,7 @@ export default function RootLayout({
           <Header/>
           {/* O conteúdo específico de cada página será renderizado aqui */}
           <main className="flex-1">{children}</main>
+          <Footer />
         </div>
       </body>
     </html>

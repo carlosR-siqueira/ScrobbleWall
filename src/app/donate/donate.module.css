@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 85.8vh;
+    color: #b6b6b6;
+  }
+
+  .title{
+    margin: 50px 0 0 0 ;
+  }
+  
+  .qrImage {
+    margin-top: 20px;
+    width: 256px;
+    height: 256px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pixKey {
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #b6b6b6;
+  }
+  

@@ -46,15 +46,7 @@
   -webkit-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
   -moz-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
 }
-.resultActions .button:nth-child(1){
-  height: fit-content;
-  width: fit-content;
-  padding: 7px;
-  font-size: 1rem;
-  position: absolute;
-  left: 12%;
-  top: 17%
-}
+
 
 .downloadBtnContainer{
   display: flex;
@@ -110,7 +102,7 @@
   padding: 20px;
   font-family: 'Arial', sans-serif;
   background-color: #1e1e1e;
-  min-height: 100vh;
+  min-height: 85.8vh;
   padding-top: 100px; 
 }
 
@@ -159,9 +151,34 @@
   font-weight: bold;
 }
 
+.VoltarButton{
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  position: absolute;
+  left: 12%;
+  top: 17%
+}
+.voltar{
+  color: #b6b6b6;
+
+}
+
+.VoltarButton:hover, .voltar:hover{
+  color: #D0021B;
+  transition: color 0.3s;
+}
+
 .button:hover {
   background-color: #ffffffe5;
   color: #D0021B
+}
+
+.switchContainer{
+  font-size: 1.2rem;
 }
 
 /* Collage container responsiva */
@@ -199,12 +216,48 @@
   left: 0;
   right: 0;
   background-color: #000000da;
-  color: #fff;
+  color: #f7f5f5;
   padding: 4px;
   text-align: center;
   font-size: 1rem;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.3s;
+}
+
+.collageItem:hover .albumInfo{
+  opacity: 1;
+}
+
+
+.albumDescription{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+
+}
+
+.footerStyle{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 5px;
+  background-color: #121212;
+  color: #ccc;
+  font-size: 1rem;
+
+}
+
+.donateButtonStyle{
+  display: inline-block;
+  width: fit-content;
+  margin-top: 10px;
+  background-color: #ff9f00;
+  color: #000;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Responsividade */
@@ -267,9 +320,9 @@
   .downloadBtnContainer {
     flex-direction: column-reverse;
     gap: 10px;
+    height: 19vh;
   }
-  
-  
+
   .container {
     padding: 15px;
     width: 100%;
@@ -284,15 +337,8 @@
     height: auto !important;
   }
 
-  .albumInfo {
-    opacity: 0;
-    font-size: 0.75rem;
-  }
 
-  .albumInfo:hover{
-    opacity: 1;
-    
-  }
+  
 
   .inputContainer {
     gap: 6px;
@@ -311,6 +357,12 @@
   .collageContainer {
     margin-top: 75px;
   }
+
+  .VoltarButton{
+    left: 7%;
+    top: 13%;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -325,15 +377,6 @@
   
   .siteTitle {
     font-size: 1.5rem;
-  }
-
-
-  .albumInfo {
-    font-size: 0.65rem;
-  }
-
-  .albumInfo:hover{
-    opacity: 1;
   }
 
   .button,

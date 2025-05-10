@@ -36,9 +36,9 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: idx * 0.03 }}
           />
-          <div className={styles.albumInfo}>
-            <strong>{album.name}</strong> <br />
-            <span>{album.artist}</span>
+          <div className={styles.albumInfo} >
+            <strong className={styles.albumDescription}>{album.name}</strong> <br />
+            <span className={styles.albumDescription}>{album.artist}</span>
           </div>
         </div>
       ))}
