@@ -3,9 +3,9 @@ import React from 'react';
 import styles from './donate.module.css';
 
 export default function DonatePage() {
-  const pixKey = '21976178836';
+  const pixKey = 'bekguittar@gmail.com';
   const name = 'Nome: Carlos Roberto Santos Siqueira Filho'
-  const banco = 'Banco: Inter'
+  const banco = 'Banco: NuBank'
 
   return (
     <div className={styles.container}>

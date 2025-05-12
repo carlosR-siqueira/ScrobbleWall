@@ -1,0 +1,31 @@
+.container {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin: 100px 20px 80px 20px ;
+    padding: 2rem;
+    line-height: 1.6;
+    color: #ccc;
+    background-color: #121212;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #D0021B;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #ff9f00;
+  }
+  
+  .paragraph {
+    margin-bottom: 20px;
+  }
+  

@@ -12,7 +12,115 @@
 .headerContentContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  align-items: center;
+}
+
+.navLink {
+  color: #d0021ab6;
+  text-decoration: none;
+
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  background-color: #1f1f1f;
+  color: #ff9f00;
+}
+
+.hamburger {
+  
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  color: #D0021B
+}
+
+.closeButton {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 0 0 50px;
+
+}
+
+.navMobile {
+  position: fixed;
+  top: 0;
+  right: 100%;
+  width: 260px;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease-in-out;
+  z-index: 1001;
+  padding: 1.5rem;
+}
+
+.navMobileOpen {
+  right: 0;
+  
+}
+
+.mobileHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+
+  
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+.linksContainer{
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  justify-content: space-between;
+}
+
+.politicasLinkContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #ff9f00;
+  
+  
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
 .siteTitle {
   font-size: 2rem;
   font-weight: bold;
@@ -40,6 +148,7 @@
   border-radius: 10px;
   width: 80%;
   padding: 20px;
+  margin-top: 80px;
   opacity: 0.95;
   background-color: #000;
   box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
@@ -92,7 +201,7 @@
 
 /* Container principal */
 .container {
-  background-image: url('../../public/tijolo-brasil.jpg');
+  background-image: url('../../public/tijolo-brasil-edit.jpg');
   background-size: cover;
   background-blend-mode: luminosity;
   display: flex;
@@ -102,8 +211,10 @@
   padding: 20px;
   font-family: 'Arial', sans-serif;
   background-color: #1e1e1e;
-  min-height: 85.8vh;
-  padding-top: 100px; 
+  min-height: 85vh;
+  /* padding-top: 100px; */
+
+
 }
 
 /* Input container */
@@ -241,7 +352,7 @@
   align-items: center;
   gap: 10px;
   text-align: center;
-  padding: 5px;
+  padding: 7px;
   background-color: #121212;
   color: #ccc;
   font-size: 1rem;
@@ -297,8 +408,8 @@
     padding: 15px;
     gap: 15px;
     text-align: center;
-    /* position: relative; */
-    margin: 55px 0 0 0;
+   
+    margin: 70px 0 0 0;
   }
   
   .resultActions .button:nth-child(1) {
@@ -321,11 +432,12 @@
     flex-direction: column-reverse;
     gap: 10px;
     height: 19vh;
+    margin: 15px 0 0 0;
   }
 
-  .container {
-    padding: 15px;
+  .container {   
     width: 100%;
+   
   }
 
   .collageContainer{
@@ -335,6 +447,35 @@
   .header img {
     width: 180px !important;
     height: auto !important;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #121212;
+    width: 100%;
+    padding: 1rem 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+  }
+  .navLink{
+    border-bottom: solid 1px #0000009a;
+    border-radius: 0%;
+  }
+
+  .navMobileOpen {
+    display: flex;
+    right: 28%;
+    padding: 10px;
+    
+  }
+
+  .hamburger {
+    display: flex;
+    justify-self: end;
   }
 
 
@@ -361,7 +502,6 @@
   .VoltarButton{
     left: 7%;
     top: 13%;
-    font-size: 1rem;
   }
 }
 
@@ -379,9 +519,17 @@
     font-size: 1.5rem;
   }
 
+  .container {
+    /* padding: 15px; */
+    /* padding-top: 0%; */
+    width: 100%;
+    height: 85.7vh;
+  }
+
   .button,
   .inputField,
   .selectField {
     font-size: 0.9rem;
   }
+
 }

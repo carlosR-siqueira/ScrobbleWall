@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 import CollageSection from './components/CollageSection';
 import AlbumGrid from './components/AlbumGrid';
-import ErrorMessage from './components/ErrorMessage';
+
 import Switch from '@mui/material/Switch';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
@@ -21,7 +21,6 @@ export default function Home() {
   const [includeInfo, setIncludeInfo] = useState(false);
   const [etapa, setEtapa] = useState<'inicio' | 'formulario' | 'resultado'>('inicio');
 
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   const collageRef = useRef<HTMLDivElement>(null);
 
@@ -172,7 +171,7 @@ export default function Home() {
                 <IconButton
                   onClick={() => setEtapa('formulario')}
                   aria-label="Voltar"
-                  sx={{ color: '#ff9f00' }}
+                  sx={{ color: '#ff9f00', fontSize: '1.2rem' }}
                 >
                   <ArrowBackIcon />
                   <span className={styles.voltar}>Voltar</span>
@@ -190,7 +189,7 @@ export default function Home() {
                   </div>
 
                   <button onClick={downloadImage} className={styles.button}>
-                    Baixar Collage
+                    Baixar Colagem
                   </button>
                 </div>
             </div>
@@ -202,8 +201,6 @@ export default function Home() {
           </>
         )}
 
-
-      {error && <ErrorMessage error={error} />}
     </main>
   );
 }

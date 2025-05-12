@@ -12,7 +12,7 @@ const Footer = () => {
         ☕ Apoie com um café
       </a>
       <p>
-          Direitos reservados © {currentYear} | Desenvolvido por{" "}
+        © {currentYear} ScrobbleWall. Todos os direitos reservados. | Desenvolvido por{" "}
         <a
           href="https://github.com/carlosR-siqueira"
           target="_blank"

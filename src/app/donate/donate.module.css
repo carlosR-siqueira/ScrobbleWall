@@ -5,12 +5,18 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 85.8vh;
+    height: 85.2vh;
     color: #b6b6b6;
   }
 
   .title{
+    color: #D0021B;
     margin: 50px 0 0 0 ;
+  }
+
+  .container:nth-child(1){
+    color: #ff9f00;
+
   }
   
   .qrImage {

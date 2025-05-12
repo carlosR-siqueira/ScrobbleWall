@@ -74,7 +74,7 @@ const CollageSection: React.FC<CollageSectionProps> = ({
           disabled={loading}
           className={styles.button}
         >
-          {loading ? 'Carregando...' : 'Gerar Collage'}
+          {loading ? 'Carregando...' : 'Gerar Colagem'}
         </button>
 
         {error && (
