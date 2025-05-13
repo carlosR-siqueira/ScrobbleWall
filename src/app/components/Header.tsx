@@ -34,7 +34,7 @@ const Header: React.FC = () => {
         </button>
 
         <nav className={styles.nav}>
-          <div onClick={() => (window.location.href = '/')} className={styles.navLink}>Início</div>
+          <Link href="/" className={styles.navLink} onClick={() => (window.location.href = '/')}>Início</Link>
           <Link href="/sobre" className={styles.navLink}>Sobre</Link>
           <Link href="/contato" className={styles.navLink}>Contato</Link>
           <Link href="/donate" className={styles.navLink}>Nos Apoie</Link>
@@ -74,8 +74,8 @@ const Header: React.FC = () => {
             <Card variant="elevation" className={styles.dividerContainer}>
               <Divider />
             </Card>
-            <Link href="/sobre" className={styles.s} onClick={() => setIsMenuOpen(false)}>Política de Privacidade</Link>
-            <Link href="/sobre" className={styles.s} onClick={() => setIsMenuOpen(false)}>Termos de uso</Link>
+            <Link href="/politica-de-privacidade" onClick={() => setIsMenuOpen(false)}>Política de Privacidade</Link>
+            <Link href="/termos-de-uso" onClick={() => setIsMenuOpen(false)}>Termos de uso</Link>
 
           </div>
         </div>  

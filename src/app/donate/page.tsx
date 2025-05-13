@@ -8,15 +8,18 @@ export default function DonatePage() {
   const banco = 'Banco: NuBank'
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Apoie com um Pix</h1>
-      <p>Escaneie o QR Code abaixo para doar:</p>
-      <img
-        src="/pix-qrcode.png"
-        alt="QR Code Pix"
-        className={styles.qrImage}
-      />
-      <p className={styles.pixKey}>Chave Pix: {pixKey} <br />{name} <br />{banco}</p>
+    <div className={styles.container} >
+
+      <div className={styles.card}>
+        <h1 className={styles.title}>Apoie com um Pix</h1>
+        <p>Escaneie o QR Code abaixo para doar:</p>
+        <img
+          src="/pix-qrcode.png"
+          alt="QR Code Pix"
+          className={styles.qrImage}
+          />
+        <p className={styles.pixKey}>Chave Pix: {pixKey} <br />{name} <br />{banco}</p>
+      </div>
     </div>
   );
 }

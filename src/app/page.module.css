@@ -61,22 +61,23 @@
 .navMobile {
   position: fixed;
   top: 0;
-  right: 100%;
+  left: -260px; /* fora da tela à esquerda */
   width: 260px;
   height: 100vh;
   background-color: #121212;
   color: white;
   display: flex;
   flex-direction: column;
-  transition: right 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
   z-index: 1001;
   padding: 1.5rem;
 }
 
+
 .navMobileOpen {
-  right: 0;
-  
+  left: 0 !important;
 }
+
 
 .mobileHeader {
   display: flex;
@@ -102,14 +103,7 @@
   justify-content: space-between;
 }
 
-.politicasLinkContainer{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: #ff9f00;
-  
-  
-}
+
 
 .overlay {
   position: fixed;
@@ -212,6 +206,7 @@
   font-family: 'Arial', sans-serif;
   background-color: #1e1e1e;
   min-height: 85vh;
+  height: 100%;
   /* padding-top: 100px; */
 
 
@@ -346,18 +341,39 @@
 }
 
 .footerStyle{
-
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   text-align: center;
   padding: 7px;
-  background-color: #121212;
+  background-color: #030303;
+  /* opacity: 0.9; */
   color: #ccc;
   font-size: 1rem;
-
+  margin: 0%;
 }
+
+.donateButtonContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.politicasFooterContainer{
+  display: flex;
+  flex-direction: row;
+ 
+  text-decoration: underline;
+  gap: 5px;
+  color: #ff9f00;
+  font-size: 0.8rem;
+  margin: 0%;
+}
+
+
 
 .donateButtonStyle{
   display: inline-block;
@@ -466,12 +482,16 @@
     border-radius: 0%;
   }
 
-  .navMobileOpen {
+  .politicasLinkContainer{
     display: flex;
-    right: 28%;
-    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+    color: #ff9f00;
+    
     
   }
+
+ 
 
   .hamburger {
     display: flex;
@@ -518,6 +538,8 @@
   .siteTitle {
     font-size: 1.5rem;
   }
+
+  
 
   .container {
     /* padding: 15px; */

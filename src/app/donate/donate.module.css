@@ -1,17 +1,28 @@
-.container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card {
     justify-content: center;
-    align-items: center;
     text-align: center;
-    height: 85.2vh;
     color: #b6b6b6;
+    width: 35%;
+    margin: 50px 0 0 0 ;
+    padding: 10px;
+    opacity: 0.95;
+    background-color: #000;
+    border-radius: 10px;
+    box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+    -webkit-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
+    -moz-box-shadow: 1px 10px 16px 11px rgba(10,10,10,0.61);
   }
 
   .title{
     color: #D0021B;
-    margin: 50px 0 0 0 ;
+   
   }
 
   .container:nth-child(1){
