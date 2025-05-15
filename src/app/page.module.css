@@ -127,6 +127,7 @@
   border-radius: 10px;
   width: 90%;
   padding: 20px;
+  margin-top: 60px;
   opacity: 0.95;
   background-color: #000;
   height: 50vh;
@@ -137,11 +138,11 @@
 
 .resultActions {
   display: flex;
-  /* flex-direction: row; */
-  justify-content: space-evenly;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
   border-radius: 10px;
   width: 80%;
-  padding: 20px;
+  padding: 10px;
   margin-top: 80px;
   opacity: 0.95;
   background-color: #000;
@@ -195,19 +196,15 @@
 
 /* Container principal */
 .container {
-  background-image: url('../../public/tijolo-brasil-edit.jpg');
-  background-size: cover;
-  background-blend-mode: luminosity;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   font-family: 'Arial', sans-serif;
-  background-color: #1e1e1e;
-  min-height: 85vh;
+  /* min-height: 85vh; */
   height: 100%;
-  /* padding-top: 100px; */
+  
 
 
 }
@@ -262,11 +259,9 @@
   font-size: 1.3rem;
   font-weight: bold;
   display: flex;
-  justify-content: space-between;
-  align-items: center; 
-  position: absolute;
-  left: 12%;
-  top: 17%
+  /* justify-content: space-between; */
+  /* align-items: flex-start;  */
+  
 }
 .voltar{
   color: #b6b6b6;
@@ -288,14 +283,14 @@
 }
 
 /* Collage container responsiva */
-.collageContainer {
+.collageContainer, .formContainer {
   display: grid;
   gap: 10px;
   margin-top: 20px;
   justify-items: center;
   width: 100%;
   max-width: 1000px;
-  /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 .collageItem {
@@ -419,13 +414,9 @@
 
   .resultActions {
     flex-direction: column;
-    align-items: center;
-    width: 95%;
-    padding: 15px;
-    gap: 15px;
     text-align: center;
-   
-    margin: 70px 0 0 0;
+    /* margin: 50px 0 0 0; */
+    width: max-content;
   }
   
   .resultActions .button:nth-child(1) {
@@ -447,8 +438,8 @@
   .downloadBtnContainer {
     flex-direction: column-reverse;
     gap: 10px;
-    height: 19vh;
-    margin: 15px 0 0 0;
+    /* height: 19vh; */
+    /* margin: 15px 0 0 0; */
   }
 
   .container {   
@@ -487,19 +478,12 @@
     flex-direction: column;
     gap: 10px;
     color: #ff9f00;
-    
-    
   }
-
- 
 
   .hamburger {
     display: flex;
     justify-self: end;
   }
-
-
-  
 
   .inputContainer {
     gap: 6px;
@@ -514,15 +498,10 @@
     font-size: 0.95rem;
   }
 
-  
   .collageContainer {
     margin-top: 75px;
   }
 
-  .VoltarButton{
-    left: 7%;
-    top: 13%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -542,10 +521,10 @@
   
 
   .container {
-    /* padding: 15px; */
+    padding: 15px;
     /* padding-top: 0%; */
     width: 100%;
-    height: 85.7vh;
+    height: 100%h;
   }
 
   .button,
@@ -553,5 +532,26 @@
   .selectField {
     font-size: 0.9rem;
   }
+
+
+
+  .collageContainer {
+    display: grid;
+    gap: 10px;
+    flex-wrap: wrap;
+ 
+    justify-items: center;
+    width: 100%;
+  
+  }
+
+  .VoltarButton{
+    margin-bottom: 5px;
+  }
+
+  .resultActions{
+    width: 100%;
+  }
+  
 
 }

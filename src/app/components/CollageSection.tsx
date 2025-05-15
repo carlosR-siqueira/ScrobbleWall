@@ -37,7 +37,7 @@ const CollageSection: React.FC<CollageSectionProps> = ({
   
 
   return (
-    <div ref={collageRef} className={styles.collageContainer}>
+    <div ref={collageRef} className={styles.formContainer}>
       <section className={styles.inputContainer}>
         <input
           type="text"
