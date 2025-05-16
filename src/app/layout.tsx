@@ -29,7 +29,7 @@ const fredericka = Fredericka_the_Great({
 
 export const metadata: Metadata = {
   title: "ScrobbleWall",
-  description: "Crie colagens com seus álbuns albuns mais ouvidos so seu Last.fm",
+  description: "Crie colagens com seus álbuns mais ouvidos so seu Last.fm",
   icons:{
     icon: '/favicon.ico'
   }
