@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from './components/Footer';
 import Head from "next/head";
 import Script from "next/script";
+import { Analytics } from '@vercel/analytics/next';
 
 
 const geistSans = Geist({
@@ -54,6 +55,7 @@ export default function RootLayout({
         {/* Header será exibido em todas as páginas */}
         <Header/>
         <main className="containerPrincipal">{children}</main>
+        <Analytics />
         <Footer />
       
       </body>
