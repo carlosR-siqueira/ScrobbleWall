@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Underdog, Fredericka_the_Great } from "next/font/goo
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from './components/Footer';
+import Head from "next/head";
 
 
 const geistSans = Geist({
@@ -42,6 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        {/* Meta tag do AdSense */}
+        <meta name="google-adsense-account" content="ca-pub-8940704424317590" />
+      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
         
         {/* Header será exibido em todas as páginas */}
