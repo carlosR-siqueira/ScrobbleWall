@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from './components/Footer';
 import Head from "next/head";
+import Script from "next/script";
 
 
 const geistSans = Geist({
@@ -48,7 +49,8 @@ export default function RootLayout({
         <meta name="google-adsense-account" content="ca-pub-8940704424317590" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
-        
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940704424317590"
+        crossOrigin="anonymous" />
         {/* Header será exibido em todas as páginas */}
         <Header/>
         <main className="containerPrincipal">{children}</main>
