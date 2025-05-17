@@ -27,5 +27,12 @@
   
   .paragraph {
     margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+  }
+
+  .mark{
+    color: #ff9f00;
+    
   }
   

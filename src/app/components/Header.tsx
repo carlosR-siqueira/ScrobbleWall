@@ -15,7 +15,7 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.headerContentContainer}>
         <Image
-          src="/logo-color.png"
+          src="/logo-red.png"
           alt="Logo"
           width={250}
           height={50}
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
       <nav className={`${styles.navMobile} ${isMenuOpen ? styles.navMobileOpen : ''}`}>
         <div className={styles.mobileHeader}>
           <Image
-            src="/logo-color.png"
+            src="/logo-yellow.png"
             alt="Logo"
             width={180}
             height={40}

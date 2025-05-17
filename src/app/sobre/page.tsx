@@ -9,7 +9,7 @@ const Sobre = () => {
       <h1 className={styles.title}>Sobre o ScrobbleWall</h1>
 
       <p className={styles.paragraph}>
-        O <strong>ScrobbleWall</strong> é um projeto criado para transformar seus dados musicais do Last.fm em arte visual.
+        O <span className={styles.mark}>ScrobbleWall</span> é um projeto criado para transformar seus dados musicais do Last.fm em arte visual.
         A ideia é simples: você fornece seu nome de usuário do Last.fm, e o site gera uma colagem com os álbuns mais
         reproduzidos no período escolhido.
       </p>

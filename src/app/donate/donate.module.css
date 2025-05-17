@@ -50,6 +50,8 @@
   font-size: 1rem;
   font-weight: bold;
   color: #b6b6b6;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
 }
 
 @media (max-width: 1024px) {

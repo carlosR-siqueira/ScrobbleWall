@@ -27,9 +27,13 @@
   
   .paragraph {
     margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
   }
   
   .link {
     color: #ff9f00;
     text-decoration: underline;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
   }
