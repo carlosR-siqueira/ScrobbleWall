@@ -1,205 +1,117 @@
-"use client"
-import * as React from 'react';
-import { useState, useRef } from 'react';
-import CollageSection from './components/CollageSection';
-import AlbumGrid from './components/AlbumGrid';
-
-import Switch from '@mui/material/Switch';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
+'use client'
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import styles from './page.module.css';
-import { styled } from '@mui/material/styles';
 
+export default function LandingPage() {
+  const router = useRouter();
 
-export default function Home() {
-  const [username, setUsername] = useState('');
-  const [period, setPeriod] = useState('7day');
-  const [gridSize, setGridSize] = useState(3);
-  const [albums, setAlbums] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [includeInfo, setIncludeInfo] = useState(false);
-  const [etapa, setEtapa] = useState<'inicio' | 'formulario' | 'resultado'>('inicio');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState('');
 
-
-  const collageRef = useRef<HTMLDivElement>(null);
-
-  const fetchAlbums = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch(`/api/collage?username=${username}&period=${period}&limit=${gridSize * gridSize}`);
-      const data = await res.json();
-      if (data.albums) {
-        setAlbums(data.albums);
-        setEtapa('resultado');
-      } else {
-        setAlbums([]);
-        setError('Erro ao buscar dados. Verifique o nome de usuário ou tente novamente mais tarde.');
-      }
-    } catch (err) {
-      setAlbums([]);
-      setError('Erro de rede. Verifique sua conexão.');
-    } finally {
-      setLoading(false);
-    }
+  const openModal = (src: string) => {
+    setModalImage(src);
+    setModalOpen(true);
+    
   };
 
-  const CustomSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase': {
-      color: '#ccc', // cor do "pino" no modo off
-      '&.Mui-checked': {
-        color: '#D0021B', // cor do "pino" no modo on
-      },
-      '&.Mui-checked + .MuiSwitch-track': {
-        backgroundColor: '#D0021B', // cor do "fundo" quando ligado
-      },
-    },
-    '& .MuiSwitch-track': {
-      backgroundColor: '#444', // cor do "fundo" quando desligado
-    },
-  }));
-  
-
-  const fallbackImage = '/fallback1.png';
-
-  const downloadImage = async () => {
-    const imageSize = 300;
-    const canvasSize = gridSize * imageSize;
-    const canvas = document.createElement('canvas');
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const loadImage = (src: string): Promise<HTMLImageElement> =>
-      new Promise((resolve) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = () => {
-          const fallbackImg = new Image();
-          fallbackImg.src = fallbackImage;
-          fallbackImg.onload = () => resolve(fallbackImg);
-          fallbackImg.onerror = () => resolve(fallbackImg);
-        };
-        img.src = src || fallbackImage;
-      });
-
-    try {
-      for (let i = 0; i < albums.length; i++) {
-        const album = albums[i];
-        const img = await loadImage(album.image);
-        const x = (i % gridSize) * imageSize;
-        const y = Math.floor(i / gridSize) * imageSize;
-        ctx.drawImage(img, x, y, imageSize, imageSize);
-
-        if (includeInfo) {
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-          ctx.fillRect(x, y + imageSize - 50, imageSize, 50);
-          ctx.fillStyle = '#fff';
-          ctx.font = 'bold 14px Arial';
-          ctx.fillText(album.name, x + 5, y + imageSize - 30);
-          ctx.font = '12px Arial';
-          ctx.fillText(album.artist, x + 5, y + imageSize - 15);
-        }
-      }
-
-      const formatPeriodName = (period: string): string => {
-        const mapping: Record<string, string> = {
-          '7day': '7 Dias',
-          '1month': '1 Mês',
-          '3month': '3 Meses',
-          '12month': '12 Meses',
-          'overall': 'Todos os Tempos'
-        };
-        return mapping[period] || period;
-      };
-
-      const formattedPeriod = formatPeriodName(period);
-      const today = new Date();
-      const formattedDate = today.toISOString().split('T')[0];
-
-      const link = document.createElement('a');
-      link.download = `ScrobbleWall - ${formattedPeriod} - ${formattedDate}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    } catch (error) {
-      console.error('Erro ao carregar imagens:', error);
-    }
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImage('');
   };
 
   return (
     <main className={styles.container}>
-      {etapa === 'inicio' && (
-        <div className={styles.welcome}>
-          <div className={styles.titleWelcome}>
-            <h1 className={styles.title}>Bem Vindo ao </h1>
-            <img src="/logo-color.png" alt="Logo" className={styles.logo} />
+      {/* Seção de boas-vindas */}
+      <div className={styles.welcome}>
+        <div className={styles.titleWelcome}>
+          <h1 className={styles.title}>Bem-vindo ao</h1>
+          <img src="/logo-color.png" alt="Logo" className={styles.logo} />
+        </div>
+        <div className={styles.descriptionContainer}>
+          <p className={styles.description}>
+            Seu top de álbuns, agora em forma de arte! Crie uma colagem com os mais ouvidos do seu perfil no Last.fm.
+          </p>
+          <button onClick={() => router.push('/generate')} className={styles.button}>
+            Começar
+          </button>
+        </div>
+      </div>
+
+      {/* Seção de instruções para conectar Spotify ao Last.fm */}
+      <section className={styles.integrationSection}>
+        <h2 className={styles.integrationTitle}>Ainda não conectou seu Spotify ao Last.fm?</h2>
+        <p className={styles.integrationDescription}>
+          Para que suas músicas do Spotify sejam registradas e apareçam na colagem, é necessário conectar sua conta ao Last.fm.
+        </p>
+        <button
+          className={styles.integrationButton}
+          onClick={() => window.open('https://www.last.fm/settings/applications', '_blank')}
+        >
+          Aprender como conectar
+        </button>
+      </section>
+
+
+      {/* Seção de exemplos de colagens */}
+      <section className={styles.examplesSection}>
+        <h2 className={styles.examplesTitle}>Exemplos de Colagens</h2>
+
+        <div className={styles.exampleItem}>
+          <img
+            src="/exemplo-3x3.png"
+            alt="Colagem 3x3"
+            className={styles.exampleImage}
+            onClick={() => openModal('/exemplo-3x3.png')}
+          />
+          <div className={styles.exampleText}>
+            <h3>Colagem 3x3</h3>
+            <p>Uma grade compacta com os 9 álbuns mais ouvidos. Ideal para destacar seus favoritos da semana.</p>
           </div>
-          <div className={styles.descriptionContainer}>
-            <p className={styles.description}>Seu top de álbuns, agora em forma de arte! Crie uma colagem com os mais ouvidos do seu perfil no Last.fm.</p>
-            <button onClick={() => setEtapa('formulario')} className={styles.button}>
-              Começar
+        </div>
+
+        <div className={styles.exampleItem}>
+          <div className={styles.exampleText}>
+            <h3>Colagem 4x4</h3>
+            <p>Um equilíbrio entre variedade e tamanho. Perfeita para o seu top do mês.</p>
+          </div>
+          <img
+            src="/exemplo-4x4.png"
+            alt="Colagem 4x4"
+            className={styles.exampleImage}
+            onClick={() => openModal('/exemplo-4x4.png')}
+          />
+        </div>
+
+        <div className={styles.exampleItem}>
+          <img
+            src="/exemplo-5x5.png"
+            alt="Colagem 5x5"
+            className={styles.exampleImage}
+            onClick={() => openModal('/exemplo-5x5.png')}
+          />
+          <div className={styles.exampleText}>
+            <h3>Colagem 5x5</h3>
+            <p>Para os ouvintes mais intensos! Mostre 25 álbuns em uma única imagem, ideal para todo o seu histórico.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Modal de visualização da imagem */}
+      {modalOpen && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <img src={modalImage} alt="Imagem ampliada" className={styles.modalImage} />
+            <button
+              className={`${styles.closeButton} ${modalOpen ? styles.active : ''}`}
+              onClick={closeModal}
+            >
+              X
             </button>
+
           </div>
         </div>
       )}
-
-      {etapa === 'formulario' && (
-        <CollageSection
-          username={username}
-          setUsername={setUsername}
-          period={period}
-          setPeriod={setPeriod}
-          gridSize={gridSize}
-          setGridSize={setGridSize}
-          fetchAlbums={fetchAlbums}
-          loading={loading}
-          error={error}
-          downloadImage={downloadImage}
-          albums={albums}
-          includeInfo={includeInfo}
-          setIncludeInfo={setIncludeInfo}
-        />
-      )}
-
-        {etapa === 'resultado' && (
-          <>
-            <div className={styles.resultActions}>
-              <div className={styles.VoltarButton}>
-                <IconButton
-                  onClick={() => setEtapa('formulario')}
-                  aria-label="Voltar"
-                  sx={{ color: '#ff9f00', fontSize: '1.2rem' }}
-                >
-                  <ArrowBackIcon />
-                  <span className={styles.voltar}>Voltar</span>
-                    </IconButton>
-              </div>
-
-                <div className={styles.downloadBtnContainer}>
-                  <div className={styles.switchContainer}>
-                  <CustomSwitch
-                    checked={includeInfo}
-                    onChange={(e) => setIncludeInfo(e.target.checked)}
-                    inputProps={{ 'aria-label': 'Incluir informações dos álbuns' }}
-                  />
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>Incluir nome do álbum e artista</span>
-                  </div>
-
-                  <button onClick={downloadImage} className={styles.button}>
-                    Baixar Colagem
-                  </button>
-                </div>
-            </div>
-           <AlbumGrid
-              albums={albums}
-              gridSize={gridSize}
-              collageRef={collageRef}
-            />
-          </>
-        )}
 
     </main>
   );
