@@ -22,19 +22,19 @@ const ConectarSpotify = () => {
         <li>
           Acesse o site do <a href="https://www.last.fm/" target="_blank" rel="noopener noreferrer">Last.fm</a> e faça login na sua conta (ou crie uma nova).
           <div className={styles.imgContainer}>
-            <img src="/lastFm.png" alt="last.fm" />
+            <img src="/public/lastFm.png" alt="last.fm" />
           </div>
         </li>
         <li>
           No rodapé da página, dentro de <strong>“Help”</strong> selecione <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Track My Music</a>, ou acesse diretamente a página de <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener noreferrer">aplicativos conectados</a>. Você também pode clicar em <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Download Scrobbler</a> dentro de <strong>"Goodies"</strong>
           <div className={styles.imgContainer}>
-            <img src="/lastFm-footer.png" alt="last.fm footer" />
+            <img src="/public/lastFm-footer.png" alt="last.fm footer" />
           </div>
         </li>
         <li>
           Clique em <strong>“Spotify”</strong>, em seguida clique em <strong>“Connect”</strong>.
           <div className={styles.imgContainer}>
-            <img src="/spotify.png" alt="spotify" />
+            <img src="/public/spotify.png" alt="spotify" />
           </div>
         </li>
         <li>
@@ -43,7 +43,7 @@ const ConectarSpotify = () => {
         <li>
           Após a confirmação, suas músicas tocadas no Spotify começarão a ser registradas automaticamente no seu perfil do Last.fm.
           <div className={styles.imgContainer}>
-            <img src="/spotify-connect.png" alt="spotify-connect" />
+            <img src="/public/spotify-connect.png" alt="spotify-connect" />
           </div>
         </li>
 
