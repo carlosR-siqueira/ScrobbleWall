@@ -37,6 +37,7 @@ const Header: React.FC = () => {
           <Link href="/" className={styles.navLink} onClick={() => (window.location.href = '/')}>Início</Link>
           <Link href="/sobre" className={styles.navLink}>Sobre</Link>
           <Link href="/contato" className={styles.navLink}>Contato</Link>
+          <Link href="/conectar" className={styles.navLink}>Conectar Spotify</Link>
           <Link href="/donate" className={styles.navLink}>Nos Apoie</Link>
         </nav>
       </div>
@@ -67,6 +68,7 @@ const Header: React.FC = () => {
             <div onClick={() => { window.location.href = '/'; setIsMenuOpen(false); }} className={styles.navLink}>Início</div>
             <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Sobre</Link>
             <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Contato</Link>
+            <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Conectar Spotify</Link>
             <Link href="/donate" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Nos Apoie</Link>
           </div>
           

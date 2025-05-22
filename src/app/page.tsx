@@ -46,7 +46,7 @@ export default function LandingPage() {
         </p>
         <button
           className={styles.integrationButton}
-          onClick={() => window.open('https://tecnoblog.net/responde/como-conectar-o-spotify-ao-last-fm/', '_blank')}
+          onClick={() => router.push('/conectar')}
         >
           Aprender como conectar
         </button>
