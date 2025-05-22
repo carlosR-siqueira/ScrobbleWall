@@ -29,7 +29,7 @@ const ConectarSpotify = () => {
         <li>
           No rodapé da página, dentro de <strong>“Help”</strong> selecione <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Track My Music</a>, ou acesse diretamente a página de <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener noreferrer">aplicativos conectados</a>. Você também pode clicar em <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Download Scrobbler</a> dentro de <strong>"Goodies"</strong>
           <div className={styles.imgContainer}>
-            <Image src="/lastFm-footer.PNG" alt="last.fm footer" width={500} height={300} />
+            <Image src="/lastFm-Footer.PNG" alt="last.fm footer" width={500} height={300} />
           </div>
         </li>
         <li>
