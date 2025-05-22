@@ -23,19 +23,19 @@ const ConectarSpotify = () => {
         <li>
           Acesse o site do <a href="https://www.last.fm/" target="_blank" rel="noopener noreferrer">Last.fm</a> e faça login na sua conta (ou crie uma nova).
           <div className={styles.imgContainer}>
-            <Image src="/lastFm.png" alt="last.fm" width={800} height={600} />
+            <Image src="/lastFm.PNG" alt="last.fm" width={800} height={600} />
           </div>
         </li>
         <li>
           No rodapé da página, dentro de <strong>“Help”</strong> selecione <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Track My Music</a>, ou acesse diretamente a página de <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener noreferrer">aplicativos conectados</a>. Você também pode clicar em <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Download Scrobbler</a> dentro de <strong>"Goodies"</strong>
           <div className={styles.imgContainer}>
-            <Image src="/lastFm-footer.png" alt="last.fm footer" width={500} height={300} />
+            <Image src="/lastFm-footer.PNG" alt="last.fm footer" width={500} height={300} />
           </div>
         </li>
         <li>
           Clique em <strong>“Spotify”</strong>, em seguida clique em <strong>“Connect”</strong>.
           <div className={styles.imgContainer}>
-            <Image src="/spotify.png" alt="spotify" width={400} height={200} />
+            <Image src="/spotify.PNG" alt="spotify" width={400} height={200} />
           </div>
         </li>
         <li>
@@ -44,7 +44,7 @@ const ConectarSpotify = () => {
         <li>
           Após a confirmação, suas músicas tocadas no Spotify começarão a ser registradas automaticamente no seu perfil do Last.fm.
           <div className={styles.imgContainer}>
-            <Image src="/spotify-connect.png" alt="spotify-connect" width={600} height={400} />
+            <Image src="/spotify-connect.PNG" alt="spotify-connect" width={600} height={400} />
           </div>
         </li>
       </ol>
