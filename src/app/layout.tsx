@@ -37,6 +37,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  other: {
+    'google-site-verification': 'IlUd2sth-FmqVUEtBjQwXwx_Zs3EqROGM9agE5VuEp',
+  },
   keywords: [
     "last.fm",
     "collage",
