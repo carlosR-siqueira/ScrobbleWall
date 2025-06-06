@@ -32,10 +32,45 @@ const fredericka = Fredericka_the_Great({
 });
 
 export const metadata: Metadata = {
-  title: "ScrobbleWall",
-  description: "Crie colagens com seus álbuns mais ouvidos so seu Last.fm",
-  icons:{
-    icon: '/favicon.ico'
+  title: "ScrobbleWall – Sua música em forma de arte",
+  description: "Transforme seus álbuns mais ouvidos do Last.fm em colagens visuais personalizadas. Compartilhe sua paixão musical com o mundo!",
+  icons: {
+    icon: '/favicon.ico',
+  },
+  keywords: [
+    "last.fm",
+    "collage",
+    "colagem last.fm",
+    "colagem 5x5",
+    "colagem 4x4",
+    "colagem 3x3",
+    "scrobble last.fm",
+    "álbuns mais ouvidos",
+    "scrobble",
+    "música",
+    "Spotify",
+    "arte digital",
+    "ScrobbleWall"
+  ],
+  openGraph: {
+    title: "ScrobbleWall – Sua música em forma de arte",
+    description: "Crie colagens com seus álbuns mais ouvidos no Last.fm e compartilhe sua identidade musical.",
+    url: "https://www.scrobblewall.art",
+    siteName: "ScrobbleWall",
+    type: "website",
+    images: [
+      {
+        url: "https://www.scrobblewall.art/og-image.png", // atualize se tiver imagem gerada para preview
+        width: 1200,
+        height: 630,
+        alt: "Exemplo de colagem do ScrobbleWall"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ScrobbleWall – Sua música em forma de arte",
+    images: ["https://www.scrobblewall.art/logo-color.png"]
   }
 };
 
