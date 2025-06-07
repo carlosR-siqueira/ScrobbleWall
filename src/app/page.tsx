@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './page.module.css';
 
+import GoogleHorizontalAd from './components/adsComponents/GoogleHorizontalAd';
+
 export default function LandingPage() {
   const router = useRouter();
 
@@ -96,6 +98,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      <div>
+        <GoogleHorizontalAd />
+      </div>
 
       {/* Modal de visualização da imagem */}
       {modalOpen && (

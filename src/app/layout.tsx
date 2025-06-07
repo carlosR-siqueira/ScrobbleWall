@@ -3,11 +3,9 @@ import { Geist, Geist_Mono, Underdog, Fredericka_the_Great } from "next/font/goo
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from './components/Footer';
-import Head from "next/head";
 import Script from "next/script";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,13 +20,13 @@ const geistMono = Geist_Mono({
 const underdog = Underdog({
   variable: "--font-underdog",
   subsets: ["latin"],
-  weight: "400", // Underdog só tem peso 400
+  weight: "400",
 });
 
 const fredericka = Fredericka_the_Great({
   variable: "--font-fredericka",
   subsets: ["latin"],
-  weight: "400", // Essa fonte só possui peso 400
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -39,6 +37,7 @@ export const metadata: Metadata = {
   },
   other: {
     'google-site-verification': 'IlUd2sth-FmqVUEtBjQwXwx_Zs3EqROGM9agE5VuEp',
+    'google-adsense-account': 'ca-pub-8940704424317590',
   },
   keywords: [
     "last.fm",
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.scrobblewall.art/og-image.png", // atualize se tiver imagem gerada para preview
+        url: "https://www.scrobblewall.art/og-image.png",
         width: 1200,
         height: 630,
         alt: "Exemplo de colagem do ScrobbleWall"
@@ -79,25 +78,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <Head>
-        {/* Meta tag do AdSense */}
-        <meta name="google-adsense-account" content="ca-pub-8940704424317590" />
-      </Head>
+    <html lang="pt-BR">
+      <head>
+        {/* O AdSense já está incluído via `Script` abaixo */}
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940704424317590"
-        crossOrigin="anonymous" />
-        {/* Header será exibido em todas as páginas */}
-        <Header/>
+        {/* Script global do Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940704424317590"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        <Header />
         <main className="containerPrincipal">{children}</main>
         <Analytics />
         <SpeedInsights />
         <Footer />
-      
       </body>
     </html>
   );
