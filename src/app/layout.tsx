@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Script from "next/script";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import AdSenseLoader from './components/adsComponents/AdSenseLoader';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,16 +85,23 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* O AdSense já está incluído via `Script` abaixo */}
+        {/* Meta tags importantes para AdSense */}
+        <meta name="google-adsense-account" content="ca-pub-8940704424317590" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
-        {/* Script global do Google AdSense */}
+        {/* Script global do Google AdSense - carregado com prioridade */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940704424317590"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
+        
+        {/* Componente para monitorar carregamento do AdSense */}
+        <AdSenseLoader />
+        
         <Header />
         <main className="containerPrincipal">{children}</main>
         <Analytics />

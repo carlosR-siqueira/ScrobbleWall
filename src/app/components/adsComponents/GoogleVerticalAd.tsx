@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export default function GoogleHorizontalAd() {
+export default function GoogleVerticalAd() {
   const [adLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function GoogleHorizontalAd() {
   }, []);
 
   return (
-    <div className="ad-container" style={{ 
+    <div className="ad-container-vertical" style={{ 
       textAlign: 'center', 
       margin: '20px 0',
-      minHeight: '90px',
+      minHeight: '600px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
@@ -40,14 +40,14 @@ export default function GoogleHorizontalAd() {
         className="adsbygoogle"
         style={{ 
           display: 'block',
-          minHeight: '90px',
+          minHeight: '600px',
           width: '100%',
-          maxWidth: '728px'
+          maxWidth: '300px'
         }}
         data-ad-client="ca-pub-8940704424317590"
         data-ad-slot="3404072661"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"
       ></ins>
       {!adLoaded && (
         <div style={{ 
@@ -60,4 +60,4 @@ export default function GoogleHorizontalAd() {
       )}
     </div>
   );
-}
+} 

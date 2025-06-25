@@ -15,8 +15,8 @@ interface CollageSectionProps {
   albums: any[];
   includeInfo: boolean;
   setIncludeInfo: React.Dispatch<React.SetStateAction<boolean>>;
+  isGeneratePage?: boolean;
 }
-
 
 const CollageSection: React.FC<CollageSectionProps> = ({
   username,
@@ -30,14 +30,16 @@ const CollageSection: React.FC<CollageSectionProps> = ({
   error,
   downloadImage,
   albums,
-  includeInfo,        // 👈 props corretos
+  includeInfo,
   setIncludeInfo,
+  isGeneratePage = false,
 }) => {
   const collageRef = useRef<HTMLDivElement | null>(null);
   
+  const containerClass = isGeneratePage ? styles.generateFormContainer : styles.formContainer;
 
   return (
-    <div ref={collageRef} className={styles.formContainer}>
+    <div ref={collageRef} className={containerClass}>
       <section className={styles.inputContainer}>
         <input
           type="text"

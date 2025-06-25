@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 import CollageSection from '../components/CollageSection';
 import AlbumGrid from '../components/AlbumGrid';
+import AdWrapper from '../components/adsComponents/AdWrapper';
 
 import Switch from '@mui/material/Switch';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -129,21 +130,26 @@ export default function GeneratePage() {
   return (
     <main className={styles.container}>
       {etapa === 'formulario' && (
-        <CollageSection
-          username={username}
-          setUsername={setUsername}
-          period={period}
-          setPeriod={setPeriod}
-          gridSize={gridSize}
-          setGridSize={setGridSize}
-          fetchAlbums={fetchAlbums}
-          loading={loading}
-          error={error}
-          downloadImage={downloadImage}
-          albums={albums}
-          includeInfo={includeInfo}
-          setIncludeInfo={setIncludeInfo}
-        />
+        <>
+          <CollageSection
+            username={username}
+            setUsername={setUsername}
+            period={period}
+            setPeriod={setPeriod}
+            gridSize={gridSize}
+            setGridSize={setGridSize}
+            fetchAlbums={fetchAlbums}
+            loading={loading}
+            error={error}
+            downloadImage={downloadImage}
+            albums={albums}
+            includeInfo={includeInfo}
+            setIncludeInfo={setIncludeInfo}
+            isGeneratePage={true}
+          />
+          
+          <AdWrapper topMargin={40} bottomMargin={20} />
+        </>
       )}
 
       {etapa === 'resultado' && (
@@ -175,11 +181,16 @@ export default function GeneratePage() {
               </button>
             </div>
           </div>
+          
+          <AdWrapper topMargin={20} bottomMargin={20} />
+          
           <AlbumGrid
             albums={albums}
             gridSize={gridSize}
             collageRef={collageRef}
           />
+          
+          <AdWrapper topMargin={20} bottomMargin={20} />
         </>
       )}
     </main>

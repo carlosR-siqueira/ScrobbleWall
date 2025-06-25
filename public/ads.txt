@@ -1,1 +1,3 @@
+# Google AdSense ads.txt file
+# This file helps prevent unauthorized inventory sales
 google.com, pub-8940704424317590, DIRECT, f08c47fec0942fa0

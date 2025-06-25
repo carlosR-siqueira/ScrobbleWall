@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './page.module.css';
 
-import GoogleHorizontalAd from './components/adsComponents/GoogleHorizontalAd';
+import GoogleResponsiveAd from './components/adsComponents/GoogleResponsiveAd';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -40,6 +40,9 @@ export default function LandingPage() {
         </div>
       </div>
 
+      {/* Propaganda responsiva após a seção de boas-vindas */}
+      <GoogleResponsiveAd />
+
       {/* Seção de instruções para conectar Spotify ao Last.fm */}
       <section className={styles.integrationSection}>
         <h2 className={styles.integrationTitle}>Ainda não conectou seu Spotify ao Last.fm?</h2>
@@ -53,7 +56,6 @@ export default function LandingPage() {
           Aprender como conectar
         </button>
       </section>
-
 
       {/* Seção de exemplos de colagens */}
       <section className={styles.examplesSection}>
@@ -98,9 +100,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <div>
-        <GoogleHorizontalAd />
-      </div>
+
+      {/* Segunda propaganda responsiva no final da página */}
+      <GoogleResponsiveAd />
 
       {/* Modal de visualização da imagem */}
       {modalOpen && (

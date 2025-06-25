@@ -362,9 +362,6 @@
   font-family: 'Arial', sans-serif;
   /* min-height: 85vh; */
   height: 100%;
-  
-
-
 }
 
 /* Input container */
@@ -449,6 +446,17 @@
   display: grid;
   gap: 10px;
   margin-top: 20px;
+  justify-items: center;
+  width: 100%;
+  max-width: 1000px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+/* Estilo específico para o formulário na página generate */
+.generateFormContainer {
+  display: grid;
+  gap: 10px;
+  margin-top: 100px; /* Ajustado para um valor mais adequado */
   justify-items: center;
   width: 100%;
   max-width: 1000px;
