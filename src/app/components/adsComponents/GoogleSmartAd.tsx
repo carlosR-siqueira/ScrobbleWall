@@ -9,9 +9,23 @@ declare global {
   }
 }
 
-export default function GoogleHorizontalAd() {
+export default function GoogleSmartAd() {
   const [adLoaded, setAdLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detecta se é dispositivo móvel
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth < 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     try {
@@ -21,7 +35,7 @@ export default function GoogleHorizontalAd() {
           if (window.adsbygoogle) {
             loadAd();
             setAdLoaded(true);
-            console.log('✅ Horizontal ad loaded successfully');
+            console.log(`✅ Smart ad loaded successfully (${isMobile ? 'mobile' : 'desktop'})`);
           } else {
             setError('AdSense script not available');
             console.warn('⚠️ AdSense script not available');
@@ -33,15 +47,20 @@ export default function GoogleHorizontalAd() {
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : 'Unknown error';
       setError(errorMessage);
-      console.error("❌ Horizontal AdSense error:", e);
+      console.error("❌ Smart AdSense error:", e);
     }
-  }, []);
+  }, [isMobile]);
+
+  // Em mobile, usa formato responsivo
+  // Em desktop, força formato horizontal
+  const adFormat = isMobile ? 'auto' : 'horizontal';
+  const adSize = isMobile ? ADSENSE_CONFIG.SIZES.MOBILE : ADSENSE_CONFIG.SIZES.DESKTOP;
 
   return (
-    <div className="ad-container-horizontal" style={{ 
+    <div className="ad-container-smart" style={{ 
       textAlign: 'center', 
       margin: '20px 0',
-      minHeight: '90px',
+      minHeight: `${adSize.height}px`,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -65,14 +84,14 @@ export default function GoogleHorizontalAd() {
             className="adsbygoogle"
             style={{ 
               display: 'block',
-              minHeight: '90px',
+              minHeight: `${adSize.height}px`,
               width: '100%',
-              maxWidth: '728px'
+              maxWidth: `${adSize.width}px`
             }}
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
             data-ad-slot={ADSENSE_CONFIG.SLOTS.HORIZONTAL}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
+            data-ad-format={adFormat}
+            data-full-width-responsive={isMobile}
           ></ins>
           {!adLoaded && (
             <div style={{ 
@@ -87,4 +106,4 @@ export default function GoogleHorizontalAd() {
       )}
     </div>
   );
-}
+} 

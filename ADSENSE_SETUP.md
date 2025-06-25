@@ -13,6 +13,14 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 
 ### 2. Componentes de Propaganda
 
+#### GoogleSmartAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleSmartAd.tsx`
+- **Funcionalidade**: Propaganda inteligente que escolhe o melhor formato baseado no dispositivo
+- **Comportamento**: 
+  - Desktop: Força formato horizontal (728x90)
+  - Mobile: Usa formato responsivo (320x250)
+- **Uso**: Páginas principais onde queremos controle total do formato
+
 #### GoogleResponsiveAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleResponsiveAd.tsx`
 - **Funcionalidade**: Propaganda responsiva que se adapta a diferentes tamanhos de tela

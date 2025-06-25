@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './page.module.css';
 
-import GoogleResponsiveAd from './components/adsComponents/GoogleResponsiveAd';
+import GoogleSmartAd from './components/adsComponents/GoogleSmartAd';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -40,8 +40,8 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Propaganda responsiva após a seção de boas-vindas */}
-      <GoogleResponsiveAd />
+      {/* Propaganda inteligente após a seção de boas-vindas */}
+      <GoogleSmartAd />
 
       {/* Seção de instruções para conectar Spotify ao Last.fm */}
       <section className={styles.integrationSection}>
@@ -101,8 +101,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Segunda propaganda responsiva no final da página */}
-      <GoogleResponsiveAd />
+      {/* Segunda propaganda inteligente no final da página */}
+      <GoogleSmartAd />
 
       {/* Modal de visualização da imagem */}
       {modalOpen && (
