@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './page.module.css';
 
-import GoogleSmartAd from './components/adsComponents/GoogleSmartAd';
+import GoogleHorizontalAd from './components/adsComponents/GoogleHorizontalAd';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -40,8 +40,8 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Propaganda inteligente após a seção de boas-vindas */}
-      <GoogleSmartAd />
+      {/* Propaganda horizontal após a seção de boas-vindas */}
+      <GoogleHorizontalAd slot="3404072661" className="first-ad" id="ad-first" delay={0} />
 
       {/* Seção de instruções para conectar Spotify ao Last.fm */}
       <section className={styles.integrationSection}>
@@ -101,8 +101,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Segunda propaganda inteligente no final da página */}
-      <GoogleSmartAd />
+      {/* Segunda propaganda horizontal no final da página */}
+      <GoogleHorizontalAd slot="3404072661" className="second-ad" id="ad-second" delay={500} />
 
       {/* Modal de visualização da imagem */}
       {modalOpen && (

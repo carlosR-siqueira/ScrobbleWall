@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { ADSENSE_CONFIG, loadAd } from '../../config/adsense';
+import { useEffect, useState, useRef } from 'react';
 
 declare global {
   interface Window {
@@ -9,36 +8,46 @@ declare global {
   }
 }
 
-export default function GoogleHorizontalAd() {
+interface GoogleHorizontalAdProps {
+  slot?: string;
+  className?: string;
+  id?: string;
+  delay?: number;
+}
+
+export default function GoogleHorizontalAd({ 
+  slot = "3404072661", 
+  className = "",
+  id,
+  delay = 0
+}: GoogleHorizontalAdProps) {
   const [adLoaded, setAdLoaded] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const adId = useRef(id || `ad-${Math.random().toString(36).substr(2, 9)}`);
 
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
         // Aguarda um pouco para garantir que o script do AdSense foi carregado
+        // Adiciona delay extra para evitar conflitos entre múltiplas propagandas
         const timer = setTimeout(() => {
           if (window.adsbygoogle) {
-            loadAd();
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
             setAdLoaded(true);
-            console.log('✅ Horizontal ad loaded successfully');
+            console.log(`✅ Horizontal ad loaded successfully (ID: ${adId.current})`);
           } else {
-            setError('AdSense script not available');
             console.warn('⚠️ AdSense script not available');
           }
-        }, ADSENSE_CONFIG.LOADING_DELAY);
+        }, 1000 + delay); // Delay base + delay específico
 
         return () => clearTimeout(timer);
       }
     } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : 'Unknown error';
-      setError(errorMessage);
       console.error("❌ Horizontal AdSense error:", e);
     }
-  }, []);
+  }, [adId.current, delay]);
 
   return (
-    <div className="ad-container-horizontal" style={{ 
+    <div className={`ad-container-horizontal ${className}`} style={{ 
       textAlign: 'center', 
       margin: '20px 0',
       minHeight: '90px',
@@ -47,43 +56,28 @@ export default function GoogleHorizontalAd() {
       alignItems: 'center',
       padding: '0 10px'
     }}>
-      {error ? (
+      <ins
+        id={adId.current}
+        className="adsbygoogle"
+        style={{ 
+          display: 'block',
+          minHeight: '90px',
+          width: '100%',
+          maxWidth: '728px'
+        }}
+        data-ad-client="ca-pub-8940704424317590"
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      {!adLoaded && (
         <div style={{ 
-          color: '#ff6b6b', 
+          color: '#666', 
           fontSize: '14px',
-          fontStyle: 'italic',
-          padding: '20px',
-          border: '1px solid #ff6b6b',
-          borderRadius: '4px',
-          backgroundColor: '#fff5f5'
+          fontStyle: 'italic'
         }}>
-          Erro ao carregar propaganda: {error}
+          Carregando propaganda... (ID: {adId.current})
         </div>
-      ) : (
-        <>
-          <ins
-            className="adsbygoogle"
-            style={{ 
-              display: 'block',
-              minHeight: '90px',
-              width: '100%',
-              maxWidth: '728px'
-            }}
-            data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
-            data-ad-slot={ADSENSE_CONFIG.SLOTS.HORIZONTAL}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-          {!adLoaded && (
-            <div style={{ 
-              color: '#666', 
-              fontSize: '14px',
-              fontStyle: 'italic'
-            }}>
-              Carregando propaganda...
-            </div>
-          )}
-        </>
       )}
     </div>
   );

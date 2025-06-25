@@ -49,11 +49,11 @@ export default function GoogleSmartAd() {
       setError(errorMessage);
       console.error("❌ Smart AdSense error:", e);
     }
-  }, [isMobile]);
+  }, []);
 
   // Em mobile, usa formato responsivo
   // Em desktop, força formato horizontal
-  const adFormat = isMobile ? 'auto' : 'horizontal';
+  const adFormat = isMobile ? 'auto' : 'auto';
   const adSize = isMobile ? ADSENSE_CONFIG.SIZES.MOBILE : ADSENSE_CONFIG.SIZES.DESKTOP;
 
   return (
@@ -91,7 +91,7 @@ export default function GoogleSmartAd() {
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
             data-ad-slot={ADSENSE_CONFIG.SLOTS.HORIZONTAL}
             data-ad-format={adFormat}
-            data-full-width-responsive={isMobile}
+            data-full-width-responsive="true"
           ></ins>
           {!adLoaded && (
             <div style={{ 
