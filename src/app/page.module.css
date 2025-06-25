@@ -746,3 +746,39 @@
   
 
 }
+
+/* Estilos para banners horizontais */
+.ad-container-banner {
+  text-align: center;
+  margin: 20px 0;
+  height: 90px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.ad-container-banner ins {
+  display: inline-block !important;
+  width: 728px !important;
+  height: 90px !important;
+  max-width: 728px !important;
+  min-width: 728px !important;
+}
+
+/* Responsividade para banners */
+@media (max-width: 768px) {
+  .ad-container-banner {
+    height: 250px !important;
+  }
+  
+  .ad-container-banner ins {
+    width: 320px !important;
+    height: 250px !important;
+    max-width: 320px !important;
+    min-width: 320px !important;
+  }
+}
