@@ -3,6 +3,7 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './page.module.css';
+import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 
 const Contato = () => {
   const [state, handleSubmit] = useForm('xnndbljn');
@@ -42,6 +43,9 @@ const Contato = () => {
       <p className={styles.paragraph}>
         Ou envie diretamente para: <a href="mailto:bekguittar@gmail.com" className={styles.link}>bekguittar@gmail.com</a>
       </p>
+
+      {/* Propaganda no final da página */}
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
     </div>
   );
 };

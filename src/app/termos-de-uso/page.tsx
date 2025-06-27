@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './page.module.css';
+import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 
 const TermosDeUso = () => {
   const currentYear = new Date().getFullYear();
@@ -23,6 +24,8 @@ const TermosDeUso = () => {
         <strong> Last.fm</strong>. Os dados são obtidos exclusivamente por meio da API oficial do Last.fm.
       </p>
 
+      <GoogleResponsiveAd position="top" forceHorizontal={true} />
+
       <h2 className={styles.subtitle}>3. Uso Pessoal</h2>
       <p className={styles.paragraph}>
         O conteúdo gerado por este site é para uso pessoal e não comercial. A reprodução, modificação ou distribuição
@@ -37,7 +40,7 @@ const TermosDeUso = () => {
 
       <h2 className={styles.subtitle}>5. Limitação de Responsabilidade</h2>
       <p className={styles.paragraph}>
-        Este site é fornecido “no estado em que se encontra”, sem garantias de qualquer tipo. Não nos responsabilizamos
+        Este site é fornecido "no estado em que se encontra", sem garantias de qualquer tipo. Não nos responsabilizamos
         por perdas, danos ou prejuízos decorrentes do uso do site.
       </p>
 
@@ -70,6 +73,8 @@ const TermosDeUso = () => {
           Carlos Siqueira
         </a>. Todos os direitos reservados.
       </p>
+
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
     </div>
   );
 };

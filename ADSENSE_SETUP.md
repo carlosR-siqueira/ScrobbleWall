@@ -16,9 +16,12 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 #### GoogleResponsiveAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleResponsiveAd.tsx`
 - **Funcionalidade**: Propaganda responsiva que se adapta a diferentes tamanhos de tela
-- **Slot**: `3404072661`
-- **Formato**: `auto` com `data-full-width-responsive="true"`
-- **Posicionamento**: Páginas principais (inicial, geração, sobre)
+- **Slots**: 
+  - `top`: `3404072661` (responsivo)
+  - `bottom`: `9969481018` (multiplex)
+- **Formato**: `horizontal` forçado para evitar formato vertical
+- **Props**: `position`, `forceHorizontal`
+- **Posicionamento**: Todas as páginas principais
 - **Recursos**: Tratamento de erros, logging, indicador de carregamento
 
 #### GoogleMultiplexAd
@@ -86,8 +89,8 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 ## Posicionamento das Propagandas
 
 ### Página Inicial (`/`)
-1. Após a seção de boas-vindas
-2. No final da página
+1. Após a seção de boas-vindas (slot responsivo)
+2. No final da página (slot multiplex)
 
 ### Página de Geração (`/generate`)
 1. Após o formulário (etapa formulário) - 40px top margin
@@ -95,8 +98,26 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 3. Após a grade de álbuns (etapa resultado) - 20px margins
 
 ### Página Sobre (`/sobre`)
-1. Após a primeira seção de conteúdo
-2. No final da página
+1. Após a introdução (slot responsivo)
+2. No final da página (slot multiplex)
+
+### Página Conectar (`/conectar`)
+1. Após a introdução (slot responsivo)
+2. No final da página (slot multiplex)
+
+### Página Política de Privacidade (`/politica-de-privacidade`)
+1. Após a introdução (slot responsivo)
+2. No final da página (slot multiplex)
+
+### Página Termos de Uso (`/termos-de-uso`)
+1. Após a introdução (slot responsivo)
+2. No final da página (slot multiplex)
+
+### Página Contato (`/contato`)
+1. No final da página (slot multiplex)
+
+### Páginas sem Anúncios
+- **Página de Doação** (`/donate`): Não possui anúncios para não interferir na experiência de doação
 
 ## Melhorias Implementadas
 
@@ -131,6 +152,21 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Multiplex**: Formato autorelaxed para melhor experiência
 - **In-Article**: Propaganda integrada ao conteúdo
 - **Responsivo**: Adaptação automática a diferentes dispositivos
+
+### 7. Estilos CSS Globais
+- **Arquivo**: `src/app/globals.css`
+- **Funcionalidade**: Estilos específicos para propagandas
+- **Benefícios**: 
+  - Garantir formato horizontal
+  - Evitar conflitos de layout
+  - Responsividade adequada
+  - Prevenção de quebras de layout
+
+### 8. Cobertura Completa
+- **Páginas com anúncios**: 7 páginas principais
+- **Estratégia**: Anúncios após introdução e no final
+- **Consistência**: Mesmo padrão em todas as páginas
+- **Experiência**: Não interfere com funcionalidades críticas
 
 ## Troubleshooting
 
@@ -174,9 +210,58 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 ### Correção do Formato Vertical
 - **Problema**: Propagandas apareciam verticalmente quando deveriam ser horizontais
 - **Solução**: 
-  - Removidas configurações de tamanho fixo que causavam o problema
-  - Deixado o AdSense decidir automaticamente o formato
-  - Mantido `data-ad-format="auto"` e `data-full-width-responsive="true"`
+  - Adicionado prop `forceHorizontal={true}`
+  - Definido `data-ad-format="horizontal"`
+  - Adicionados estilos CSS específicos
+  - Altura mínima forçada para 90px
+
+### Correção do Segundo Anúncio
+- **Problema**: Segundo anúncio não aparecia na mesma página
+- **Solução**: 
+  - Implementado sistema de slots diferentes por posição
+  - Primeiro anúncio: slot responsivo (`3404072661`)
+  - Segundo anúncio: slot multiplex (`9969481018`)
+  - Props `position` para diferenciar os anúncios
+
+### Implementação em Todas as Páginas
+- **Adicionado**: Anúncios em 7 páginas principais
+- **Estratégia**: Posicionamento consistente (após introdução + final)
+- **Slots**: Uso inteligente de slots diferentes para evitar conflitos
+- **Experiência**: Mantida qualidade da experiência do usuário
+
+## Uso dos Componentes
+
+### GoogleResponsiveAd
+```tsx
+// Primeiro anúncio (topo da página)
+<GoogleResponsiveAd position="top" forceHorizontal={true} />
+
+// Segundo anúncio (final da página)
+<GoogleResponsiveAd position="bottom" forceHorizontal={true} />
+```
+
+### Outros Componentes
+```tsx
+// Multiplex para conteúdo extenso
+<GoogleMultiplexAd />
+
+// In-article para artigos
+<GoogleArticleAd />
+```
+
+## Páginas com Anúncios Implementados
+
+### ✅ Páginas Principais
+1. **Página Inicial** (`/`) - 2 anúncios
+2. **Página de Geração** (`/generate`) - 3 anúncios
+3. **Página Sobre** (`/sobre`) - 2 anúncios
+4. **Página Conectar** (`/conectar`) - 2 anúncios
+5. **Página Política de Privacidade** (`/politica-de-privacidade`) - 2 anúncios
+6. **Página Termos de Uso** (`/termos-de-uso`) - 2 anúncios
+7. **Página Contato** (`/contato`) - 1 anúncio
+
+### ❌ Páginas sem Anúncios
+- **Página de Doação** (`/donate`) - Intencionalmente sem anúncios
 
 ## Próximos Passos
 

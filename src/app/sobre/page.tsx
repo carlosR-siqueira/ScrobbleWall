@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from './page.module.css';
-import GoogleHorizontalAd from '../components/adsComponents/GoogleHorizontalAd';
+import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 
 const Sobre = () => {
   return (
@@ -25,7 +25,7 @@ const Sobre = () => {
         Tudo é feito diretamente no navegador, sem necessidade de login ou coleta de dados sensíveis.
       </p>
 
-      <GoogleHorizontalAd />
+      <GoogleResponsiveAd position="top" forceHorizontal={true} />
 
       <h2 className={styles.subtitle}>Por que criei este site?</h2>
 
@@ -40,10 +40,10 @@ const Sobre = () => {
       </p>
 
       <p className={styles.paragraph}>
-        Obrigado por visitar o site. 🎵✨
+        Obrigado por visitar o site. ��✨
       </p>
 
-      <GoogleHorizontalAd />
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
     </div>
   );
 };

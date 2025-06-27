@@ -9,9 +9,25 @@ declare global {
   }
 }
 
-export default function GoogleResponsiveAd() {
+interface GoogleResponsiveAdProps {
+  position?: 'top' | 'bottom';
+  forceHorizontal?: boolean;
+}
+
+export default function GoogleResponsiveAd({ 
+  position = 'top', 
+  forceHorizontal = true 
+}: GoogleResponsiveAdProps) {
   const [adLoaded, setAdLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Usar slot diferente baseado na posição para evitar conflitos
+  const getAdSlot = () => {
+    if (position === 'bottom') {
+      return ADSENSE_CONFIG.SLOTS.MULTIPLEX; // Usar slot multiplex para o segundo anúncio
+    }
+    return ADSENSE_CONFIG.SLOTS.RESPONSIVE; // Usar slot responsivo para o primeiro anúncio
+  };
 
   useEffect(() => {
     try {
@@ -21,7 +37,7 @@ export default function GoogleResponsiveAd() {
           if (window.adsbygoogle) {
             loadAd();
             setAdLoaded(true);
-            console.log('✅ Ad loaded successfully');
+            console.log(`✅ ${position} Ad loaded successfully with slot ${getAdSlot()}`);
           } else {
             setError('AdSense script not available');
             console.warn('⚠️ AdSense script not available');
@@ -35,16 +51,17 @@ export default function GoogleResponsiveAd() {
       setError(errorMessage);
       console.error("❌ AdSense error:", e);
     }
-  }, []);
+  }, [position]);
 
   return (
     <div className="ad-container-responsive" style={{ 
       textAlign: 'center', 
-      margin: '10px 0',
+      margin: '20px 0',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '0 10px'
+      padding: '0 10px',
+      minHeight: forceHorizontal ? '90px' : 'auto'
     }}>
       {error ? (
         <div style={{ 
@@ -65,11 +82,12 @@ export default function GoogleResponsiveAd() {
             style={{ 
               display: 'block',
               width: '100%',
-              maxWidth: '728px'
+              maxWidth: '728px',
+              minHeight: forceHorizontal ? '90px' : 'auto'
             }}
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
-            data-ad-slot={ADSENSE_CONFIG.SLOTS.RESPONSIVE}
-            data-ad-format="auto"
+            data-ad-slot={getAdSlot()}
+            data-ad-format={forceHorizontal ? 'horizontal' : 'auto'}
             data-full-width-responsive="true"
           ></ins>
           {!adLoaded && (

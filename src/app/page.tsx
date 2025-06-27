@@ -41,7 +41,7 @@ export default function LandingPage() {
       </div>
 
       {/* Propaganda responsiva após a seção de boas-vindas */}
-      <GoogleResponsiveAd />
+      <GoogleResponsiveAd position="top" forceHorizontal={true} />
 
       {/* Seção de instruções para conectar Spotify ao Last.fm */}
       <section className={styles.integrationSection}>
@@ -102,7 +102,7 @@ export default function LandingPage() {
       </section>
 
       {/* Segunda propaganda responsiva no final da página */}
-      <GoogleResponsiveAd />
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
 
       {/* Modal de visualização da imagem */}
       {modalOpen && (

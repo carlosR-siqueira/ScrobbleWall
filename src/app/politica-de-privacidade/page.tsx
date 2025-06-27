@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './page.module.css';
+import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 
 const PoliticaDePrivacidade = () => {
   const currentYear = new Date().getFullYear();
@@ -22,6 +23,8 @@ const PoliticaDePrivacidade = () => {
         Podemos utilizar cookies e tecnologias semelhantes para melhorar a experiência do usuário, como lembrar suas
         preferências ou medir o desempenho do site.
       </p>
+
+      <GoogleResponsiveAd position="top" forceHorizontal={true} />
 
       <h2 className={styles.subtitle}>3. Serviços de Terceiros</h2>
       <p className={styles.paragraph}>
@@ -69,6 +72,8 @@ const PoliticaDePrivacidade = () => {
           Carlos Siqueira
         </a>. Todos os direitos reservados.
       </p>
+
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
     </div>
   );
 };

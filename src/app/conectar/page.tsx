@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
+import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 
 const ConectarSpotify = () => {
   return (
@@ -17,6 +18,9 @@ const ConectarSpotify = () => {
         Funciona como uma comunidade virtual focada em interesses musicais. Você pode trocar informações e indicações com fãs da sua banda preferida, por exemplo, e ver sua compatibilidade musical com outros usuários.
       </p>
 
+      {/* Propaganda após a introdução */}
+      <GoogleResponsiveAd position="top" forceHorizontal={true} />
+
       <h2 className={styles.subtitle}>Passo a passo para conectar</h2>
 
       <ol className={styles.paragraph}>
@@ -27,19 +31,19 @@ const ConectarSpotify = () => {
           </div>
         </li>
         <li>
-          No rodapé da página, dentro de <strong>“Help”</strong> selecione <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Track My Music</a>, ou acesse diretamente a página de <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener noreferrer">aplicativos conectados</a>. Você também pode clicar em <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Download Scrobbler</a> dentro de <strong>"Goodies"</strong>
+          No rodapé da página, dentro de <strong>"Help"</strong> selecione <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Track My Music</a>, ou acesse diretamente a página de <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener noreferrer">aplicativos conectados</a>. Você também pode clicar em <a href='https://www.last.fm/about/trackmymusic' target="_blank" rel="noopener noreferrer">Download Scrobbler</a> dentro de <strong>"Goodies"</strong>
           <div className={styles.imgContainer}>
             <Image src="/lastFm-Footer.PNG" alt="last.fm footer" width={500} height={300} />
           </div>
         </li>
         <li>
-          Clique em <strong>“Spotify”</strong>, em seguida clique em <strong>“Connect”</strong>.
+          Clique em <strong>"Spotify"</strong>, em seguida clique em <strong>"Connect"</strong>.
           <div className={styles.imgContainer}>
             <Image src="/spotify.PNG" alt="spotify" width={400} height={200} />
           </div>
         </li>
         <li>
-          Uma janela pop-up do Spotify será aberta solicitando permissão para integrar as plataformas. Clique em <strong>“Aceitar”</strong>.
+          Uma janela pop-up do Spotify será aberta solicitando permissão para integrar as plataformas. Clique em <strong>"Aceitar"</strong>.
         </li>
         <li>
           Após a confirmação, suas músicas tocadas no Spotify começarão a ser registradas automaticamente no seu perfil do Last.fm.
@@ -58,12 +62,15 @@ const ConectarSpotify = () => {
       <h2 className={styles.subtitle}>Como remover a conexão?</h2>
 
       <p className={styles.paragraph}>
-        Caso deseje desconectar o Spotify do Last.fm, acesse a página de <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer">aplicativos conectados do Spotify</a>, localize o Last.fm e clique em <strong>“Remover Acesso”</strong>.
+        Caso deseje desconectar o Spotify do Last.fm, acesse a página de <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer">aplicativos conectados do Spotify</a>, localize o Last.fm e clique em <strong>"Remover Acesso"</strong>.
       </p>
 
       <p className={styles.paragraph}>
         Pronto! Agora você já sabe como integrar o Spotify ao Last.fm e aproveitar ao máximo os recursos do ScrobbleWall.
       </p>
+
+      {/* Propaganda no final da página */}
+      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
     </div>
   );
 };
