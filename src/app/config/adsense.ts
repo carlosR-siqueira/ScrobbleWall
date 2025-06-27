@@ -5,9 +5,11 @@ export const ADSENSE_CONFIG = {
   
   // Slots de propaganda
   SLOTS: {
-    HORIZONTAL: '3404072661',
-    VERTICAL: '3404072661', // Usando o mesmo slot por enquanto
-    RESPONSIVE: '3404072661'
+    HORIZONTAL: '3404072661',      // Slot original - horizontal
+    VERTICAL: '3404072661',        // Slot original - vertical
+    RESPONSIVE: '3404072661',      // Slot original - responsivo
+    MULTIPLEX: '9969481018',       // Novo slot - multiplex
+    ARTICLE: '6493270436'          // Novo slot - in-article
   },
   
   // Configurações de carregamento
@@ -20,11 +22,11 @@ export const ADSENSE_CONFIG = {
     DESKTOP: 1200
   },
   
-  // Tamanhos de propaganda
+  // Tamanhos de propaganda (corrigidos para horizontal)
   SIZES: {
     MOBILE: {
       width: 320,
-      height: 250
+      height: 50  // Altura menor para mobile horizontal
     },
     DESKTOP: {
       width: 728,

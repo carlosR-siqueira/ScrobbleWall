@@ -16,7 +16,25 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 #### GoogleResponsiveAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleResponsiveAd.tsx`
 - **Funcionalidade**: Propaganda responsiva que se adapta a diferentes tamanhos de tela
+- **Slot**: `3404072661`
+- **Formato**: `auto` com `data-full-width-responsive="true"`
 - **Posicionamento**: Páginas principais (inicial, geração, sobre)
+- **Recursos**: Tratamento de erros, logging, indicador de carregamento
+
+#### GoogleMultiplexAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleMultiplexAd.tsx`
+- **Funcionalidade**: Propaganda multiplex com formato autorelaxed
+- **Slot**: `9969481018`
+- **Formato**: `autorelaxed`
+- **Uso**: Páginas com conteúdo extenso
+- **Recursos**: Tratamento de erros, logging, indicador de carregamento
+
+#### GoogleArticleAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleArticleAd.tsx`
+- **Funcionalidade**: Propaganda in-article com layout fluid
+- **Slot**: `6493270436`
+- **Formato**: `fluid` com `data-ad-layout="in-article"`
+- **Uso**: Dentro de artigos e conteúdo textual
 - **Recursos**: Tratamento de erros, logging, indicador de carregamento
 
 #### AdWrapper
@@ -28,11 +46,13 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 #### GoogleHorizontalAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleHorizontalAd.tsx`
 - **Funcionalidade**: Propaganda horizontal fixa
+- **Slot**: `3404072661`
 - **Uso**: Páginas secundárias
 
 #### GoogleVerticalAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleVerticalAd.tsx`
 - **Funcionalidade**: Propaganda vertical para sidebars
+- **Slot**: `3404072661`
 - **Uso**: Páginas com layout em colunas
 
 #### AdSenseLoader
@@ -42,6 +62,12 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 
 ### 3. Configuração Centralizada
 - **Arquivo**: `src/app/config/adsense.ts`
+- **Slots Disponíveis**:
+  - `HORIZONTAL`: `3404072661` (Slot original - horizontal)
+  - `VERTICAL`: `3404072661` (Slot original - vertical)
+  - `RESPONSIVE`: `3404072661` (Slot original - responsivo)
+  - `MULTIPLEX`: `9969481018` (Novo slot - multiplex)
+  - `ARTICLE`: `6493270436` (Novo slot - in-article)
 - **Benefícios**: 
   - Configurações centralizadas
   - Fácil manutenção
@@ -101,6 +127,11 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - Componente AdWrapper para espaçamento consistente
 - Propagandas não interferem com o layout do conteúdo
 
+### 6. Novos Formatos de Propaganda
+- **Multiplex**: Formato autorelaxed para melhor experiência
+- **In-Article**: Propaganda integrada ao conteúdo
+- **Responsivo**: Adaptação automática a diferentes dispositivos
+
 ## Troubleshooting
 
 ### Propagandas não aparecem
@@ -140,12 +171,19 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - Propagandas posicionadas estrategicamente sem interferir no layout
   - Header e container principal mantidos no estado original
 
+### Correção do Formato Vertical
+- **Problema**: Propagandas apareciam verticalmente quando deveriam ser horizontais
+- **Solução**: 
+  - Removidas configurações de tamanho fixo que causavam o problema
+  - Deixado o AdSense decidir automaticamente o formato
+  - Mantido `data-ad-format="auto"` e `data-full-width-responsive="true"`
+
 ## Próximos Passos
 
 1. **Monitoramento**: Implementar analytics para performance das propagandas
 2. **A/B Testing**: Testar diferentes posicionamentos
 3. **Otimização**: Ajustar baseado em métricas de CTR
-4. **Novos Formatos**: Implementar propagandas in-article e sticky
+4. **Novos Formatos**: Implementar propagandas sticky e outros formatos avançados
 
 ## Contato
 Para dúvidas sobre a implementação do AdSense, consulte a documentação oficial do Google ou entre em contato com a equipe de desenvolvimento. 

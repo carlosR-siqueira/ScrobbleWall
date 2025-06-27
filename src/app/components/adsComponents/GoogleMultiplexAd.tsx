@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-export default function GoogleResponsiveAd() {
+export default function GoogleMultiplexAd() {
   const [adLoaded, setAdLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,7 +21,7 @@ export default function GoogleResponsiveAd() {
           if (window.adsbygoogle) {
             loadAd();
             setAdLoaded(true);
-            console.log('✅ Ad loaded successfully');
+            console.log('✅ Multiplex Ad loaded successfully');
           } else {
             setError('AdSense script not available');
             console.warn('⚠️ AdSense script not available');
@@ -33,14 +33,14 @@ export default function GoogleResponsiveAd() {
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : 'Unknown error';
       setError(errorMessage);
-      console.error("❌ AdSense error:", e);
+      console.error("❌ Multiplex AdSense error:", e);
     }
   }, []);
 
   return (
-    <div className="ad-container-responsive" style={{ 
+    <div className="ad-container-multiplex" style={{ 
       textAlign: 'center', 
-      margin: '10px 0',
+      margin: '20px 0',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -67,10 +67,9 @@ export default function GoogleResponsiveAd() {
               width: '100%',
               maxWidth: '728px'
             }}
+            data-ad-format="autorelaxed"
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
-            data-ad-slot={ADSENSE_CONFIG.SLOTS.RESPONSIVE}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
+            data-ad-slot={ADSENSE_CONFIG.SLOTS.MULTIPLEX}
           ></ins>
           {!adLoaded && (
             <div style={{ 
