@@ -50,6 +50,7 @@
   .paragraph li{
     list-style:decimal;
     margin: 40px 0;
+    padding-left: 20px;
   }
 
   .paragraph a{
@@ -102,6 +103,7 @@
     
     .paragraph li {
       margin: 20px 0;
+      padding-left: 25px;
     }
     
     .imgContainer {
@@ -123,6 +125,10 @@
     
     .subtitle {
       font-size: 1.1rem;
+    }
+    
+    .paragraph li {
+      padding-left: 20px;
     }
   }
   
