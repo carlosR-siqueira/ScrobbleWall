@@ -354,7 +354,7 @@ SLOTS: {
   RESPONSIVE: '3404072661',      // Slot original - responsivo
   MULTIPLEX: '9969481018',       // Novo slot - multiplex
   ARTICLE: '6493270436',         // Novo slot - in-article
-  SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar
+  SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar (120x500)
 }
 ```
 
@@ -376,6 +376,7 @@ SLOTS: {
 - **Características**:
   - Tamanho fixo para desktop
   - Responsivo para mobile (320x50)
+  - Tratamento de erros melhorado
 
 ### 3. GoogleVerticalAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleVerticalAd.tsx`
@@ -403,10 +404,10 @@ SLOTS: {
 
 ### 6. GoogleSidebarAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleSidebarAd.tsx`
-- **Função**: Anúncio vertical para sidebar (250x450)
+- **Função**: Anúncio vertical para sidebar (120x500)
 - **Slot**: `SIDEBAR` (7699203606)
 - **Características**:
-  - Tamanho fixo 250x450px
+  - Tamanho fixo 120x500px (atualizado)
   - Específico para laterais das páginas
   - Apenas em desktop
 
@@ -425,6 +426,7 @@ SLOTS: {
   - Layout de 3 colunas em desktop (anúncio | conteúdo | anúncio)
   - Anúncios laterais apenas em desktop (>768px)
   - Anúncios sticky (fixos durante scroll)
+  - Layout otimizado para não espremer o conteúdo principal
   - Em mobile: apenas o conteúdo (sem anúncios laterais)
 
 ## Implementação nas Páginas
@@ -478,13 +480,13 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 
 ### Desktop (>768px)
 ```
-┌─────────────┬─────────────────┬─────────────┐
-│   Anúncio   │                 │   Anúncio   │
-│   Lateral   │    Conteúdo     │   Lateral   │
-│   (250px)   │   Principal     │   (250px)   │
-│             │                 │             │
-│   Sticky    │                 │   Sticky    │
-└─────────────┴─────────────────┴─────────────┘
+┌───────────┬─────────────────────┬───────────┐
+│  Anúncio  │                     │  Anúncio  │
+│  Lateral  │    Conteúdo         │  Lateral  │
+│ (120px)   │   Principal         │ (120px)   │
+│           │                     │           │
+│  Sticky   │                     │  Sticky   │
+└───────────┴─────────────────────┴───────────┘
 ```
 
 ### Mobile (≤768px)
@@ -507,12 +509,14 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
   - Estilos específicos para anúncios da sidebar
   - Responsividade para mobile
   - Garantias de visibilidade e display
+  - Melhorias específicas para mobile
 
 ### Características dos Estilos
-- **Anúncios Laterais**: 250px × 450px, sticky positioning
+- **Anúncios Laterais**: 120px × 500px, sticky positioning
 - **Responsividade**: Ocultos em mobile (≤768px)
 - **Visibilidade**: Forçada em mobile para evitar problemas de display
 - **Overflow**: Configurado como `visible` para evitar cortes
+- **Mobile**: Estilos específicos para garantir exibição
 
 ## Carregamento e Performance
 
@@ -549,14 +553,28 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 1. **3404072661**: Slot original (horizontal/vertical/responsivo)
 2. **9969481018**: Slot multiplex
 3. **6493270436**: Slot in-article
-4. **7699203606**: Slot sidebar (vertical 250x450)
+4. **7699203606**: Slot sidebar (vertical 120x500)
 
 ### Formatos Suportados
 - Horizontal: 728×90 (desktop), 320×50 (mobile)
-- Vertical: 300×600 (desktop), 250×450 (sidebar)
+- Vertical: 300×600 (desktop), 120×500 (sidebar)
 - Responsivo: Adaptável
 - Multiplex: Múltiplos anúncios
 - In-article: Integrado ao conteúdo
+
+## Melhorias Recentes
+
+### Correções de Layout
+- **Anúncios Laterais**: Reduzidos de 250x450px para 120x500px
+- **Layout Principal**: Aumentado maxWidth para 1400px
+- **Gap**: Reduzido de 20px para 15px
+- **Conteúdo Principal**: Melhor flexibilidade com minWidth: 0
+
+### Correções Mobile
+- **Visibilidade**: Forçada com !important
+- **Display**: Garantido com flex !important
+- **Width**: Configurado para 100% em mobile
+- **Iframes**: Garantida exibição dos anúncios
 
 ## Manutenção
 
@@ -574,4 +592,5 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - Verificar console para erros
 - Confirmar carregamento do script AdSense
 - Testar em diferentes dispositivos
-- Verificar breakpoints CSS 
+- Verificar breakpoints CSS
+- Verificar se os estilos mobile estão sendo aplicados 

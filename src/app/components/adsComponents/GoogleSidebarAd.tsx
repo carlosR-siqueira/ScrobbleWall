@@ -44,8 +44,8 @@ export default function GoogleSidebarAd() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '250px',
-      height: '450px',
+      width: '120px',
+      height: '500px',
       overflow: 'visible'
     }}>
       {error ? (
@@ -67,8 +67,8 @@ export default function GoogleSidebarAd() {
             className="adsbygoogle"
             style={{ 
               display: 'inline-block',
-              width: '250px',
-              height: '450px',
+              width: '120px',
+              height: '500px',
               overflow: 'visible'
             }}
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}

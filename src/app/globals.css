@@ -77,11 +77,11 @@ a {
 
 /* Estilos específicos para anúncios da sidebar */
 .ad-container-sidebar {
-  max-width: 250px;
-  min-height: 450px;
+  max-width: 120px;
+  min-height: 500px;
   margin: 0;
-  width: 250px;
-  height: 450px;
+  width: 120px;
+  height: 500px;
 }
 
 .adsbygoogle {
@@ -98,10 +98,10 @@ a {
 /* Estilos específicos para anúncios da sidebar */
 .ad-container-sidebar .adsbygoogle {
   display: inline-block !important;
-  width: 250px !important;
-  height: 450px !important;
-  max-width: 250px !important;
-  min-height: 450px !important;
+  width: 120px !important;
+  height: 500px !important;
+  max-width: 120px !important;
+  min-height: 500px !important;
   margin: 0 !important;
 }
 
@@ -132,6 +132,7 @@ a {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    width: 100% !important;
   }
   
   .ad-container-sidebar {
@@ -161,6 +162,7 @@ a {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    width: 100% !important;
   }
   
   .adsbygoogle {
@@ -234,5 +236,37 @@ a {
     opacity: 1 !important;
     width: 100% !important;
     max-width: 320px !important;
+  }
+}
+
+/* Melhorias específicas para mobile - forçar display */
+@media (max-width: 768px) {
+  /* Forçar todos os containers de anúncio a aparecerem */
+  .ad-container-responsive,
+  .ad-container-multiplex,
+  .ad-container-article,
+  .ad-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 15px auto !important;
+  }
+  
+  /* Forçar todos os anúncios a aparecerem */
+  .adsbygoogle {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 320px !important;
+  }
+  
+  /* Garantir que iframes dos anúncios apareçam */
+  .adsbygoogle iframe {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }

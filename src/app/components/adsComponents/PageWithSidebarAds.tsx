@@ -34,17 +34,19 @@ export default function PageWithSidebarAds({ children }: PageWithSidebarAdsProps
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'flex-start',
-      gap: '20px',
-      maxWidth: '1200px',
+      gap: '15px',
+      maxWidth: '1400px',
       margin: '0 auto',
-      padding: '0 20px'
+      padding: '0 20px',
+      minHeight: '100vh'
     }}>
       {/* Anúncio lateral esquerdo */}
       <div style={{ 
         position: 'sticky',
         top: '100px',
-        width: '250px',
-        flexShrink: 0
+        width: '120px',
+        flexShrink: 0,
+        height: 'fit-content'
       }}>
         <GoogleSidebarAd />
       </div>
@@ -52,7 +54,9 @@ export default function PageWithSidebarAds({ children }: PageWithSidebarAdsProps
       {/* Conteúdo principal */}
       <div style={{ 
         flex: '1',
-        maxWidth: '800px'
+        minWidth: '0', // Permite que o conteúdo seja espremido se necessário
+        maxWidth: '900px',
+        width: '100%'
       }}>
         {children}
       </div>
@@ -61,8 +65,9 @@ export default function PageWithSidebarAds({ children }: PageWithSidebarAdsProps
       <div style={{ 
         position: 'sticky',
         top: '100px',
-        width: '250px',
-        flexShrink: 0
+        width: '120px',
+        flexShrink: 0,
+        height: 'fit-content'
       }}>
         <GoogleSidebarAd />
       </div>
