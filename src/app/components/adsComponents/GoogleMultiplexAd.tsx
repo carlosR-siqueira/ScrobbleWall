@@ -44,7 +44,11 @@ export default function GoogleMultiplexAd() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '0 10px'
+      padding: '0 10px',
+      minHeight: '90px',
+      width: '100%',
+      maxWidth: '728px',
+      overflow: 'visible'
     }}>
       {error ? (
         <div style={{ 
@@ -65,7 +69,9 @@ export default function GoogleMultiplexAd() {
             style={{ 
               display: 'block',
               width: '100%',
-              maxWidth: '728px'
+              maxWidth: '728px',
+              minHeight: '90px',
+              overflow: 'visible'
             }}
             data-ad-format="autorelaxed"
             data-ad-client={ADSENSE_CONFIG.CLIENT_ID}

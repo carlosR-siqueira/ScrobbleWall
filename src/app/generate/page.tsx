@@ -182,8 +182,6 @@ export default function GeneratePage() {
             </div>
           </div>
           
-          <AdWrapper topMargin={20} bottomMargin={20} />
-          
           <AlbumGrid
             albums={albums}
             gridSize={gridSize}

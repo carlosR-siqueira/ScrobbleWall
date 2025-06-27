@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
+import GoogleMultiplexAd from '../components/adsComponents/GoogleMultiplexAd';
 
 const Sobre = () => {
   return (
@@ -43,7 +44,7 @@ const Sobre = () => {
         Obrigado por visitar o site. ��✨
       </p>
 
-      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
+      <GoogleMultiplexAd />
     </div>
   );
 };

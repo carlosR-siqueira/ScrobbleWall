@@ -21,7 +21,7 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - `bottom`: `9969481018` (multiplex)
 - **Formato**: `horizontal` forçado para evitar formato vertical
 - **Props**: `position`, `forceHorizontal`
-- **Posicionamento**: Todas as páginas principais
+- **Posicionamento**: Páginas principais
 - **Recursos**: Tratamento de erros, logging, indicador de carregamento
 
 #### GoogleMultiplexAd
@@ -29,8 +29,8 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Funcionalidade**: Propaganda multiplex com formato autorelaxed
 - **Slot**: `9969481018`
 - **Formato**: `autorelaxed`
-- **Uso**: Páginas com conteúdo extenso
-- **Recursos**: Tratamento de erros, logging, indicador de carregamento
+- **Uso**: Páginas com conteúdo extenso e segundo anúncio
+- **Recursos**: Tratamento de erros, logging, indicador de carregamento, responsividade mobile otimizada
 
 #### GoogleArticleAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleArticleAd.tsx`
@@ -95,15 +95,15 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 ### Página de Geração (`/generate`)
 1. Após o formulário (etapa formulário) - 40px top margin
 2. Antes da grade de álbuns (etapa resultado) - 20px margins
-3. Após a grade de álbuns (etapa resultado) - 20px margins
+3. Após a grade de álbuns (etapa resultado) - 20px margins (AdWrapper mantido)
 
 ### Página Sobre (`/sobre`)
-1. Após a introdução (slot responsivo)
-2. No final da página (slot multiplex)
+1. Após a introdução (GoogleResponsiveAd)
+2. No final da página (GoogleMultiplexAd)
 
 ### Página Conectar (`/conectar`)
-1. Após a introdução (slot responsivo)
-2. No final da página (slot multiplex)
+1. Após a introdução (GoogleMultiplexAd)
+2. No final da página (GoogleMultiplexAd)
 
 ### Página Política de Privacidade (`/politica-de-privacidade`)
 1. Após a introdução (slot responsivo)
@@ -161,12 +161,19 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - Evitar conflitos de layout
   - Responsividade adequada
   - Prevenção de quebras de layout
+  - **Mobile otimizado**: Forçar exibição em dispositivos móveis
 
 ### 8. Cobertura Completa
 - **Páginas com anúncios**: 7 páginas principais
 - **Estratégia**: Anúncios após introdução e no final
 - **Consistência**: Mesmo padrão em todas as páginas
 - **Experiência**: Não interfere com funcionalidades críticas
+
+### 9. Responsividade Mobile
+- **Estilos específicos**: CSS otimizado para mobile
+- **Forçar exibição**: Propriedades CSS para garantir visibilidade
+- **Tamanhos adaptativos**: 320px para mobile, 300px para mobile pequeno
+- **Overflow visible**: Evitar cortes de conteúdo
 
 ## Troubleshooting
 
@@ -175,6 +182,12 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 2. Confirmar se o site está aprovado no AdSense
 3. Verificar se não há bloqueadores de propaganda ativos
 4. Verificar mensagens de erro no console
+
+### Propagandas não aparecem no mobile
+1. Verificar se os estilos CSS estão sendo aplicados corretamente
+2. Confirmar se não há conflitos de overflow ou z-index
+3. Verificar se as propriedades `display: block !important` estão ativas
+4. Testar em diferentes navegadores mobile
 
 ### Propagandas quebram o layout
 1. Verificar se os containers têm altura mínima adequada
@@ -229,6 +242,20 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Slots**: Uso inteligente de slots diferentes para evitar conflitos
 - **Experiência**: Mantida qualidade da experiência do usuário
 
+### Correção de Problemas Mobile
+- **Problema**: Propagandas não apareciam em dispositivos móveis
+- **Solução**:
+  - Adicionados estilos CSS específicos para mobile
+  - Forçada exibição com `display: block !important`
+  - Otimizados tamanhos para diferentes breakpoints
+  - Adicionado `overflow: visible` para evitar cortes
+  - Melhorada responsividade dos containers
+
+### Alterações do Usuário Mantidas
+- **Página Generate**: AdWrapper mantido após resultado
+- **Página Sobre**: GoogleResponsiveAd + GoogleMultiplexAd
+- **Página Conectar**: Ambos os anúncios com GoogleMultiplexAd
+
 ## Uso dos Componentes
 
 ### GoogleResponsiveAd
@@ -240,22 +267,28 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
 ```
 
+### GoogleMultiplexAd
+```tsx
+// Anúncio multiplex (melhor para mobile)
+<GoogleMultiplexAd />
+```
+
 ### Outros Componentes
 ```tsx
-// Multiplex para conteúdo extenso
-<GoogleMultiplexAd />
-
 // In-article para artigos
 <GoogleArticleAd />
+
+// Wrapper para espaçamento
+<AdWrapper topMargin={20} bottomMargin={20} />
 ```
 
 ## Páginas com Anúncios Implementados
 
 ### ✅ Páginas Principais
 1. **Página Inicial** (`/`) - 2 anúncios
-2. **Página de Geração** (`/generate`) - 3 anúncios
-3. **Página Sobre** (`/sobre`) - 2 anúncios
-4. **Página Conectar** (`/conectar`) - 2 anúncios
+2. **Página de Geração** (`/generate`) - 3 anúncios (AdWrapper mantido)
+3. **Página Sobre** (`/sobre`) - 2 anúncios (GoogleResponsiveAd + GoogleMultiplexAd)
+4. **Página Conectar** (`/conectar`) - 2 anúncios (ambos GoogleMultiplexAd)
 5. **Página Política de Privacidade** (`/politica-de-privacidade`) - 2 anúncios
 6. **Página Termos de Uso** (`/termos-de-uso`) - 2 anúncios
 7. **Página Contato** (`/contato`) - 1 anúncio

@@ -68,6 +68,7 @@ a {
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  overflow: visible;
 }
 
 .adsbygoogle {
@@ -76,6 +77,7 @@ a {
   max-width: 728px !important;
   min-height: 90px !important;
   margin: 0 auto !important;
+  overflow: visible !important;
 }
 
 /* Garantir que as propagandas não quebrem o layout */
@@ -88,6 +90,10 @@ a {
   min-height: 90px !important;
 }
 
+.adsbygoogle[data-ad-format="autorelaxed"] {
+  min-height: 90px !important;
+}
+
 /* Responsividade para mobile */
 @media (max-width: 768px) {
   .ad-container-responsive,
@@ -95,11 +101,32 @@ a {
   .ad-container-article {
     max-width: 320px;
     min-height: 50px;
+    margin: 15px auto;
+    padding: 0 5px;
   }
   
   .adsbygoogle {
     max-width: 320px !important;
     min-height: 50px !important;
+    width: 100% !important;
+  }
+}
+
+/* Responsividade para mobile pequeno */
+@media (max-width: 480px) {
+  .ad-container-responsive,
+  .ad-container-multiplex,
+  .ad-container-article {
+    max-width: 300px;
+    min-height: 50px;
+    margin: 10px auto;
+    padding: 0 2px;
+  }
+  
+  .adsbygoogle {
+    max-width: 300px !important;
+    min-height: 50px !important;
+    width: 100% !important;
   }
 }
 
@@ -113,4 +140,30 @@ a {
   border: none !important;
   margin: 0 !important;
   padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* Garantir que os containers não sejam cortados */
+.ad-container-responsive,
+.ad-container-multiplex,
+.ad-container-article {
+  position: relative;
+  z-index: 1;
+}
+
+/* Forçar exibição em mobile */
+@media (max-width: 768px) {
+  .adsbygoogle {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .ad-container-responsive,
+  .ad-container-multiplex,
+  .ad-container-article {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 }

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
+import GoogleMultiplexAd from '../components/adsComponents/GoogleMultiplexAd';
 
 const ConectarSpotify = () => {
   return (
@@ -19,7 +20,7 @@ const ConectarSpotify = () => {
       </p>
 
       {/* Propaganda após a introdução */}
-      <GoogleResponsiveAd position="top" forceHorizontal={true} />
+      <GoogleMultiplexAd />
 
       <h2 className={styles.subtitle}>Passo a passo para conectar</h2>
 
@@ -70,7 +71,7 @@ const ConectarSpotify = () => {
       </p>
 
       {/* Propaganda no final da página */}
-      <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
+      <GoogleMultiplexAd />
     </div>
   );
 };
