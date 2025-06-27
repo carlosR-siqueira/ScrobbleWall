@@ -9,7 +9,8 @@ export const ADSENSE_CONFIG = {
     VERTICAL: '3404072661',        // Slot original - vertical
     RESPONSIVE: '3404072661',      // Slot original - responsivo
     MULTIPLEX: '9969481018',       // Novo slot - multiplex
-    ARTICLE: '6493270436'          // Novo slot - in-article
+    ARTICLE: '6493270436',         // Novo slot - in-article
+    SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar
   },
   
   // Configurações de carregamento

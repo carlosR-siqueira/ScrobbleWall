@@ -1,7 +1,7 @@
 # Configuração do Google AdSense - ScrobbleWall
 
 ## Visão Geral
-Este documento descreve a implementação do Google AdSense no projeto ScrobbleWall.
+Este documento descreve a implementação do Google AdSense no projeto ScrobbleWall, incluindo todos os componentes, configurações e slots utilizados.
 
 ## Configurações Implementadas
 
@@ -24,6 +24,14 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Posicionamento**: Páginas principais
 - **Recursos**: Tratamento de erros, logging, indicador de carregamento
 
+#### GoogleMobileAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleMobileAd.tsx`
+- **Funcionalidade**: Alterna automaticamente entre horizontal (mobile) e multiplex (desktop)
+- **Mobile**: GoogleHorizontalAd (≤768px)
+- **Desktop**: GoogleMultiplexAd (>768px)
+- **Uso**: Páginas sobre e conectar
+- **Recursos**: Detecção automática de dispositivo, responsividade otimizada
+
 #### GoogleMultiplexAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleMultiplexAd.tsx`
 - **Funcionalidade**: Propaganda multiplex com formato autorelaxed
@@ -31,6 +39,14 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Formato**: `autorelaxed`
 - **Uso**: Páginas com conteúdo extenso e segundo anúncio
 - **Recursos**: Tratamento de erros, logging, indicador de carregamento, responsividade mobile otimizada
+
+#### GoogleHorizontalAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleHorizontalAd.tsx`
+- **Funcionalidade**: Propaganda horizontal fixa
+- **Slot**: `3404072661`
+- **Formato**: `horizontal`
+- **Uso**: Mobile e páginas secundárias
+- **Recursos**: Otimizado para mobile, formato horizontal forçado
 
 #### GoogleArticleAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleArticleAd.tsx`
@@ -45,12 +61,6 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Funcionalidade**: Wrapper para propagandas com espaçamento consistente
 - **Uso**: Garante espaçamento adequado entre conteúdo e propagandas
 - **Props**: `topMargin`, `bottomMargin`, `className`
-
-#### GoogleHorizontalAd
-- **Arquivo**: `src/app/components/adsComponents/GoogleHorizontalAd.tsx`
-- **Funcionalidade**: Propaganda horizontal fixa
-- **Slot**: `3404072661`
-- **Uso**: Páginas secundárias
 
 #### GoogleVerticalAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleVerticalAd.tsx`
@@ -71,6 +81,7 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - `RESPONSIVE`: `3404072661` (Slot original - responsivo)
   - `MULTIPLEX`: `9969481018` (Novo slot - multiplex)
   - `ARTICLE`: `6493270436` (Novo slot - in-article)
+  - `SIDEBAR`: `7699203606` (Novo slot - vertical para sidebar)
 - **Benefícios**: 
   - Configurações centralizadas
   - Fácil manutenção
@@ -99,11 +110,11 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 
 ### Página Sobre (`/sobre`)
 1. Após a introdução (GoogleResponsiveAd)
-2. No final da página (GoogleMultiplexAd)
+2. No final da página (GoogleMobileAd - horizontal no mobile, multiplex no desktop)
 
 ### Página Conectar (`/conectar`)
-1. Após a introdução (GoogleMultiplexAd)
-2. No final da página (GoogleMultiplexAd)
+1. Após a introdução (GoogleMobileAd - horizontal no mobile, multiplex no desktop)
+2. No final da página (GoogleMobileAd - horizontal no mobile, multiplex no desktop)
 
 ### Página Política de Privacidade (`/politica-de-privacidade`)
 1. Após a introdução (slot responsivo)
@@ -174,6 +185,13 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **Forçar exibição**: Propriedades CSS para garantir visibilidade
 - **Tamanhos adaptativos**: 320px para mobile, 300px para mobile pequeno
 - **Overflow visible**: Evitar cortes de conteúdo
+- **Componente adaptativo**: GoogleMobileAd alterna automaticamente
+
+### 10. Componente Inteligente
+- **GoogleMobileAd**: Detecta automaticamente o dispositivo
+- **Mobile (≤768px)**: Renderiza GoogleHorizontalAd
+- **Desktop (>768px)**: Renderiza GoogleMultiplexAd
+- **Responsivo**: Adapta-se a mudanças de tamanho de tela
 
 ## Troubleshooting
 
@@ -188,6 +206,7 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 2. Confirmar se não há conflitos de overflow ou z-index
 3. Verificar se as propriedades `display: block !important` estão ativas
 4. Testar em diferentes navegadores mobile
+5. Verificar se o componente GoogleMobileAd está funcionando corretamente
 
 ### Propagandas quebram o layout
 1. Verificar se os containers têm altura mínima adequada
@@ -204,6 +223,7 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 - **"AdSense script not available"**: O script não carregou corretamente
 - **"Ad loaded successfully"**: Propaganda carregada com sucesso
 - **"AdSense script may not have loaded properly"**: Timeout no carregamento
+- **"Horizontal Ad loaded successfully"**: Anúncio horizontal carregado
 
 ## Correções Recentes
 
@@ -251,10 +271,18 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - Adicionado `overflow: visible` para evitar cortes
   - Melhorada responsividade dos containers
 
+### Criação do Componente GoogleMobileAd
+- **Problema**: Necessidade de anúncios diferentes para mobile e desktop
+- **Solução**:
+  - Criado componente que detecta automaticamente o dispositivo
+  - Mobile (≤768px): GoogleHorizontalAd
+  - Desktop (>768px): GoogleMultiplexAd
+  - Implementado nas páginas sobre e conectar
+
 ### Alterações do Usuário Mantidas
 - **Página Generate**: AdWrapper mantido após resultado
-- **Página Sobre**: GoogleResponsiveAd + GoogleMultiplexAd
-- **Página Conectar**: Ambos os anúncios com GoogleMultiplexAd
+- **Página Sobre**: GoogleResponsiveAd + GoogleMobileAd
+- **Página Conectar**: Ambos os anúncios com GoogleMobileAd
 
 ## Uso dos Componentes
 
@@ -267,9 +295,15 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
 ```
 
+### GoogleMobileAd
+```tsx
+// Anúncio que alterna automaticamente entre mobile e desktop
+<GoogleMobileAd />
+```
+
 ### GoogleMultiplexAd
 ```tsx
-// Anúncio multiplex (melhor para mobile)
+// Anúncio multiplex (melhor para desktop)
 <GoogleMultiplexAd />
 ```
 
@@ -287,8 +321,8 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 ### ✅ Páginas Principais
 1. **Página Inicial** (`/`) - 2 anúncios
 2. **Página de Geração** (`/generate`) - 3 anúncios (AdWrapper mantido)
-3. **Página Sobre** (`/sobre`) - 2 anúncios (GoogleResponsiveAd + GoogleMultiplexAd)
-4. **Página Conectar** (`/conectar`) - 2 anúncios (ambos GoogleMultiplexAd)
+3. **Página Sobre** (`/sobre`) - 2 anúncios (GoogleResponsiveAd + GoogleMobileAd)
+4. **Página Conectar** (`/conectar`) - 2 anúncios (ambos GoogleMobileAd)
 5. **Página Política de Privacidade** (`/politica-de-privacidade`) - 2 anúncios
 6. **Página Termos de Uso** (`/termos-de-uso`) - 2 anúncios
 7. **Página Contato** (`/contato`) - 1 anúncio
@@ -305,3 +339,239 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
 
 ## Contato
 Para dúvidas sobre a implementação do AdSense, consulte a documentação oficial do Google ou entre em contato com a equipe de desenvolvimento. 
+
+## Configuração Centralizada
+
+### Arquivo de Configuração
+- **Localização**: `src/app/config/adsense.ts`
+- **Função**: Centraliza todas as configurações do AdSense (client ID, slots, breakpoints, etc.)
+
+### Slots Configurados
+```typescript
+SLOTS: {
+  HORIZONTAL: '3404072661',      // Slot original - horizontal
+  VERTICAL: '3404072661',        // Slot original - vertical  
+  RESPONSIVE: '3404072661',      // Slot original - responsivo
+  MULTIPLEX: '9969481018',       // Novo slot - multiplex
+  ARTICLE: '6493270436',         // Novo slot - in-article
+  SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar
+}
+```
+
+## Componentes de Propaganda
+
+### 1. GoogleResponsiveAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleResponsiveAd.tsx`
+- **Função**: Anúncio responsivo que se adapta ao tamanho da tela
+- **Slot**: `RESPONSIVE` (3404072661)
+- **Características**:
+  - Adapta-se automaticamente ao dispositivo
+  - Suporte a `forceHorizontal` para forçar formato horizontal
+  - Tratamento de erros e loading states
+
+### 2. GoogleHorizontalAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleHorizontalAd.tsx`
+- **Função**: Anúncio horizontal fixo (728x90)
+- **Slot**: `HORIZONTAL` (3404072661)
+- **Características**:
+  - Tamanho fixo para desktop
+  - Responsivo para mobile (320x50)
+
+### 3. GoogleVerticalAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleVerticalAd.tsx`
+- **Função**: Anúncio vertical fixo (300x600)
+- **Slot**: `VERTICAL` (3404072661)
+- **Características**:
+  - Tamanho fixo para desktop
+  - Oculto em mobile
+
+### 4. GoogleMultiplexAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleMultiplexAd.tsx`
+- **Função**: Anúncio multiplex (múltiplos anúncios em um slot)
+- **Slot**: `MULTIPLEX` (9969481018)
+- **Características**:
+  - Exibe múltiplos anúncios simultaneamente
+  - Layout responsivo
+
+### 5. GoogleArticleAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleArticleAd.tsx`
+- **Função**: Anúncio in-article (dentro do conteúdo)
+- **Slot**: `ARTICLE` (6493270436)
+- **Características**:
+  - Integrado ao conteúdo do artigo
+  - Layout responsivo
+
+### 6. GoogleSidebarAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleSidebarAd.tsx`
+- **Função**: Anúncio vertical para sidebar (250x450)
+- **Slot**: `SIDEBAR` (7699203606)
+- **Características**:
+  - Tamanho fixo 250x450px
+  - Específico para laterais das páginas
+  - Apenas em desktop
+
+### 7. GoogleMobileAd
+- **Arquivo**: `src/app/components/adsComponents/GoogleMobileAd.tsx`
+- **Função**: Componente que alterna entre anúncios baseado no dispositivo
+- **Características**:
+  - Mobile: GoogleHorizontalAd
+  - Desktop: GoogleMultiplexAd
+  - Detecção automática de tela
+
+### 8. PageWithSidebarAds
+- **Arquivo**: `src/app/components/adsComponents/PageWithSidebarAds.tsx`
+- **Função**: Wrapper que adiciona anúncios laterais nas páginas
+- **Características**:
+  - Layout de 3 colunas em desktop (anúncio | conteúdo | anúncio)
+  - Anúncios laterais apenas em desktop (>768px)
+  - Anúncios sticky (fixos durante scroll)
+  - Em mobile: apenas o conteúdo (sem anúncios laterais)
+
+## Implementação nas Páginas
+
+### Página Principal (`src/app/page.tsx`)
+```tsx
+// Anúncio responsivo com formato horizontal forçado
+<GoogleResponsiveAd position="top" forceHorizontal={true} />
+```
+
+### Páginas com Anúncios Laterais
+As seguintes páginas usam o wrapper `PageWithSidebarAds`:
+
+#### Sobre (`src/app/sobre/page.tsx`)
+```tsx
+<PageWithSidebarAds>
+  <div className={styles.container}>
+    {/* Conteúdo da página */}
+    <GoogleResponsiveAd position="top" forceHorizontal={true} />
+    <GoogleMobileAd />
+  </div>
+</PageWithSidebarAds>
+```
+
+#### Conectar (`src/app/conectar/page.tsx`)
+```tsx
+<PageWithSidebarAds>
+  <div className={styles.container}>
+    {/* Conteúdo da página */}
+    <GoogleMobileAd />
+  </div>
+</PageWithSidebarAds>
+```
+
+#### Contato (`src/app/contato/page.tsx`)
+```tsx
+<PageWithSidebarAds>
+  <div className={styles.container}>
+    {/* Conteúdo da página */}
+    <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
+  </div>
+</PageWithSidebarAds>
+```
+
+### Outras Páginas
+- **Doar**: GoogleResponsiveAd + GoogleMultiplexAd
+- **Política de Privacidade**: GoogleResponsiveAd + GoogleMultiplexAd
+- **Termos de Uso**: GoogleResponsiveAd + GoogleMultiplexAd
+
+## Layout dos Anúncios Laterais
+
+### Desktop (>768px)
+```
+┌─────────────┬─────────────────┬─────────────┐
+│   Anúncio   │                 │   Anúncio   │
+│   Lateral   │    Conteúdo     │   Lateral   │
+│   (250px)   │   Principal     │   (250px)   │
+│             │                 │             │
+│   Sticky    │                 │   Sticky    │
+└─────────────┴─────────────────┴─────────────┘
+```
+
+### Mobile (≤768px)
+```
+┌─────────────────────────────────────────────┐
+│                                             │
+│              Conteúdo Principal             │
+│                                             │
+│              (Sem anúncios laterais)        │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+## Estilos CSS
+
+### Arquivo Principal
+- **Localização**: `src/app/globals.css`
+- **Seções**:
+  - Estilos globais para todos os containers de anúncio
+  - Estilos específicos para anúncios da sidebar
+  - Responsividade para mobile
+  - Garantias de visibilidade e display
+
+### Características dos Estilos
+- **Anúncios Laterais**: 250px × 450px, sticky positioning
+- **Responsividade**: Ocultos em mobile (≤768px)
+- **Visibilidade**: Forçada em mobile para evitar problemas de display
+- **Overflow**: Configurado como `visible` para evitar cortes
+
+## Carregamento e Performance
+
+### Script do AdSense
+- **Localização**: `src/app/layout.tsx`
+- **Carregamento**: Assíncrono com crossorigin
+- **Client ID**: `ca-pub-8940704424317590`
+
+### Tratamento de Erros
+- Todos os componentes incluem tratamento de erros
+- Estados de loading para melhor UX
+- Fallbacks para quando o AdSense não está disponível
+
+### Otimizações
+- Carregamento assíncrono dos scripts
+- Delay configurável para garantir carregamento
+- Detecção de disponibilidade do AdSense
+
+## Monitoramento e Debug
+
+### Console Logs
+- ✅ Sucesso no carregamento
+- ⚠️ Avisos sobre scripts não disponíveis
+- ❌ Erros de carregamento
+
+### Estados dos Componentes
+- `adLoaded`: Indica se o anúncio foi carregado
+- `error`: Mensagem de erro se houver problemas
+- `isDesktop`: Detecção de dispositivo para anúncios laterais
+
+## Configurações do AdSense
+
+### Slots Utilizados
+1. **3404072661**: Slot original (horizontal/vertical/responsivo)
+2. **9969481018**: Slot multiplex
+3. **6493270436**: Slot in-article
+4. **7699203606**: Slot sidebar (vertical 250x450)
+
+### Formatos Suportados
+- Horizontal: 728×90 (desktop), 320×50 (mobile)
+- Vertical: 300×600 (desktop), 250×450 (sidebar)
+- Responsivo: Adaptável
+- Multiplex: Múltiplos anúncios
+- In-article: Integrado ao conteúdo
+
+## Manutenção
+
+### Adicionando Novos Slots
+1. Adicionar o slot em `src/app/config/adsense.ts`
+2. Criar componente específico se necessário
+3. Atualizar esta documentação
+
+### Modificando Layouts
+1. Ajustar estilos em `src/app/globals.css`
+2. Testar responsividade
+3. Verificar visibilidade em mobile
+
+### Troubleshooting
+- Verificar console para erros
+- Confirmar carregamento do script AdSense
+- Testar em diferentes dispositivos
+- Verificar breakpoints CSS 

@@ -18,6 +18,7 @@ export default function GoogleHorizontalAd() {
         const timer = setTimeout(() => {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           setAdLoaded(true);
+          console.log('✅ Horizontal Ad loaded successfully');
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -34,7 +35,10 @@ export default function GoogleHorizontalAd() {
       minHeight: '90px',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '100%',
+      maxWidth: '728px',
+      overflow: 'visible'
     }}>
       <ins
         className="adsbygoogle"
@@ -42,11 +46,12 @@ export default function GoogleHorizontalAd() {
           display: 'block',
           minHeight: '90px',
           width: '100%',
-          maxWidth: '728px'
+          maxWidth: '728px',
+          overflow: 'visible'
         }}
         data-ad-client="ca-pub-8940704424317590"
         data-ad-slot="3404072661"
-        data-ad-format="auto"
+        data-ad-format="horizontal"
         data-full-width-responsive="true"
       ></ins>
       {!adLoaded && (
