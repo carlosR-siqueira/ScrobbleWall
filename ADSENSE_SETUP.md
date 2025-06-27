@@ -82,6 +82,7 @@ Este documento descreve a implementação do Google AdSense no projeto ScrobbleW
   - `MULTIPLEX`: `9969481018` (Novo slot - multiplex)
   - `ARTICLE`: `6493270436` (Novo slot - in-article)
   - `SIDEBAR`: `7699203606` (Novo slot - vertical para sidebar)
+  - `MOBILE`: `2398300106` (Novo slot - específico para mobile)
 - **Benefícios**: 
   - Configurações centralizadas
   - Fácil manutenção
@@ -354,7 +355,8 @@ SLOTS: {
   RESPONSIVE: '3404072661',      // Slot original - responsivo
   MULTIPLEX: '9969481018',       // Novo slot - multiplex
   ARTICLE: '6493270436',         // Novo slot - in-article
-  SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar (120x500)
+  SIDEBAR: '7699203606',         // Novo slot - vertical para sidebar (120x500)
+  MOBILE: '2398300106'           // Novo slot - específico para mobile
 }
 ```
 
@@ -363,11 +365,14 @@ SLOTS: {
 ### 1. GoogleResponsiveAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleResponsiveAd.tsx`
 - **Função**: Anúncio responsivo que se adapta ao tamanho da tela
-- **Slot**: `RESPONSIVE` (3404072661)
+- **Slots**: 
+  - Desktop: `RESPONSIVE` (3404072661) ou `MULTIPLEX` (9969481018)
+  - Mobile: `MOBILE` (2398300106)
 - **Características**:
   - Adapta-se automaticamente ao dispositivo
-  - Suporte a `forceHorizontal` para forçar formato horizontal
+  - Suporte a `forceHorizontal` para forçar formato horizontal (apenas desktop)
   - Tratamento de erros e loading states
+  - Detecção automática de mobile/desktop
 
 ### 2. GoogleHorizontalAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleHorizontalAd.tsx`
@@ -414,10 +419,14 @@ SLOTS: {
 ### 7. GoogleMobileAd
 - **Arquivo**: `src/app/components/adsComponents/GoogleMobileAd.tsx`
 - **Função**: Componente que alterna entre anúncios baseado no dispositivo
+- **Slots**:
+  - Mobile: `MOBILE` (2398300106) - slot específico para mobile
+  - Desktop: `MULTIPLEX` (9969481018)
 - **Características**:
-  - Mobile: GoogleHorizontalAd
+  - Mobile: Anúncio específico para mobile com formato auto
   - Desktop: GoogleMultiplexAd
   - Detecção automática de tela
+  - Tratamento de erros e loading states
 
 ### 8. PageWithSidebarAds
 - **Arquivo**: `src/app/components/adsComponents/PageWithSidebarAds.tsx`
@@ -433,7 +442,7 @@ SLOTS: {
 
 ### Página Principal (`src/app/page.tsx`)
 ```tsx
-// Anúncio responsivo com formato horizontal forçado
+// Anúncio responsivo com formato horizontal forçado (apenas desktop)
 <GoogleResponsiveAd position="top" forceHorizontal={true} />
 ```
 
@@ -492,13 +501,28 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 ### Mobile (≤768px)
 ```
 ┌─────────────────────────────────────────────┐
-│                                             │
 │              Conteúdo Principal             │
 │                                             │
 │              (Sem anúncios laterais)        │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
+
+## Comportamento Mobile vs Desktop
+
+### Mobile (≤768px)
+- **GoogleResponsiveAd**: Usa slot `MOBILE` (2398300106) com formato `auto`
+- **GoogleMobileAd**: Usa slot `MOBILE` (2398300106) com formato `auto`
+- **GoogleHorizontalAd**: Usa slot `HORIZONTAL` (3404072661) com formato `horizontal`
+- **Anúncios Laterais**: Ocultos
+- **Tamanho**: Máximo 320px de largura
+
+### Desktop (>768px)
+- **GoogleResponsiveAd**: Usa slot `RESPONSIVE` (3404072661) ou `MULTIPLEX` (9969481018)
+- **GoogleMobileAd**: Usa slot `MULTIPLEX` (9969481018)
+- **GoogleHorizontalAd**: Usa slot `HORIZONTAL` (3404072661)
+- **Anúncios Laterais**: Visíveis com slot `SIDEBAR` (7699203606)
+- **Tamanho**: Máximo 728px de largura
 
 ## Estilos CSS
 
@@ -507,12 +531,14 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - **Seções**:
   - Estilos globais para todos os containers de anúncio
   - Estilos específicos para anúncios da sidebar
+  - Estilos específicos para anúncios mobile
   - Responsividade para mobile
   - Garantias de visibilidade e display
   - Melhorias específicas para mobile
 
 ### Características dos Estilos
 - **Anúncios Laterais**: 120px × 500px, sticky positioning
+- **Anúncios Mobile**: 320px × 50px, formato auto
 - **Responsividade**: Ocultos em mobile (≤768px)
 - **Visibilidade**: Forçada em mobile para evitar problemas de display
 - **Overflow**: Configurado como `visible` para evitar cortes
@@ -546,6 +572,7 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - `adLoaded`: Indica se o anúncio foi carregado
 - `error`: Mensagem de erro se houver problemas
 - `isDesktop`: Detecção de dispositivo para anúncios laterais
+- `isMobile`: Detecção de dispositivo para anúncios mobile
 
 ## Configurações do AdSense
 
@@ -554,6 +581,7 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 2. **9969481018**: Slot multiplex
 3. **6493270436**: Slot in-article
 4. **7699203606**: Slot sidebar (vertical 120x500)
+5. **2398300106**: Slot mobile (específico para mobile)
 
 ### Formatos Suportados
 - Horizontal: 728×90 (desktop), 320×50 (mobile)
@@ -561,6 +589,7 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - Responsivo: Adaptável
 - Multiplex: Múltiplos anúncios
 - In-article: Integrado ao conteúdo
+- Mobile: Auto (específico para mobile)
 
 ## Melhorias Recentes
 
@@ -571,10 +600,17 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - **Conteúdo Principal**: Melhor flexibilidade com minWidth: 0
 
 ### Correções Mobile
+- **Slot Específico**: Novo slot `MOBILE` (2398300106) para mobile
+- **Formato Auto**: Usa `data-ad-format="auto"` em mobile
 - **Visibilidade**: Forçada com !important
 - **Display**: Garantido com flex !important
 - **Width**: Configurado para 100% em mobile
 - **Iframes**: Garantida exibição dos anúncios
+
+### Detecção de Dispositivo
+- **GoogleResponsiveAd**: Detecta mobile e usa slot específico
+- **GoogleMobileAd**: Detecta mobile e usa slot específico
+- **Responsividade**: Todos os componentes se adaptam automaticamente
 
 ## Manutenção
 
@@ -593,4 +629,5 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - Confirmar carregamento do script AdSense
 - Testar em diferentes dispositivos
 - Verificar breakpoints CSS
-- Verificar se os estilos mobile estão sendo aplicados 
+- Verificar se os estilos mobile estão sendo aplicados
+- Confirmar se o slot mobile está sendo usado corretamente 

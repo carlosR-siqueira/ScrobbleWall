@@ -60,7 +60,8 @@ a {
 .ad-container-multiplex,
 .ad-container-article,
 .ad-container,
-.ad-container-sidebar {
+.ad-container-sidebar,
+.ad-container-mobile {
   width: 100%;
   max-width: 728px;
   margin: 20px auto;
@@ -84,6 +85,13 @@ a {
   height: 500px;
 }
 
+/* Estilos específicos para anúncios mobile */
+.ad-container-mobile {
+  max-width: 320px;
+  min-height: 50px;
+  margin: 15px auto;
+}
+
 .adsbygoogle {
   display: block !important;
   width: 100% !important;
@@ -105,6 +113,15 @@ a {
   margin: 0 !important;
 }
 
+/* Estilos específicos para anúncios mobile */
+.ad-container-mobile .adsbygoogle {
+  display: block !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  min-height: 50px !important;
+  margin: 0 auto !important;
+}
+
 /* Garantir que as propagandas não quebrem o layout */
 .adsbygoogle[data-ad-format="horizontal"] {
   min-height: 90px !important;
@@ -124,7 +141,8 @@ a {
   .ad-container-responsive,
   .ad-container-multiplex,
   .ad-container-article,
-  .ad-container {
+  .ad-container,
+  .ad-container-mobile {
     max-width: 320px;
     min-height: 50px;
     margin: 15px auto;
@@ -154,7 +172,8 @@ a {
   .ad-container-responsive,
   .ad-container-multiplex,
   .ad-container-article,
-  .ad-container {
+  .ad-container,
+  .ad-container-mobile {
     max-width: 300px;
     min-height: 50px;
     margin: 10px auto;
@@ -193,7 +212,8 @@ a {
 .ad-container-multiplex,
 .ad-container-article,
 .ad-container,
-.ad-container-sidebar {
+.ad-container-sidebar,
+.ad-container-mobile {
   position: relative;
   z-index: 1;
 }
@@ -209,7 +229,8 @@ a {
   .ad-container-responsive,
   .ad-container-multiplex,
   .ad-container-article,
-  .ad-container {
+  .ad-container,
+  .ad-container-mobile {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -221,7 +242,8 @@ a {
   .container .ad-container-responsive,
   .container .ad-container-multiplex,
   .container .ad-container-article,
-  .container .ad-container {
+  .container .ad-container,
+  .container .ad-container-mobile {
     margin: 15px auto !important;
     display: flex !important;
     visibility: visible !important;
@@ -245,7 +267,8 @@ a {
   .ad-container-responsive,
   .ad-container-multiplex,
   .ad-container-article,
-  .ad-container {
+  .ad-container,
+  .ad-container-mobile {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;

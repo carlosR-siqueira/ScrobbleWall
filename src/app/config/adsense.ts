@@ -10,7 +10,8 @@ export const ADSENSE_CONFIG = {
     RESPONSIVE: '3404072661',      // Slot original - responsivo
     MULTIPLEX: '9969481018',       // Novo slot - multiplex
     ARTICLE: '6493270436',         // Novo slot - in-article
-    SIDEBAR: '7699203606'          // Novo slot - vertical para sidebar
+    SIDEBAR: '7699203606',         // Novo slot - vertical para sidebar (120x500)
+    MOBILE: '2398300106'           // Novo slot - específico para mobile
   },
   
   // Configurações de carregamento
