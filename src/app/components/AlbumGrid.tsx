@@ -7,6 +7,7 @@ interface Album {
   image: string;
   name: string;
   artist: string;
+  playcount: number;
 }
 
 interface AlbumGridProps {
@@ -38,7 +39,10 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
           />
           <div className={styles.albumInfo} >
             <strong className={styles.albumDescription}>{album.name}</strong> <br />
-            <span className={styles.albumDescription}>{album.artist}</span>
+            <span className={styles.albumDescription}>{album.artist}</span> <br />
+            <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
+              {album.playcount} plays
+            </span>
           </div>
         </div>
       ))}

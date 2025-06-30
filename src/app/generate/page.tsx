@@ -19,6 +19,7 @@ export default function GeneratePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [includeInfo, setIncludeInfo] = useState(false);
+  const [includePlayCount, setIncludePlayCount] = useState(false);
   const [etapa, setEtapa] = useState<'formulario' | 'resultado'>('formulario');
 
   const collageRef = useRef<HTMLDivElement>(null);
@@ -92,14 +93,31 @@ export default function GeneratePage() {
         const y = Math.floor(i / gridSize) * imageSize;
         ctx.drawImage(img, x, y, imageSize, imageSize);
 
-        if (includeInfo) {
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-          ctx.fillRect(x, y + imageSize - 50, imageSize, 50);
-          ctx.fillStyle = '#fff';
-          ctx.font = 'bold 14px Arial';
-          ctx.fillText(album.name, x + 5, y + imageSize - 30);
-          ctx.font = '12px Arial';
-          ctx.fillText(album.artist, x + 5, y + imageSize - 15);
+        if (includeInfo || includePlayCount) {
+          let infoHeight = 0;
+          let currentY = y + imageSize;
+          
+          if (includeInfo) {
+            infoHeight += 50;
+            currentY -= infoHeight;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.fillRect(x, currentY, imageSize, infoHeight);
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText(album.name, x + 5, currentY + 20);
+            ctx.font = '12px Arial';
+            ctx.fillText(album.artist, x + 5, currentY + 35);
+          }
+          
+          if (includePlayCount) {
+            const playHeight = 30;
+            currentY -= playHeight;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.fillRect(x, currentY, imageSize, playHeight);
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 12px Arial';
+            ctx.fillText(`${album.playcount} plays`, x + 5, currentY + 20);
+          }
         }
       }
 
@@ -169,12 +187,23 @@ export default function GeneratePage() {
             <div className={styles.downloadBtnContainer}>
               <div className={styles.switchContainer}>
                 <CustomSwitch
+                  checked={includePlayCount}
+                  onChange={(e) => setIncludePlayCount(e.target.checked)}
+                  inputProps={{ 'aria-label': 'Incluir quantidade de plays' }}
+                />
+                <span style={{ color: '#fff', fontWeight: 'bold' }}>
+                  Incluir quantidade de plays
+                </span>
+              </div>
+              <div className={styles.switchContainer}>
+                <CustomSwitch
                   checked={includeInfo}
                   onChange={(e) => setIncludeInfo(e.target.checked)}
                   inputProps={{ 'aria-label': 'Incluir informações dos álbuns' }}
                 />
                 <span style={{ color: '#fff', fontWeight: 'bold' }}>Incluir nome do álbum e artista</span>
               </div>
+
 
               <button onClick={downloadImage} className={styles.button}>
                 Baixar Colagem

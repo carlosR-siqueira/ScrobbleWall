@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&api_key=${API_KEY}&format=json&period=${period}&limit=${limit}`;
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&api_key=${API_KEY}&format=json&period=${period}&limit=${limit}&extended=1`;
 
   try {
     const response = await fetch(url);
@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
       name: item.name,
       artist: item.artist.name,
       image: item.image[3]['#text'] || '',
+      playcount: item.playcount || 0,
     })) || [];
 
     return new Response(JSON.stringify({ albums }), {
