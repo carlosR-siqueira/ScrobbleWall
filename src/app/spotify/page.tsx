@@ -12,7 +12,7 @@ import styles from '../page.module.css';
 import { styled } from '@mui/material/styles';
 
 export default function SpotifyPage() {
-  const [period, setPeriod] = useState('medium_term');
+  const [period, setPeriod] = useState('7day');
   const [gridSize, setGridSize] = useState(3);
   const [albums, setAlbums] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -119,16 +119,18 @@ export default function SpotifyPage() {
             ctx.fillRect(x, currentY, imageSize, playHeight);
             ctx.fillStyle = '#fff';
             ctx.font = 'bold 12px Arial';
-            ctx.fillText(`Popularidade: ${album.popularity}%`, x + 5, currentY + 20);
+            ctx.fillText(`${album.playcount} plays`, x + 5, currentY + 20);
           }
         }
       }
 
       const formatPeriodName = (period: string): string => {
         const mapping: Record<string, string> = {
-          'short_term': '4 Semanas',
-          'medium_term': '6 Meses',
-          'long_term': 'Todos os Tempos'
+          '7day': '7 Dias',
+          '1month': '1 Mês',
+          '3month': '3 Meses',
+          '12month': '12 Meses',
+          'overall': 'Todos os Tempos'
         };
         return mapping[period] || period;
       };
@@ -190,7 +192,7 @@ export default function SpotifyPage() {
                   inputProps={{ 'aria-label': 'Incluir popularidade' }}
                 />
                 <span style={{ color: '#fff', fontWeight: 'bold' }}>
-                  Incluir popularidade
+                  Incluir quantidade de plays
                 </span>
               </div>
               <div className={styles.switchContainer}>

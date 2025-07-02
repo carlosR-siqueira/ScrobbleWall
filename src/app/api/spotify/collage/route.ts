@@ -11,8 +11,19 @@ const spotifyApi = new SpotifyWebApi({
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const period = searchParams.get('period') || 'medium_term';
+  const period = searchParams.get('period') || '7day';
   const limit = searchParams.get('limit') || '9';
+
+  // Mapear períodos do Last.fm para períodos do Spotify
+  const spotifyPeriodMap: Record<string, string> = {
+    '7day': 'short_term',
+    '1month': 'short_term',
+    '3month': 'medium_term',
+    '12month': 'long_term',
+    'overall': 'long_term'
+  };
+  
+  const spotifyPeriod = spotifyPeriodMap[period] || 'medium_term';
 
   // Pegar token do cookie
   const accessToken = req.cookies.get('spotify_access_token')?.value;
@@ -30,7 +41,7 @@ export async function GET(req: NextRequest) {
 
     const response = await spotifyApi.getMyTopTracks({
       limit: parseInt(limit),
-      time_range: period as any,
+      time_range: spotifyPeriod as any,
     });
 
     // Agrupar por álbum e contar plays
@@ -43,7 +54,6 @@ export async function GET(req: NextRequest) {
           name: track.album.name,
           artist: track.album.artists[0].name,
           image: track.album.images[0]?.url || '',
-          popularity: track.album.popularity || 0,
           playcount: 1,
           service: 'spotify'
         });
@@ -72,7 +82,7 @@ export async function GET(req: NextRequest) {
         // Retry da requisição
         const response = await spotifyApi.getMyTopTracks({
           limit: parseInt(limit),
-          time_range: period as any,
+          time_range: spotifyPeriod as any,
         });
         
         // Processar resposta novamente...
@@ -85,7 +95,6 @@ export async function GET(req: NextRequest) {
               name: track.album.name,
               artist: track.album.artists[0].name,
               image: track.album.images[0]?.url || '',
-              popularity: track.album.popularity || 0,
               playcount: 1,
               service: 'spotify'
             });
