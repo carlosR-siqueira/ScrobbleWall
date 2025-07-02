@@ -34,9 +34,9 @@ export default function LandingPage() {
           <p className={styles.description}>
             Seu top de álbuns, agora em forma de arte! Crie uma colagem com os mais ouvidos do seu perfil no Last.fm.
           </p>
-          <button onClick={() => router.push('/generate')} className={styles.button}>
-            Começar
-          </button>
+                  <button onClick={() => router.push('/comecar')} className={styles.button}>
+          Começar
+        </button>
         </div>
       </div>
 
