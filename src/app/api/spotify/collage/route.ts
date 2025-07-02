@@ -48,19 +48,21 @@ export async function GET(req: NextRequest) {
     
     response.body.items.forEach((track: any) => {
       const albumId = track.album.id;
+      const trackPopularity = track.popularity || 0; // Usar popularidade da track, não do álbum
+      
       if (!albumMap.has(albumId)) {
         albumMap.set(albumId, {
           name: track.album.name,
           artist: track.album.artists[0].name,
           image: track.album.images[0]?.url || '',
-          popularity: track.album.popularity || 0,
+          popularity: trackPopularity,
           tracksCount: 1,
           service: 'spotify'
         });
       } else {
         // Se o álbum já existe, calcular popularidade média
         const existingAlbum = albumMap.get(albumId);
-        const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + (track.album.popularity || 0);
+        const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + trackPopularity;
         existingAlbum.tracksCount += 1;
         existingAlbum.popularity = Math.round(totalPopularity / existingAlbum.tracksCount);
       }
@@ -94,19 +96,21 @@ export async function GET(req: NextRequest) {
         
         response.body.items.forEach((track: any) => {
           const albumId = track.album.id;
+          const trackPopularity = track.popularity || 0; // Usar popularidade da track, não do álbum
+          
           if (!albumMap.has(albumId)) {
             albumMap.set(albumId, {
               name: track.album.name,
               artist: track.album.artists[0].name,
               image: track.album.images[0]?.url || '',
-              popularity: track.album.popularity || 0,
+              popularity: trackPopularity,
               tracksCount: 1,
               service: 'spotify'
             });
           } else {
             // Se o álbum já existe, calcular popularidade média
             const existingAlbum = albumMap.get(albumId);
-            const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + (track.album.popularity || 0);
+            const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + trackPopularity;
             existingAlbum.tracksCount += 1;
             existingAlbum.popularity = Math.round(totalPopularity / existingAlbum.tracksCount);
           }

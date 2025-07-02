@@ -7,7 +7,9 @@ interface Album {
   image: string;
   name: string;
   artist: string;
-  playcount: number;
+  playcount?: number;
+  popularity?: number;
+  service?: string;
 }
 
 interface AlbumGridProps {
@@ -41,7 +43,12 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
             <strong className={styles.albumDescription}>{album.name}</strong> <br />
             <span className={styles.albumDescription}>{album.artist}</span> <br />
             <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
-              {album.playcount} plays
+              {album.service === 'spotify' && album.popularity !== undefined 
+                ? `Popularidade: ${album.popularity}%`
+                : album.playcount 
+                  ? `${album.playcount} plays`
+                  : ''
+              }
             </span>
           </div>
         </div>
