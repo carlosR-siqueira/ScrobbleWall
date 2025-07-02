@@ -52,11 +52,9 @@ const SpotifyCollageSection: React.FC<SpotifyCollageSectionProps> = ({
             onChange={(e) => setPeriod(e.target.value)}
             className={styles.selectField}
           >
-            <option value="7day">7 Dias</option>
             <option value="1month">1 Mês</option>
-            <option value="3month">3 Meses</option>
-            <option value="12month">12 Meses</option>
-            <option value="overall">Todos os tempos</option>
+            <option value="6months">6 Meses</option>
+            <option value="alltime">Todo o Tempo</option>
           </select>
         </div>
 

@@ -12,7 +12,7 @@ import styles from '../page.module.css';
 import { styled } from '@mui/material/styles';
 
 export default function SpotifyPage() {
-  const [period, setPeriod] = useState('7day');
+  const [period, setPeriod] = useState('1month');
   const [gridSize, setGridSize] = useState(3);
   const [albums, setAlbums] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -126,11 +126,9 @@ export default function SpotifyPage() {
 
       const formatPeriodName = (period: string): string => {
         const mapping: Record<string, string> = {
-          '7day': '7 Dias',
           '1month': '1 Mês',
-          '3month': '3 Meses',
-          '12month': '12 Meses',
-          'overall': 'Todos os Tempos'
+          '6months': '6 Meses',
+          'alltime': 'Todo o Tempo'
         };
         return mapping[period] || period;
       };

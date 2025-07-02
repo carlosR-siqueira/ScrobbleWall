@@ -11,16 +11,14 @@ const spotifyApi = new SpotifyWebApi({
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const period = searchParams.get('period') || '7day';
+  const period = searchParams.get('period') || '1month';
   const limit = searchParams.get('limit') || '9';
 
-  // Mapear períodos do Last.fm para períodos do Spotify
+  // Mapear períodos personalizados para períodos do Spotify
   const spotifyPeriodMap: Record<string, string> = {
-    '7day': 'short_term',
-    '1month': 'short_term',
-    '3month': 'medium_term',
-    '12month': 'long_term',
-    'overall': 'long_term'
+    '1month': 'short_term',    // 4 semanas
+    '6months': 'medium_term',  // 6 meses
+    'alltime': 'long_term'     // vários anos
   };
   
   const spotifyPeriod = spotifyPeriodMap[period] || 'medium_term';
@@ -39,26 +37,33 @@ export async function GET(req: NextRequest) {
   try {
     spotifyApi.setAccessToken(accessToken);
 
+    // Buscar top tracks do Spotify
     const response = await spotifyApi.getMyTopTracks({
-      limit: parseInt(limit),
+      limit: 50, // Buscar mais tracks para ter mais álbuns
       time_range: spotifyPeriod as any,
     });
 
-    // Agrupar por álbum e contar plays
+    // Agrupar por álbum e calcular playcount baseado na posição
     const albumMap = new Map();
     
-    response.body.items.forEach((track: any) => {
+    response.body.items.forEach((track: any, index: number) => {
       const albumId = track.album.id;
       if (!albumMap.has(albumId)) {
+        // Calcular playcount baseado na posição (mais alto = mais plays)
+        // Usar uma fórmula que simule playcount real
+        const playcount = Math.max(1, 50 - index);
+        
         albumMap.set(albumId, {
           name: track.album.name,
           artist: track.album.artists[0].name,
           image: track.album.images[0]?.url || '',
-          playcount: 1,
+          playcount: playcount,
           service: 'spotify'
         });
       } else {
-        albumMap.get(albumId).playcount += 1;
+        // Se o álbum já existe, adicionar mais plays baseado na posição
+        const existingAlbum = albumMap.get(albumId);
+        existingAlbum.playcount += Math.max(1, 50 - index);
       }
     });
 
@@ -81,25 +86,28 @@ export async function GET(req: NextRequest) {
         
         // Retry da requisição
         const response = await spotifyApi.getMyTopTracks({
-          limit: parseInt(limit),
+          limit: 50,
           time_range: spotifyPeriod as any,
         });
         
         // Processar resposta novamente...
         const albumMap = new Map();
         
-        response.body.items.forEach((track: any) => {
+        response.body.items.forEach((track: any, index: number) => {
           const albumId = track.album.id;
           if (!albumMap.has(albumId)) {
+            const playcount = Math.max(1, 50 - index);
+            
             albumMap.set(albumId, {
               name: track.album.name,
               artist: track.album.artists[0].name,
               image: track.album.images[0]?.url || '',
-              playcount: 1,
+              playcount: playcount,
               service: 'spotify'
             });
           } else {
-            albumMap.get(albumId).playcount += 1;
+            const existingAlbum = albumMap.get(albumId);
+            existingAlbum.playcount += Math.max(1, 50 - index);
           }
         });
 
