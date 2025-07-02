@@ -6,9 +6,9 @@ import styles from '../page.module.css';
 interface Album {
   image: string;
   name: string;
-  artist: string;
-  playcount?: number;
+  artist?: string;
   popularity?: number;
+  type?: 'artist' | 'track';
   service?: string;
 }
 
@@ -31,7 +31,7 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
         <div key={idx} className={styles.collageItem}>
           <motion.img
             src={album.image || '/fallback1.png'} 
-            alt={album.name || 'Album sem nome'}
+            alt={album.name || 'Sem nome'}
             className={styles.collageImage}
             width={100}
             height={100}
@@ -41,15 +41,20 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
           />
           <div className={styles.albumInfo} >
             <strong className={styles.albumDescription}>{album.name}</strong> <br />
-            <span className={styles.albumDescription}>{album.artist}</span> <br />
-            <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
-              {album.service === 'spotify' && album.popularity !== undefined 
-                ? `Popularidade: ${album.popularity}%`
-                : album.playcount 
-                  ? `${album.playcount} plays`
-                  : ''
-              }
-            </span>
+            {album.type === 'track' && album.artist && (
+              <span className={styles.albumDescription}>{album.artist}</span>
+            )}
+            <br />
+            {album.service === 'spotify' && album.popularity !== undefined && (
+              <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
+                Popularidade: {album.popularity}%
+              </span>
+            )}
+            {album.service !== 'spotify' && album.playcount !== undefined && (
+              <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
+                {album.playcount} plays
+              </span>
+            )}
           </div>
         </div>
       ))}

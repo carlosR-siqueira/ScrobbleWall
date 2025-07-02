@@ -1,37 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import styles from '../page.module.css';
 
 interface SpotifyCollageSectionProps {
-  period: string;
-  setPeriod: React.Dispatch<React.SetStateAction<string>>;
-  gridSize: number;
-  setGridSize: React.Dispatch<React.SetStateAction<number>>;
-  fetchAlbums: () => void;
+  type: 'artist' | 'track';
+  setType: React.Dispatch<React.SetStateAction<'artist' | 'track'>>;
+  fetchTop: () => void;
   loading: boolean;
   error: string;
-  downloadImage: (includeInfo: boolean) => void;
-  albums: any[];
-  includeInfo: boolean;
-  setIncludeInfo: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SpotifyCollageSection: React.FC<SpotifyCollageSectionProps> = ({
-  period,
-  setPeriod,
-  gridSize,
-  setGridSize,
-  fetchAlbums,
+  type,
+  setType,
+  fetchTop,
   loading,
   error,
-  downloadImage,
-  albums,
-  includeInfo,
-  setIncludeInfo,
 }) => {
-  const collageRef = useRef<HTMLDivElement | null>(null);
-
   return (
-    <div ref={collageRef} className={styles.generateFormContainer}>
+    <div className={styles.generateFormContainer}>
       <section className={styles.inputContainer}>
         <div className={styles.spotifyAuthSection}>
           <h3>Conecte sua conta do Spotify</h3>
@@ -46,33 +32,27 @@ const SpotifyCollageSection: React.FC<SpotifyCollageSectionProps> = ({
         </div>
 
         <div className={styles.periodSelection}>
-          <h4>Período de análise:</h4>
-          <select
-            value={period}
-            onChange={(e) => setPeriod(e.target.value)}
-            className={styles.selectField}
-          >
-            <option value="1month">1 Mês</option>
-            <option value="6months">6 Meses</option>
-            <option value="alltime">Todo o Tempo</option>
-          </select>
-        </div>
-
-        <div className={styles.gridSelection}>
-          <h4>Tamanho da colagem:</h4>
-          <select
-            value={gridSize}
-            onChange={(e) => setGridSize(Number(e.target.value))}
-            className={styles.selectField}
-          >
-            <option value={3}>3x3</option>
-            <option value={4}>4x4</option>
-            <option value={5}>5x5</option>
-          </select>
+          <h4>Tipo de colagem:</h4>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <button
+              className={type === 'artist' ? styles.buttonActive : styles.button}
+              onClick={() => setType('artist')}
+              disabled={loading}
+            >
+              Top 10 Artistas
+            </button>
+            <button
+              className={type === 'track' ? styles.buttonActive : styles.button}
+              onClick={() => setType('track')}
+              disabled={loading}
+            >
+              Top 10 Músicas
+            </button>
+          </div>
         </div>
 
         <button
-          onClick={fetchAlbums}
+          onClick={fetchTop}
           disabled={loading}
           className={styles.button}
         >
