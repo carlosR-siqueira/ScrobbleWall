@@ -43,33 +43,32 @@ export async function GET(req: NextRequest) {
       time_range: spotifyPeriod as any,
     });
 
-    // Agrupar por álbum e calcular playcount baseado na posição
+    // Agrupar por álbum e calcular popularidade média
     const albumMap = new Map();
     
-    response.body.items.forEach((track: any, index: number) => {
+    response.body.items.forEach((track: any) => {
       const albumId = track.album.id;
       if (!albumMap.has(albumId)) {
-        // Calcular playcount baseado na posição (mais alto = mais plays)
-        // Usar uma fórmula que simule playcount real
-        const playcount = Math.max(1, 50 - index);
-        
         albumMap.set(albumId, {
           name: track.album.name,
           artist: track.album.artists[0].name,
           image: track.album.images[0]?.url || '',
-          playcount: playcount,
+          popularity: track.album.popularity || 0,
+          tracksCount: 1,
           service: 'spotify'
         });
       } else {
-        // Se o álbum já existe, adicionar mais plays baseado na posição
+        // Se o álbum já existe, calcular popularidade média
         const existingAlbum = albumMap.get(albumId);
-        existingAlbum.playcount += Math.max(1, 50 - index);
+        const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + (track.album.popularity || 0);
+        existingAlbum.tracksCount += 1;
+        existingAlbum.popularity = Math.round(totalPopularity / existingAlbum.tracksCount);
       }
     });
 
-    // Converter para array e ordenar por playcount
+    // Converter para array e ordenar por popularidade
     const albums = Array.from(albumMap.values())
-      .sort((a, b) => b.playcount - a.playcount)
+      .sort((a, b) => b.popularity - a.popularity)
       .slice(0, parseInt(limit));
 
     return new Response(JSON.stringify({ albums }), {
@@ -93,26 +92,28 @@ export async function GET(req: NextRequest) {
         // Processar resposta novamente...
         const albumMap = new Map();
         
-        response.body.items.forEach((track: any, index: number) => {
+        response.body.items.forEach((track: any) => {
           const albumId = track.album.id;
           if (!albumMap.has(albumId)) {
-            const playcount = Math.max(1, 50 - index);
-            
             albumMap.set(albumId, {
               name: track.album.name,
               artist: track.album.artists[0].name,
               image: track.album.images[0]?.url || '',
-              playcount: playcount,
+              popularity: track.album.popularity || 0,
+              tracksCount: 1,
               service: 'spotify'
             });
           } else {
+            // Se o álbum já existe, calcular popularidade média
             const existingAlbum = albumMap.get(albumId);
-            existingAlbum.playcount += Math.max(1, 50 - index);
+            const totalPopularity = existingAlbum.popularity * existingAlbum.tracksCount + (track.album.popularity || 0);
+            existingAlbum.tracksCount += 1;
+            existingAlbum.popularity = Math.round(totalPopularity / existingAlbum.tracksCount);
           }
         });
 
         const albums = Array.from(albumMap.values())
-          .sort((a, b) => b.playcount - a.playcount)
+          .sort((a, b) => b.popularity - a.popularity)
           .slice(0, parseInt(limit));
 
         return new Response(JSON.stringify({ albums }), {

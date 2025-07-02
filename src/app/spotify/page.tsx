@@ -119,7 +119,7 @@ export default function SpotifyPage() {
             ctx.fillRect(x, currentY, imageSize, playHeight);
             ctx.fillStyle = '#fff';
             ctx.font = 'bold 12px Arial';
-            ctx.fillText(`${album.playcount} plays`, x + 5, currentY + 20);
+            ctx.fillText(`Popularidade: ${album.popularity}%`, x + 5, currentY + 20);
           }
         }
       }
@@ -190,7 +190,7 @@ export default function SpotifyPage() {
                   inputProps={{ 'aria-label': 'Incluir popularidade' }}
                 />
                 <span style={{ color: '#fff', fontWeight: 'bold' }}>
-                  Incluir quantidade de plays
+                  Incluir popularidade
                 </span>
               </div>
               <div className={styles.switchContainer}>
