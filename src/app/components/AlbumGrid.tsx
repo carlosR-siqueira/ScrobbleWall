@@ -50,11 +50,7 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
                 Popularidade: {album.popularity}%
               </span>
             )}
-            {album.service !== 'spotify' && album.playcount !== undefined && (
-              <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
-                {album.playcount} plays
-              </span>
-            )}
+          
           </div>
         </div>
       ))}
