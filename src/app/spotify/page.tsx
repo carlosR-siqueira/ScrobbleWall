@@ -46,6 +46,7 @@ export default function SpotifyPage() {
       setLoading(false);
     }
   };
+  
 
   const CustomSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-switchBase': {
