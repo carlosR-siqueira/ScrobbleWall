@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from '../page.module.css';
+import styles from '../spotify/spotify.module.css';
+
 
 interface SpotifyCollageSectionProps {
   type: 'artist' | 'track';

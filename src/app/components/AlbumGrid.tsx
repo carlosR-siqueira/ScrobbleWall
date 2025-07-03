@@ -10,6 +10,7 @@ interface Album {
   popularity?: number;
   type?: 'artist' | 'track';
   service?: string;
+  playcount?: number;
 }
 
 interface AlbumGridProps {
@@ -41,7 +42,7 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
           />
           <div className={styles.albumInfo} >
             <strong className={styles.albumDescription}>{album.name}</strong> <br />
-            {album.type === 'track' && album.artist && (
+            {album.artist && (
               <span className={styles.albumDescription}>{album.artist}</span>
             )}
             <br />
@@ -50,7 +51,11 @@ const AlbumGrid: React.FC<AlbumGridProps> = ({ albums, gridSize, collageRef }) =
                 Popularidade: {album.popularity}%
               </span>
             )}
-          
+            {album.service !== 'spotify' && album.playcount !== undefined && (
+              <span className={styles.albumDescription} style={{ fontSize: '0.8em', opacity: 0.8 }}>
+                Plays: {album.playcount}
+              </span>
+            )}
           </div>
         </div>
       ))}
