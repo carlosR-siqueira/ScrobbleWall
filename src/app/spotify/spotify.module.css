@@ -1275,6 +1275,35 @@
     font-size: 0.9rem;
   }
 
+  .optionsContainer {
+    padding: 1rem;
+  }
+
+  .optionsTitle {
+    font-size: 1.5rem;
+  }
+
+  .optionsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .optionCard {
+    padding: 1.5rem;
+  }
+
+  .optionIcon {
+    font-size: 2.5rem !important;
+  }
+
+  .optionInfo h3 {
+    font-size: 1.3rem;
+  }
+
+  .optionInfo p {
+    font-size: 0.9rem;
+  }
+
   .periodSelection h4 {
     font-size: 0.9rem;
   }
@@ -1307,6 +1336,30 @@
   .spotifyAuthButton {
     padding: 8px 16px;
     font-size: 0.85rem;
+  }
+
+  .optionsContainer {
+    padding: 0.8rem;
+  }
+
+  .optionsTitle {
+    font-size: 1.3rem;
+  }
+
+  .optionCard {
+    padding: 1rem;
+  }
+
+  .optionIcon {
+    font-size: 2rem !important;
+  }
+
+  .optionInfo h3 {
+    font-size: 1.1rem;
+  }
+
+  .optionInfo p {
+    font-size: 0.8rem;
   }
 
   .periodSelection h4 {

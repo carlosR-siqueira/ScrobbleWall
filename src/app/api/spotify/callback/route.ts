@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   const state = searchParams.get('state');
 
   if (!code) {
-    return NextResponse.redirect(new URL('/spotify?error=no_code', req.url));
+    return NextResponse.redirect(new URL('http://127.0.0.1:3000/spotify?error=no_code'));
   }
 
   try {
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
     // Em produção, você deve armazenar esses tokens de forma segura
     // Por simplicidade, vamos usar cookies (não recomendado para produção)
-    const response = NextResponse.redirect(new URL('/spotify', req.url));
+    const response = NextResponse.redirect(new URL('http://127.0.0.1:3000/spotify'));
     
     response.cookies.set('spotify_access_token', access_token, {
       httpOnly: true,
@@ -47,6 +47,6 @@ export async function GET(req: NextRequest) {
     return response;
   } catch (error) {
     console.error('Erro na autenticação Spotify:', error);
-    return NextResponse.redirect(new URL('/spotify?error=auth_failed', req.url));
+    return NextResponse.redirect(new URL('http://127.0.0.1:3000/spotify?error=auth_failed'));
   }
 } 

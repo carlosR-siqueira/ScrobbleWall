@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     response_type: 'code',
     redirect_uri: SPOTIFY_REDIRECT_URI,
     state: state,
-    scope: 'user-top-read',
+    scope: 'user-top-read user-read-recently-played',
     show_dialog: 'true'
   });
 
