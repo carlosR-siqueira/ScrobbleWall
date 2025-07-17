@@ -70,14 +70,14 @@ export default function LandingPage() {
           />
           <div className={styles.exampleText}>
             <h3>Colagem 3x3</h3>
-            <p>Uma grade compacta com os 9 álbuns mais ouvidos. Ideal para destacar seus favoritos da semana.</p>
+            <p>Uma grade compacta com os 9 álbuns mais ouvidos. Ideal para destacar seus favoritos do last.fm da semana.</p>
           </div>
         </div>
 
         <div className={styles.exampleItem}>
           <div className={styles.exampleText}>
             <h3>Colagem 4x4</h3>
-            <p>Um equilíbrio entre variedade e tamanho. Perfeita para o seu top do mês.</p>
+            <p>Um equilíbrio entre variedade e tamanho. Perfeita para o seu top álbum do mês do last.fm.</p>
           </div>
           <img
             src="/exemplo-4x4.png"
@@ -96,7 +96,7 @@ export default function LandingPage() {
           />
           <div className={styles.exampleText}>
             <h3>Colagem 5x5</h3>
-            <p>Para os ouvintes mais intensos! Mostre 25 álbuns em uma única imagem, ideal para todo o seu histórico.</p>
+            <p>Para os ouvintes mais intensos! Mostre 25 álbuns do su last.fm em uma única imagem, ideal para todo o seu histórico.</p>
           </div>
         </div>
       </section>
