@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
     // Em produção, você deve armazenar esses tokens de forma segura
     // Por simplicidade, vamos usar cookies (não recomendado para produção)
-    const response = NextResponse.redirect(new URL('http://127.0.0.1:3000/spotify'));
+    const response = NextResponse.redirect(new URL(`${SPOTIFY_REDIRECT_URI}`));
     
     response.cookies.set('spotify_access_token', access_token, {
       httpOnly: true,
