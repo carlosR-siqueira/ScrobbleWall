@@ -1371,3 +1371,241 @@
     padding: 8px 16px;
   }
 }
+
+/* Estilos para loading */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 20px;
+}
+.loadingContainer p {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(29, 185, 84, 0.3);
+  border-top: 4px solid #1DB954;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos para status de conexão */
+.connectionStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(29, 185, 84, 0.1);
+  border: 2px solid #1DB954;
+  border-radius: 25px;
+  padding: 12px;
+  margin-bottom: 30px;
+  color: #1DB954;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.connectionIcon {
+  color: #1DB954 !important;
+  font-size: 24px !important;
+}
+
+/* Estilos para container de opções */
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.optionsTitle {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.optionCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 2px solid rgba(29, 185, 84);
+  border-radius: 20px;
+  padding: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.optionCard:hover {
+  transform: translateY(-5px);
+  border-color: #1DB954;
+  box-shadow: 0 12px 40px rgba(29, 185, 84, 0.3);
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.optionIcon {
+  color: #1DB954 !important;
+  font-size: 48px !important;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.optionCard:hover .optionIcon {
+  transform: scale(1.1);
+  color: #1ed760;
+}
+
+.optionInfo h3 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  margin: 0 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.optionInfo p {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.05;
+  margin: 0 0;
+  font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .optionsContainer {
+    padding: 20px;
+  }
+
+  .optionsTitle {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .optionsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .optionCard {
+    padding: 25px;
+  }
+
+  .optionIcon {
+    font-size: 40px !important;
+  }
+
+  .optionInfo h3 {
+    font-size: 20px;
+  }
+
+  .optionInfo p {
+    font-size: 14px;
+  }
+
+  .connectionStatus {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .connectionIcon {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .optionsContainer {
+    padding: 15px;
+  }
+
+  .optionsTitle {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .optionCard {
+    padding: 20px;
+  }
+
+  .optionIcon {
+    font-size: 36px !important;
+  }
+
+  .optionInfo h3 {
+    font-size: 18px;
+  }
+
+  .optionInfo p {
+    font-size: 13px;
+  }
+
+  .connectionStatus {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .connectionIcon {
+    font-size: 18px !important;
+  }
+}
+
+/* Container preto de fundo */
+.blackContainer {
+  background: #000;
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 60px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .blackContainer {
+    padding: 30px 20px;
+    margin: 15px;
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blackContainer {
+    padding: 20px 10px;
+    margin: 8px;
+    min-height: 250px;
+  }
+}

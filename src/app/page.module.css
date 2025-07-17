@@ -803,7 +803,37 @@
 .serviceInfo p {
   color: #ccc;
   font-size: 0.9rem;
-  margin: 0.5rem 0 0 0;
+  margin: 0.50 0;
   line-height: 1.4;
+}
+
+/* Estilos específicos para o card do Spotify */
+.serviceButton.spotifyCard {
+  border-color: #1DB954;
+}
+.serviceButton.spotifyCard:hover {
+  border-color: #1DB954;
+  box-shadow: 0 10px 25px rgba(29, 185, 84, 0.3);
+}
+.serviceButton.spotifyCard .serviceIcon {
+  color: #1DB954 !important;
+}
+.serviceButton.spotifyCard:hover .serviceIcon {
+  color: #1ed760 !important;
+}
+
+/* Estilos específicos para o card do Last.fm */
+.serviceButton.lastfmCard {
+  border-color: #D0021B;
+}
+.serviceButton.lastfmCard:hover {
+  border-color: #D0021B;
+  box-shadow: 0 10px 25px rgba(208, 2, 27, 0.3);
+}
+.serviceButton.lastfmCard .serviceIcon {
+  color: #D0021B !important;
+}
+.serviceButton.lastfmCard:hover .serviceIcon {
+  color: #ff4444 !important;
 }
 

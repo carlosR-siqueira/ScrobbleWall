@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../page.module.css';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const MAX_WIDTH = 700;
 
@@ -8,10 +7,6 @@ const SpotifyTopTrackDay: React.FC = () => {
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const handleBack = () => {
-    window.history.back();
-  };
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -33,32 +28,13 @@ const SpotifyTopTrackDay: React.FC = () => {
     }
   };
 
+  // Gerar imagem automaticamente quando o componente carregar
+  useEffect(() => {
+    handleGenerate();
+  }, []);
+
   return (
     <>
-      {/* Barra preta translúcida com título e botão de voltar */}
-      
-        <button
-          onClick={handleBack}
-          style={{
-            position: 'absolute',
-            left: 24,
-            top: 24,
-            background: 'none',
-            border: 'none',
-            color: '#1DB954',
-            fontWeight: 700,
-            fontSize: 28,
-            display: 'flex',
-            alignItems: 'center',
-            cursor: 'pointer',
-            zIndex: 2,
-          }}
-          aria-label="Voltar"
-        >
-          <ArrowBackIcon style={{ fontSize: 32 }} />
-        </button>
-       
-      
       {/* Antes de gerar: bloco preto centralizado com descrição e botão */}
       {!imgUrl && (
         <div
@@ -101,27 +77,59 @@ const SpotifyTopTrackDay: React.FC = () => {
               textShadow: '0 2px 8px #000a',
             }}
           >
-            Gere uma imagem pronta para stories com suas 5 músicas mais reproduzidas recentemente no Spotify.
+            {loading ? 'Gerando sua imagem...' : 'Gere uma imagem pronta para stories com suas 5 músicas mais reproduzidas recentemente no Spotify.'}
           </p>
-          <button
-            onClick={handleGenerate}
-            disabled={loading}
-            className={styles.button}
-            style={{
-              width: '100%',
-              fontSize: 26,
-              padding: '18px 0',
-              borderRadius: 12,
-              fontWeight: 900,
-              background: loading ? '#666' : '#1DB954',
-              color: '#fff',
-              marginBottom: 0,
-              boxShadow: '0 2px 12px #0004',
-              fontFamily: 'inherit',
-            }}
-          >
-            {loading ? 'Gerando imagem...' : 'Gerar Top Track Day'}
-          </button>
+          {!loading && (
+            <button
+              onClick={handleGenerate}
+              disabled={loading}
+              className={styles.button}
+              style={{
+                width: '100%',
+                fontSize: 26,
+                padding: '18px 0',
+                borderRadius: 12,
+                fontWeight: 900,
+                background: loading ? '#666' : '#1DB954',
+                color: '#fff',
+                marginBottom: 0,
+                boxShadow: '0 2px 12px #0004',
+                fontFamily: 'inherit',
+              }}
+            >
+              {loading ? 'Gerando imagem...' : 'Gerar Top Track Day'}
+            </button>
+          )}
+          {loading && (
+            <div
+              style={{
+                width: '100%',
+                fontSize: 26,
+                padding: '18px 0',
+                borderRadius: 12,
+                fontWeight: 900,
+                background: '#1DB954',
+                color: '#fff',
+                marginBottom: 0,
+                boxShadow: '0 2px 12px #0004',
+                fontFamily: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px'
+              }}
+            >
+              <div style={{
+                width: '24px',
+                height: '24px',
+                border: '3px solid #fff',
+                borderTop: '3px solid transparent',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}></div>
+              Gerando imagem...
+            </div>
+          )}
           {error && (
             <div
               style={{

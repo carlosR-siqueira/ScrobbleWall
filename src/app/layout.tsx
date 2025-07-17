@@ -18,17 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const underdog = Underdog({
-  variable: "--font-underdog",
-  subsets: ["latin"],
-  weight: "400",
-});
 
-const fredericka = Fredericka_the_Great({
-  variable: "--font-fredericka",
-  subsets: ["latin"],
-  weight: "400",
-});
 
 export const metadata: Metadata = {
   title: "ScrobbleWall – Sua música em forma de arte",
@@ -90,7 +80,7 @@ export default function RootLayout({
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${underdog.variable} ${fredericka.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} `}>
         {/* Script global do Google AdSense - carregado com prioridade */}
         <Script
           async

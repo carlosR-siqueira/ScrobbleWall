@@ -38,7 +38,7 @@ body {
 }
 
 * {
-  font-family: var(--font-fredericka);
+  font-family: var(--font-geist-mono);
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -197,6 +197,12 @@ a {
 /* Garantir que as propagandas não sejam afetadas por outros estilos */
 .adsbygoogle * {
   box-sizing: border-box !important;
+}
+
+/* Animação de loading */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Evitar conflitos com outros estilos */
