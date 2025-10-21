@@ -5,14 +5,16 @@ import { useForm, ValidationError } from '@formspree/react';
 import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 import PageWithSidebarAds from '../components/adsComponents/PageWithSidebarAds';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Contato = () => {
   const [state, handleSubmit] = useForm('xnndbljn');
+  const { t } = useLanguage();
 
   if (state.succeeded) {
     return <div className={styles.successMessageContainer}>
         <p
-          className={styles.successMessage}>Mensagem enviada com sucesso!
+          className={styles.successMessage}>{t('contact.successMessage')}
         </p>
       </div> 
   }
@@ -20,30 +22,30 @@ const Contato = () => {
   return (
     <PageWithSidebarAds>
       <div className={styles.container}>
-        <h1 className={styles.title}>Contato</h1>
+        <h1 className={styles.title}>{t('contact.title')}</h1>
         <p className={styles.paragraph}>
-          Tem dúvidas, sugestões ou precisa de ajuda? Fique à vontade para nos enviar uma mensagem.
+          {t('contact.description')}
         </p>
         <form onSubmit={handleSubmit} className={styles.form}>
           <label htmlFor="email" className={styles.label}>
-            Endereço de e-mail
+            {t('contact.emailLabel')}
           </label>
           <input id="email" type="email" name="email" className={styles.input} required />
           <ValidationError prefix="Email" field="email" errors={state.errors} />
 
           <label htmlFor="message" className={styles.label}>
-            Mensagem
+            {t('contact.messageLabel')}
           </label>
           <textarea id="message" name="message" className={styles.textarea} rows={5} required />
           <ValidationError prefix="Message" field="message" errors={state.errors} />
 
           <button type="submit" disabled={state.submitting} className={styles.button}>
-            {state.submitting ? 'Enviando...' : 'Enviar'}
+            {state.submitting ? t('contact.sendingButton') : t('contact.sendButton')}
           </button>
         </form>
 
         <p className={styles.paragraph}>
-          Ou envie diretamente para: <a href="mailto:bekguittar@gmail.com" className={styles.link}>bekguittar@gmail.com</a>
+          {t('contact.orSendTo')} <a href="mailto:bekguittar@gmail.com" className={styles.link}>bekguittar@gmail.com</a>
         </p>
 
         {/* Propaganda no final da página */}

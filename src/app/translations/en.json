@@ -31,5 +31,60 @@
     "ogTitle": "ScrobbleWall – Your music in art form",
     "ogDescription": "Create collages with your most listened albums on Last.fm and share your musical identity.",
     "twitterTitle": "ScrobbleWall – Your music in art form"
+  },
+  "about": {
+    "title": "About ScrobbleWall",
+    "paragraph1": "ScrobbleWall is a project created to transform your Last.fm music data into visual art. The idea is simple: you provide your Last.fm username, and the site generates a collage with your most played albums in the chosen period.",
+    "paragraph2": "With a simple and customizable interface, you can easily create an image with the albums that marked your week, month, or even your entire musical journey. You can include information such as album and artist names, adjust the grid size, and download the generated image in high quality.",
+    "paragraph3": "Everything is done directly in the browser, without the need for login or collection of sensitive data.",
+    "whyCreatedTitle": "Why did I create this site?",
+    "whyCreatedText1": "I'm Carlos Siqueira, a front-end developer with a passion for music, art, and data. I've always found it fascinating how our personal soundtrack can tell stories. ScrobbleWall was born as a way to give visual life to this data and share our musical identity with the world.",
+    "whyCreatedText2": "If you liked the project, consider supporting with a coffee or sharing it with friends!",
+    "thanks": "Thank you for visiting the site. 🎵✨"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Have questions, suggestions, or need help? Feel free to send us a message.",
+    "emailLabel": "Email address",
+    "messageLabel": "Message",
+    "sendButton": "Send",
+    "sendingButton": "Sending...",
+    "successMessage": "Message sent successfully!",
+    "orSendTo": "Or send directly to:"
+  },
+  "connect": {
+    "title": "How to connect Spotify to Last.fm",
+    "intro1": "Last.fm is a platform that allows you to integrate streaming services, such as Spotify, to automatically record the songs you listen to. This process is known as 'scrobbling' and helps catalog your musical habits.",
+    "intro2": "It works as a virtual community focused on musical interests. You can exchange information and recommendations with fans of your favorite band, for example, and see your musical compatibility with other users.",
+    "stepsTitle": "Step by step to connect",
+    "step1": "Go to the Last.fm website and log in to your account (or create a new one).",
+    "step2": "At the bottom of the page, under 'Help' select Track My Music, or go directly to the connected apps page. You can also click on Download Scrobbler under 'Goodies'",
+    "step3": "Click on 'Spotify', then click on 'Connect'.",
+    "step4": "A Spotify pop-up window will open requesting permission to integrate the platforms. Click 'Accept'.",
+    "step5": "After confirmation, your songs played on Spotify will start being automatically recorded on your Last.fm profile.",
+    "afterTitle": "What happens next?",
+    "afterText": "With scrobbling active, all tracks played on Spotify will be recorded on your Last.fm profile, regardless of the device used (phone, tablet, or computer). You'll be able to view detailed statistics about your most listened songs, albums, and artists, as well as discover your musical compatibility with other users.",
+    "removeTitle": "How to remove the connection?",
+    "removeText": "If you wish to disconnect Spotify from Last.fm, go to the Spotify connected apps page, locate Last.fm and click 'Remove Access'.",
+    "conclusion": "Done! Now you know how to integrate Spotify with Last.fm and make the most of ScrobbleWall features."
+  },
+  "generate": {
+    "username": "Last.fm username",
+    "period": "Period",
+    "gridSize": "Grid size",
+    "includeInfo": "Include album information",
+    "includePlayCount": "Include play count",
+    "generateButton": "Generate Collage",
+    "loading": "Loading...",
+    "downloadButton": "Download Image",
+    "backButton": "Back",
+    "errorNetwork": "Network error. Check your connection.",
+    "errorData": "Error fetching data. Check the username or try again later.",
+    "period7day": "Last week",
+    "period1month": "Last month",
+    "period3month": "Last 3 months",
+    "period6month": "Last 6 months",
+    "period12month": "Last year",
+    "periodOverall": "All time"
   }
 }
