@@ -3,6 +3,7 @@ import React from 'react';
 import styles from '../page.module.css';
 import Divider, { dividerClasses } from '@mui/material/Divider';
 import { Box } from '@mui/material';
+import BuyMeACoffeeButton from './BuyMeACoffee';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,10 +11,10 @@ const Footer = () => {
   return (
     <footer className={styles.footerStyle}>
       <div className={styles.donateButtonContainer} >
-        <a href="/donate" rel="noopener noreferrer" className={styles.donateButtonStyle}>
-          ☕ Apoie com um café
-        </a>
-        
+        {/* <a href="https://buymeacoffee.com/scrobblewall" rel="noopener noreferrer" target='blank' className={styles.donateButtonStyle}>
+          ☕ Buy me a coffee
+        </a> */}
+        <BuyMeACoffeeButton />
 
         <div className={styles.politicasFooterContainer}>
           
