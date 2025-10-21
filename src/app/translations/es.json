@@ -31,5 +31,60 @@
     "ogTitle": "ScrobbleWall – Tu música en forma de arte",
     "ogDescription": "Crea collages con tus álbumes más escuchados en Last.fm y comparte tu identidad musical.",
     "twitterTitle": "ScrobbleWall – Tu música en forma de arte"
+  },
+  "about": {
+    "title": "Acerca de ScrobbleWall",
+    "paragraph1": "ScrobbleWall es un proyecto creado para transformar tus datos musicales de Last.fm en arte visual. La idea es simple: proporcionas tu nombre de usuario de Last.fm y el sitio genera un collage con los álbumes más reproducidos en el período elegido.",
+    "paragraph2": "Con una interfaz simple y personalizable, puedes crear fácilmente una imagen con los álbumes que marcaron tu semana, mes o incluso todo tu viaje musical. Puedes incluir información como el nombre del álbum y el artista, ajustar el tamaño de la cuadrícula y descargar la imagen generada en alta calidad.",
+    "paragraph3": "Todo se hace directamente en el navegador, sin necesidad de inicio de sesión o recolección de datos sensibles.",
+    "whyCreatedTitle": "¿Por qué creé este sitio?",
+    "whyCreatedText1": "Soy Carlos Siqueira, desarrollador front-end con pasión por la música, el arte y los datos. Siempre me ha parecido fascinante cómo nuestra banda sonora personal puede contar historias. ScrobbleWall nació como una forma de dar vida visual a estos datos y compartir nuestra identidad musical con el mundo.",
+    "whyCreatedText2": "¡Si te gustó el proyecto, considera apoyar con un café o compartirlo con amigos!",
+    "thanks": "Gracias por visitar el sitio. 🎵✨"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "¿Tienes dudas, sugerencias o necesitas ayuda? No dudes en enviarnos un mensaje.",
+    "emailLabel": "Dirección de correo electrónico",
+    "messageLabel": "Mensaje",
+    "sendButton": "Enviar",
+    "sendingButton": "Enviando...",
+    "successMessage": "¡Mensaje enviado con éxito!",
+    "orSendTo": "O envía directamente a:"
+  },
+  "connect": {
+    "title": "Cómo conectar Spotify a Last.fm",
+    "intro1": "Last.fm es una plataforma que permite integrar servicios de streaming, como Spotify, para registrar automáticamente las canciones que escuchas. Este proceso se conoce como 'scrobbling' y ayuda a catalogar tus hábitos musicales.",
+    "intro2": "Funciona como una comunidad virtual enfocada en intereses musicales. Puedes intercambiar información y recomendaciones con fans de tu banda favorita, por ejemplo, y ver tu compatibilidad musical con otros usuarios.",
+    "stepsTitle": "Paso a paso para conectar",
+    "step1": "Accede al sitio web de Last.fm e inicia sesión en tu cuenta (o crea una nueva).",
+    "step2": "En el pie de página, dentro de 'Help' selecciona Track My Music, o accede directamente a la página de aplicaciones conectadas. También puedes hacer clic en Download Scrobbler dentro de 'Goodies'",
+    "step3": "Haz clic en 'Spotify', luego haz clic en 'Connect'.",
+    "step4": "Se abrirá una ventana emergente de Spotify solicitando permiso para integrar las plataformas. Haz clic en 'Aceptar'.",
+    "step5": "Después de la confirmación, tus canciones reproducidas en Spotify comenzarán a registrarse automáticamente en tu perfil de Last.fm.",
+    "afterTitle": "¿Qué sucede después?",
+    "afterText": "Con el scrobbling activo, todas las pistas reproducidas en Spotify se registrarán en tu perfil de Last.fm, independientemente del dispositivo utilizado (teléfono, tableta o computadora). Podrás visualizar estadísticas detalladas sobre tus canciones, álbumes y artistas más escuchados, además de descubrir tu compatibilidad musical con otros usuarios.",
+    "removeTitle": "¿Cómo eliminar la conexión?",
+    "removeText": "Si deseas desconectar Spotify de Last.fm, accede a la página de aplicaciones conectadas de Spotify, localiza Last.fm y haz clic en 'Eliminar Acceso'.",
+    "conclusion": "¡Listo! Ahora ya sabes cómo integrar Spotify con Last.fm y aprovechar al máximo las funciones de ScrobbleWall."
+  },
+  "generate": {
+    "username": "Nombre de usuario de Last.fm",
+    "period": "Período",
+    "gridSize": "Tamaño de cuadrícula",
+    "includeInfo": "Incluir información del álbum",
+    "includePlayCount": "Incluir conteo de reproducciones",
+    "generateButton": "Generar Collage",
+    "loading": "Cargando...",
+    "downloadButton": "Descargar Imagen",
+    "backButton": "Volver",
+    "errorNetwork": "Error de red. Verifica tu conexión.",
+    "errorData": "Error al obtener datos. Verifica el nombre de usuario o inténtalo de nuevo más tarde.",
+    "period7day": "Última semana",
+    "period1month": "Último mes",
+    "period3month": "Últimos 3 meses",
+    "period6month": "Últimos 6 meses",
+    "period12month": "Último año",
+    "periodOverall": "Todo el tiempo"
   }
 }

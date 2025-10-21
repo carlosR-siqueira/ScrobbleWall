@@ -5,45 +5,42 @@ import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
 import GoogleMobileAd from '../components/adsComponents/GoogleMobileAd';
 import PageWithSidebarAds from '../components/adsComponents/PageWithSidebarAds';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Sobre = () => {
+  const { t } = useLanguage();
+  
   return (
     <PageWithSidebarAds>
       <div className={styles.container}>
-        <h1 className={styles.title}>Sobre o ScrobbleWall</h1>
+        <h1 className={styles.title}>{t('about.title')}</h1>
 
         <p className={styles.paragraph}>
-          O <span className={styles.mark}>ScrobbleWall</span> é um projeto criado para transformar seus dados musicais do Last.fm em arte visual.
-          A ideia é simples: você fornece seu nome de usuário do Last.fm, e o site gera uma colagem com os álbuns mais
-          reproduzidos no período escolhido.
+          {t('about.paragraph1')}
         </p>
 
         <p className={styles.paragraph}>
-          Com uma interface simples e personalizável, é possível criar facilmente uma imagem com os álbuns que marcaram
-          sua semana, mês ou até mesmo toda sua jornada musical. Você pode incluir informações como o nome do álbum e
-          artista, ajustar o tamanho da grade e fazer o download da imagem gerada com alta qualidade.
+          {t('about.paragraph2')}
         </p>
 
         <p className={styles.paragraph}>
-          Tudo é feito diretamente no navegador, sem necessidade de login ou coleta de dados sensíveis.
+          {t('about.paragraph3')}
         </p>
 
         <GoogleResponsiveAd position="top" forceHorizontal={true} />
 
-        <h2 className={styles.subtitle}>Por que criei este site?</h2>
+        <h2 className={styles.subtitle}>{t('about.whyCreatedTitle')}</h2>
 
         <p className={styles.paragraph}>
-          Sou <strong>Carlos Siqueira</strong>, desenvolvedor front-end com paixão por música, arte e dados. Sempre achei
-          fascinante como nossa trilha sonora pessoal pode contar histórias. O ScrobbleWall nasceu como uma forma de dar
-          vida visual a esses dados e compartilhar nossa identidade musical com o mundo.
+          {t('about.whyCreatedText1')}
         </p>
 
         <p className={styles.paragraph}>
-          Se você gostou do projeto, considere apoiar com um café ou compartilhá-lo com amigos!
+          {t('about.whyCreatedText2')}
         </p>
 
         <p className={styles.paragraph}>
-          Obrigado por visitar o site. 🎵✨
+          {t('about.thanks')}
         </p>
 
         <GoogleMobileAd />
