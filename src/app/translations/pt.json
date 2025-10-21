@@ -86,5 +86,11 @@
     "period6month": "Últimos 6 meses",
     "period12month": "Último ano",
     "periodOverall": "Todo o período"
+  },
+  "footer": {
+    "termsOfUse": "Termos de uso",
+    "privacyPolicy": "Política de Privacidade",
+    "rightsReserved": "Todos os direitos reservados.",
+    "developedBy": "Desenvolvido por"
   }
 }

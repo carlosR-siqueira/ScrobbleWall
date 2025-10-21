@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import CollageSection from '../components/CollageSection';
 import AlbumGrid from '../components/AlbumGrid';
 import AdWrapper from '../components/adsComponents/AdWrapper';
+import { useLanguage } from '../contexts/LanguageContext';
 
 import Switch from '@mui/material/Switch';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -12,6 +13,7 @@ import styles from '../page.module.css';
 import { styled } from '@mui/material/styles';
 
 export default function GeneratePage() {
+  const { t } = useLanguage();
   const [username, setUsername] = useState('');
   const [period, setPeriod] = useState('7day');
   const [gridSize, setGridSize] = useState(3);
@@ -35,11 +37,11 @@ export default function GeneratePage() {
         setEtapa('resultado');
       } else {
         setAlbums([]);
-        setError('Erro ao buscar dados. Verifique o nome de usuário ou tente novamente mais tarde.');
+        setError(t('generate.errorData'));
       }
     } catch (err) {
       setAlbums([]);
-      setError('Erro de rede. Verifique sua conexão.');
+      setError(t('generate.errorNetwork'));
     } finally {
       setLoading(false);
     }
@@ -123,11 +125,11 @@ export default function GeneratePage() {
 
       const formatPeriodName = (period: string): string => {
         const mapping: Record<string, string> = {
-          '7day': '7 Dias',
-          '1month': '1 Mês',
-          '3month': '3 Meses',
-          '12month': '12 Meses',
-          'overall': 'Todos os Tempos'
+          '7day': t('generate.period7day'),
+          '1month': t('generate.period1month'),
+          '3month': t('generate.period3month'),
+          '12month': t('generate.period12month'),
+          'overall': t('generate.periodOverall')
         };
         return mapping[period] || period;
       };
@@ -176,11 +178,11 @@ export default function GeneratePage() {
             <div className={styles.VoltarButton}>
               <IconButton
                 onClick={() => setEtapa('formulario')}
-                aria-label="Voltar"
+                aria-label={t('generate.backButton')}
                 sx={{ color: '#ff9f00', fontSize: '1.2rem' }}
               >
                 <ArrowBackIcon />
-                <span className={styles.voltar}>Voltar</span>
+                <span className={styles.voltar}>{t('generate.backButton')}</span>
               </IconButton>
             </div>
 
@@ -189,24 +191,24 @@ export default function GeneratePage() {
                 <CustomSwitch
                   checked={includePlayCount}
                   onChange={(e) => setIncludePlayCount(e.target.checked)}
-                  inputProps={{ 'aria-label': 'Incluir quantidade de plays' }}
+                  inputProps={{ 'aria-label': t('generate.includePlayCount') }}
                 />
                 <span style={{ color: '#fff', fontWeight: 'bold' }}>
-                  Incluir quantidade de plays
+                  {t('generate.includePlayCount')}
                 </span>
               </div>
               <div className={styles.switchContainer}>
                 <CustomSwitch
                   checked={includeInfo}
                   onChange={(e) => setIncludeInfo(e.target.checked)}
-                  inputProps={{ 'aria-label': 'Incluir informações dos álbuns' }}
+                  inputProps={{ 'aria-label': t('generate.includeInfo') }}
                 />
-                <span style={{ color: '#fff', fontWeight: 'bold' }}>Incluir nome do álbum e artista</span>
+                <span style={{ color: '#fff', fontWeight: 'bold' }}>{t('generate.includeInfo')}</span>
               </div>
 
 
               <button onClick={downloadImage} className={styles.button}>
-                Baixar Colagem
+                {t('generate.downloadButton')}
               </button>
             </div>
           </div>
