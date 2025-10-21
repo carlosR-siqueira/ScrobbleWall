@@ -7,9 +7,12 @@ import Close from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Divider from '@mui/material/Divider';
 import { Card } from '@mui/material';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <header className={styles.header}>
@@ -26,7 +29,7 @@ const Header: React.FC = () => {
         <button
           className={styles.hamburger}
           onClick={() => setIsMenuOpen(true)}
-          aria-label="Abrir menu"
+          aria-label={t('header.openMenu')}
         >
           <MenuOpenIcon 
             sx={{fontSize: 40}}
@@ -34,11 +37,12 @@ const Header: React.FC = () => {
         </button>
 
         <nav className={styles.nav}>
-          <Link href="/" className={styles.navLink} onClick={() => (window.location.href = '/')}>Início</Link>
-          <Link href="/sobre" className={styles.navLink}>Sobre</Link>
-          <Link href="/contato" className={styles.navLink}>Contato</Link>
-          <Link href="/conectar" className={styles.navLink}>Conectar Spotify</Link>
-          <Link href="https://buymeacoffee.com/scrobblewall" target='blank' className={styles.navLink}>Buy me a coffee</Link>
+          <Link href="/" className={styles.navLink} onClick={() => (window.location.href = '/')}>{t('header.home')}</Link>
+          <Link href="/sobre" className={styles.navLink}>{t('header.about')}</Link>
+          <Link href="/contato" className={styles.navLink}>{t('header.contact')}</Link>
+          <Link href="/conectar" className={styles.navLink}>{t('header.connectSpotify')}</Link>
+          <Link href="https://buymeacoffee.com/scrobblewall" target='blank' className={styles.navLink}>{t('header.buyMeCoffee')}</Link>
+          <LanguageSwitcher />
         </nav>
       </div>
 
@@ -65,19 +69,22 @@ const Header: React.FC = () => {
             <Card variant="elevation" className={styles.dividerContainer}>
               <Divider />
             </Card>
-            <div onClick={() => { window.location.href = '/'; setIsMenuOpen(false); }} className={styles.navLink}>Início</div>
-            <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Sobre</Link>
-            <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Contato</Link>
-            <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Conectar Spotify</Link>
-            <Link href="/donate" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Nos Apoie</Link>
+            <div onClick={() => { window.location.href = '/'; setIsMenuOpen(false); }} className={styles.navLink}>{t('header.home')}</div>
+            <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.about')}</Link>
+            <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.contact')}</Link>
+            <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.connectSpotify')}</Link>
+            <Link href="/donate" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.support')}</Link>
+            <div style={{  display: 'flex', justifyContent: 'center' }}>
+              <LanguageSwitcher />
+            </div>
           </div>
           
           <div className={styles.politicasLinkContainer}>
             <Card variant="elevation" className={styles.dividerContainer}>
               <Divider />
             </Card>
-            <Link href="/politica-de-privacidade" onClick={() => setIsMenuOpen(false)}>Política de Privacidade</Link>
-            <Link href="/termos-de-uso" onClick={() => setIsMenuOpen(false)}>Termos de uso</Link>
+            <Link href="/politica-de-privacidade" onClick={() => setIsMenuOpen(false)}>{t('header.privacyPolicy')}</Link>
+            <Link href="/termos-de-uso" onClick={() => setIsMenuOpen(false)}>{t('header.termsOfUse')}</Link>
 
           </div>
         </div>  

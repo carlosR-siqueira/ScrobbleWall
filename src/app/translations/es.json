@@ -1,0 +1,35 @@
+{
+  "header": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "connectSpotify": "Conectar Spotify",
+    "buyMeCoffee": "Buy me a coffee",
+    "support": "Apóyanos",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfUse": "Términos de Uso",
+    "openMenu": "Abrir menú"
+  },
+  "home": {
+    "welcomeTitle": "Bienvenido a",
+    "description": "¡Tus álbumes favoritos, ahora en forma de arte! Crea un collage con los más escuchados de tu perfil de Last.fm.",
+    "startButton": "Comenzar",
+    "integrationTitle": "¿Aún no has conectado tu Spotify a Last.fm?",
+    "integrationDescription": "Para que tus canciones de Spotify sean registradas y aparezcan en el collage, es necesario conectar tu cuenta a Last.fm.",
+    "integrationButton": "Aprender cómo conectar",
+    "examplesTitle": "Ejemplos de Collages",
+    "collage3x3Title": "Collage 3x3",
+    "collage3x3Description": "Una cuadrícula compacta con los 9 álbumes más escuchados. Ideal para destacar tus favoritos de last.fm de la semana.",
+    "collage4x4Title": "Collage 4x4",
+    "collage4x4Description": "Un equilibrio entre variedad y tamaño. Perfecto para tu top álbum del mes de last.fm.",
+    "collage5x5Title": "Collage 5x5",
+    "collage5x5Description": "¡Para los oyentes más intensos! Muestra 25 álbumes de tu last.fm en una sola imagen, ideal para todo tu historial."
+  },
+  "metadata": {
+    "title": "ScrobbleWall – Tu música en forma de arte",
+    "description": "Transforma tus álbumes más escuchados de Last.fm en collages visuales personalizados. ¡Comparte tu pasión musical con el mundo!",
+    "ogTitle": "ScrobbleWall – Tu música en forma de arte",
+    "ogDescription": "Crea collages con tus álbumes más escuchados en Last.fm y comparte tu identidad musical.",
+    "twitterTitle": "ScrobbleWall – Tu música en forma de arte"
+  }
+}

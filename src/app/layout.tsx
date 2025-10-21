@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Underdog, Fredericka_the_Great } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
-import Footer from './components/Footer';
+import ClientLayout from "./components/ClientLayout";
 import Script from "next/script";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -94,11 +93,11 @@ export default function RootLayout({
         {/* Componente para monitorar carregamento do AdSense */}
         <AdSenseLoader />
         
-        <Header />
-        <main className="containerPrincipal">{children}</main>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
         <Analytics />
         <SpeedInsights />
-        <Footer />
       </body>
     </html>
   );
