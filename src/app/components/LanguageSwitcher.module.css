@@ -1,0 +1,102 @@
+
+
+.currentLanguage {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  color: #d0021ab6;
+  border: none;
+  padding: 2px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 50px;
+  text-align: center;
+}
+
+.currentLanguage:hover {
+  background-color: #1f1f1f;
+  color: #ff9f00;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 5px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 999;
+  min-width: 80px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.languageOption {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background-color: white;
+  color: #d0021ab6;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.languageOption:hover {
+  background-color: #f5f5f5;
+  color: #e50914;
+}
+
+.languageOption.active {
+  background-color: #1f1f1f;
+  color: #ff9f00;
+}
+
+.languageOption:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .currentLanguage {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 45px;
+  }
+
+  .dropdown {
+    min-width: 70px;
+  }
+
+  .languageOption {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
