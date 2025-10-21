@@ -4,8 +4,10 @@ import styles from '../page.module.css';
 import Divider, { dividerClasses } from '@mui/material/Divider';
 import { Box } from '@mui/material';
 import BuyMeACoffeeButton from './BuyMeACoffee';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -18,7 +20,7 @@ const Footer = () => {
 
         <div className={styles.politicasFooterContainer}>
           
-          <Link href="/termos-de-uso">Termos de uso</Link>
+          <Link href="/termos-de-uso">{t('footer.termsOfUse')}</Link>
           <Box
             sx={{
               display: 'flex',
@@ -44,7 +46,7 @@ const Footer = () => {
               }}
             />
           </Box>
-          <Link href="/politica-de-privacidade">Política de Privacidade</Link>
+          <Link href="/politica-de-privacidade">{t('footer.privacyPolicy')}</Link>
         </div>  
       </div>
 
@@ -63,7 +65,7 @@ const Footer = () => {
 
 
       <p>
-        © {currentYear} ScrobbleWall. Todos os direitos reservados. | Desenvolvido por{" "}
+        © {currentYear} ScrobbleWall. {t('footer.rightsReserved')} | {t('footer.developedBy')}{" "}
         <a
           href="https://github.com/carlosR-siqueira"
           target="_blank"

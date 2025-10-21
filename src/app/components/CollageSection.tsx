@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styles from '../page.module.css';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface CollageSectionProps {
   username: string;
@@ -34,6 +35,7 @@ const CollageSection: React.FC<CollageSectionProps> = ({
   setIncludeInfo,
   isGeneratePage = false,
 }) => {
+  const { t } = useLanguage();
   const collageRef = useRef<HTMLDivElement | null>(null);
   
   const containerClass = isGeneratePage ? styles.generateFormContainer : styles.formContainer;
@@ -43,7 +45,7 @@ const CollageSection: React.FC<CollageSectionProps> = ({
       <section className={styles.inputContainer}>
         <input
           type="text"
-          placeholder="Digite seu usuário do Last.fm"
+          placeholder={t('generate.username')}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className={styles.inputField}
@@ -54,11 +56,11 @@ const CollageSection: React.FC<CollageSectionProps> = ({
           onChange={(e) => setPeriod(e.target.value)}
           className={styles.selectField}
         >
-          <option value="7day">7 Dias</option>
-          <option value="1month">1 Mês</option>
-          <option value="3month">3 Meses</option>
-          <option value="12month">12 Meses</option>
-          <option value="overall">Todos os tempos</option>
+          <option value="7day">{t('generate.period7day')}</option>
+          <option value="1month">{t('generate.period1month')}</option>
+          <option value="3month">{t('generate.period3month')}</option>
+          <option value="12month">{t('generate.period12month')}</option>
+          <option value="overall">{t('generate.periodOverall')}</option>
         </select>
 
         <select
@@ -76,7 +78,7 @@ const CollageSection: React.FC<CollageSectionProps> = ({
           disabled={loading}
           className={styles.button}
         >
-          {loading ? 'Carregando...' : 'Gerar Colagem'}
+          {loading ? t('generate.loading') : t('generate.generateButton')}
         </button>
 
         {error && (
