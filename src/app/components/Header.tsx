@@ -74,9 +74,7 @@ const Header: React.FC = () => {
             <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.contact')}</Link>
             <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.connectSpotify')}</Link>
             <Link href="/donate" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.support')}</Link>
-            <div style={{  display: 'flex', justifyContent: 'center' }}>
-              <LanguageSwitcher />
-            </div>
+            <LanguageSwitcher />
           </div>
           
           <div className={styles.politicasLinkContainer}>

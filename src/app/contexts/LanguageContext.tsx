@@ -7,6 +7,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  isLoading: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -26,6 +27,7 @@ interface LanguageProviderProps {
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('en');
   const [translations, setTranslations] = useState<Record<string, any>>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Load saved language from localStorage or detect browser language
@@ -49,9 +51,16 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   useEffect(() => {
     // Load translations for the current language
+    setIsLoading(true);
     import(`../translations/${language}.json`)
-      .then((module) => setTranslations(module.default))
-      .catch((err) => console.error('Error loading translations:', err));
+      .then((module) => {
+        setTranslations(module.default);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error loading translations:', err);
+        setIsLoading(false);
+      });
   }, [language]);
 
   const setLanguage = (lang: Language) => {
@@ -75,7 +84,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, isLoading }}>
       {children}
     </LanguageContext.Provider>
   );
