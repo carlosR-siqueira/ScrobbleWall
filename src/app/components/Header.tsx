@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           <Link href="/sobre" className={styles.navLink}>Sobre</Link>
           <Link href="/contato" className={styles.navLink}>Contato</Link>
           <Link href="/conectar" className={styles.navLink}>Conectar Spotify</Link>
-          <Link href="/donate" className={styles.navLink}>Nos Apoie</Link>
+          <Link href="https://buymeacoffee.com/scrobblewall" target='blank' className={styles.navLink}>Buy me a coffee</Link>
         </nav>
       </div>
 

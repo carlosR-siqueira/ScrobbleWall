@@ -552,6 +552,38 @@
   font-weight: bold;
 }
 
+/* components/BuyMeACoffeeButton.module.css */
+
+.bmcButton {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d5070f;
+  color: #ffffff;
+  font-family: 'Cookie', cursive;
+  font-size: 15px;
+  padding: 0px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid #ffffff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 10px 0 0 0;
+}
+
+.bmcButton:hover {
+  background-color: #b8050d;
+  transform: scale(1.05);
+}
+
+.emoji {
+  margin-right: 8px;
+  font-size: 28px;
+}
+
+.text {
+  color: #ffffff;
+}
+
+
 /* Responsividade */
 @media (max-width: 1059px){
 
