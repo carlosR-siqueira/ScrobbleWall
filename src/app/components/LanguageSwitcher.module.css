@@ -1,4 +1,7 @@
-
+.languageSwitcher {
+  position: relative;
+  display: inline-block;
+}
 
 .currentLanguage {
   display: flex;
@@ -85,18 +88,51 @@
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
+  .languageSwitcher {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .currentLanguage {
-    padding: 6px 12px;
-    font-size: 12px;
-    min-width: 45px;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    min-width: auto;
+    justify-content: center;
+    border-bottom: solid 1px #0000009a;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .currentLanguage:hover {
+    background-color: transparent;
+    color: #ff9f00;
   }
 
   .dropdown {
-    min-width: 70px;
+    min-width: 100%;
+    left: 0;
+    right: auto;
+    background-color: #1a1a1a;
+    border-radius: 0;
   }
 
   .languageOption {
-    padding: 10px 16px;
-    font-size: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    background-color: #1a1a1a;
+    color: #d0021ab6;
+    border-bottom: solid 1px #0000009a;
+  }
+
+  .languageOption:hover {
+    background-color: #1f1f1f;
+    color: #ff9f00;
+  }
+
+  .languageOption.active {
+    background-color: #1f1f1f;
+    color: #ff9f00;
   }
 }
