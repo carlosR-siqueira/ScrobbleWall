@@ -44,6 +44,7 @@ export default function SpotifyCapsulePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [downloading, setDownloading] = useState(false);
+  const [showPlayCount, setShowPlayCount] = useState(true);
   const artRef = useRef<HTMLDivElement>(null);
 
   const nowFormatted = useMemo(() => {
@@ -143,6 +144,14 @@ export default function SpotifyCapsulePage() {
           )}
           {data && (
             <>
+              <button
+                onClick={() => setShowPlayCount((prev) => !prev)}
+                className={styles.button}
+              >
+                {showPlayCount
+                  ? t('spotifyCapsule.hidePlayCount')
+                  : t('spotifyCapsule.showPlayCount')}
+              </button>
               <button onClick={downloadArtwork} className={styles.button} disabled={downloading}>
                 {downloading ? t('spotifyCapsule.downloading') : t('spotifyCapsule.downloadArt')}
               </button>
@@ -183,7 +192,10 @@ export default function SpotifyCapsulePage() {
               <h2 className={styles.cardTitle}>{t('spotifyCapsule.topTracks')}</h2>
               <ul className={styles.list}>
                 {data.tracks.map((track) => (
-                  <li key={track.rank} className={styles.listItem}>
+                  <li
+                    key={track.rank}
+                    className={`${styles.listItem} ${!showPlayCount ? styles.listItemNoBadge : ''}`}
+                  >
                     <span className={styles.rank}>{track.rank}</span>
                     <img
                       src={track.artistImage || '/fallback1.png'}
@@ -196,9 +208,11 @@ export default function SpotifyCapsulePage() {
                       <span className={styles.trackName}>{track.name}</span>
                       <span className={styles.trackArtist}>{track.artist || '-'}</span>
                     </span>
-                    <span className={styles.playBadge}>
-                      {track.plays} {t('spotifyCapsule.plays')}
-                    </span>
+                    {showPlayCount && (
+                      <span className={styles.playBadge}>
+                        {track.plays} {t('spotifyCapsule.plays')}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

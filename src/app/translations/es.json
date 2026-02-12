@@ -99,6 +99,8 @@
     "disconnect": "Cambiar cuenta",
     "downloadArt": "Descargar arte",
     "downloading": "Generando arte...",
+    "showPlayCount": "Mostrar reproducciones",
+    "hidePlayCount": "Ocultar reproducciones",
     "loading": "Cargando datos de Spotify...",
     "notConnected": "Todavía no conectaste tu cuenta de Spotify.",
     "errorLoad": "No se pudo cargar el resumen de Spotify.",

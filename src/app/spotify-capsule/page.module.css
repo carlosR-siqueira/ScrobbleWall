@@ -179,6 +179,10 @@
   backdrop-filter: blur(2px);
 }
 
+.listItemNoBadge {
+  grid-template-columns: 20px 30px 1fr;
+}
+
 .rank {
   color: #ff9f00;
   font-weight: 700;

@@ -99,6 +99,8 @@
     "disconnect": "Switch account",
     "downloadArt": "Download artwork",
     "downloading": "Generating artwork...",
+    "showPlayCount": "Show plays",
+    "hidePlayCount": "Hide plays",
     "loading": "Loading Spotify data...",
     "notConnected": "Your Spotify account is not connected yet.",
     "errorLoad": "Could not load Spotify summary.",
