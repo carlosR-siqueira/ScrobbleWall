@@ -56,6 +56,18 @@ export default function LandingPage() {
         >
           {t('home.integrationButton')}
         </button>
+        <h2 className={styles.integrationTitle} style={{ marginTop: '2rem' }}>
+          {t('home.spotifyCapsuleTitle')}
+        </h2>
+        <p className={styles.integrationDescription}>
+          {t('home.spotifyCapsuleDescription')}
+        </p>
+        <button
+          className={styles.integrationButton}
+          onClick={() => router.push('/spotify-capsule')}
+        >
+          {t('home.spotifyCapsuleButton')}
+        </button>
       </section>
 
       {/* Seção de exemplos de colagens */}

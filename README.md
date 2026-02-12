@@ -16,6 +16,19 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment variables
+
+Create a `.env.local` file with:
+
+```env
+LASTFM_API_KEY=your_lastfm_api_key
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_REDIRECT_URI=http://localhost:3000/api/spotify/callback
+SPOTIFY_SCOPES=user-top-read user-read-recently-played
+```
+
+For production, set `SPOTIFY_REDIRECT_URI` to your deployed callback URL.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

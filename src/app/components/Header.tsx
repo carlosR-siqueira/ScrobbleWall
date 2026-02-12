@@ -41,6 +41,7 @@ const Header: React.FC = () => {
           <Link href="/sobre" className={styles.navLink}>{t('header.about')}</Link>
           <Link href="/contato" className={styles.navLink}>{t('header.contact')}</Link>
           <Link href="/conectar" className={styles.navLink}>{t('header.connectSpotify')}</Link>
+          <Link href="/spotify-capsule" className={styles.navLink}>{t('header.spotifyCapsule')}</Link>
           <Link href="https://buymeacoffee.com/scrobblewall" target='blank' className={styles.navLink}>{t('header.buyMeCoffee')}</Link>
           <LanguageSwitcher />
         </nav>
@@ -73,6 +74,7 @@ const Header: React.FC = () => {
             <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.about')}</Link>
             <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.contact')}</Link>
             <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.connectSpotify')}</Link>
+            <Link href="/spotify-capsule" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.spotifyCapsule')}</Link>
             <Link href="/donate" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.support')}</Link>
             <LanguageSwitcher />
           </div>

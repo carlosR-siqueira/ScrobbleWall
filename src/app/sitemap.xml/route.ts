@@ -8,7 +8,9 @@ export function GET(req: NextRequest) {
 
   const pages = [
     '',        // Home
+    '/generate',
     '/conectar',
+    '/spotify-capsule',
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

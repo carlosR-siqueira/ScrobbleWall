@@ -1,0 +1,257 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 90px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 820px;
+  background-color: #000;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 1px 10px 16px 11px rgba(10, 10, 10, 0.61);
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.button {
+  background-color: #353535;
+  color: #f2f2f2;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #ffffffe5;
+  color: #d0021b;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.dangerButton {
+  background-color: #42070d;
+  color: #f1f1f1;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+}
+
+.artwork {
+  position: relative;
+  width: min(100%, 430px);
+  aspect-ratio: 9 / 16;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(144, 96, 255, 0.32) 0%, rgba(144, 96, 255, 0) 46%),
+    radial-gradient(circle at 0% 90%, rgba(29, 185, 84, 0.2) 0%, rgba(29, 185, 84, 0) 45%),
+    linear-gradient(165deg, #121212 0%, #0a0a0a 60%, #050505 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 26px;
+  padding: 14px 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 22%;
+  background:
+    radial-gradient(circle at 75% 30%, rgba(153, 110, 255, 0.42) 0%, rgba(153, 110, 255, 0) 35%),
+    radial-gradient(circle at 25% 65%, rgba(29, 185, 84, 0.34) 0%, rgba(29, 185, 84, 0) 40%),
+    linear-gradient(130deg, #0f1117 0%, #17112a 50%, #0a0f12 100%);
+  opacity: 0.98;
+}
+
+.brandTop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: clamp(22px, 4.5vh, 40px);
+}
+
+.brandLogo {
+  width: min(56vw, 228px);
+  height: auto;
+  filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.45));
+}
+
+.date {
+  color: #ffffff;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: right;
+  white-space: nowrap;
+  background: rgba(18, 20, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 5px 9px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  color: #f5f5f5;
+  font-size: clamp(1.55rem, 5.2vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.6px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.titleRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  color: #d6d6d6;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  max-width: 92%;
+}
+
+.cardTitle {
+  color: #1db954;
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  flex: 1;
+}
+
+.listItem {
+  display: grid;
+  grid-template-columns: 20px 30px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  color: #efefef;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 5px 7px;
+  backdrop-filter: blur(2px);
+}
+
+.rank {
+  color: #ff9f00;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+.artistImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #444;
+}
+
+.trackMeta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.trackName {
+  color: #f4f4f4;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trackArtist {
+  color: #9f9f9f;
+  font-size: 0.64rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playBadge {
+  color: #d9ffd9;
+  background: rgba(29, 185, 84, 0.2);
+  border: 1px solid rgba(29, 185, 84, 0.5);
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status {
+  color: #d9d9d9;
+  text-align: center;
+  margin-top: 18px;
+}
+
+.error {
+  color: #f19797;
+  text-align: center;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding: 16px;
+  }
+
+  .artwork {
+    border-radius: 16px;
+  }
+
+  .brandLogo {
+    width: 180px;
+  }
+
+}
