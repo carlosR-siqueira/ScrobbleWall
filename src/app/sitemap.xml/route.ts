@@ -4,7 +4,7 @@ import { type NextRequest } from 'next/server';
 export const dynamic = 'force-static';
 
 export function GET(req: NextRequest) {
-  const baseUrl = 'https://www.scrobblewall.art';
+  const baseUrl = 'https://scrobblewall.fun';
 
   const pages = [
     '',        // Home

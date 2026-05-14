@@ -49,12 +49,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ScrobbleWall – Sua música em forma de arte",
     description: "Crie colagens com seus álbuns mais ouvidos no Last.fm e compartilhe sua identidade musical.",
-    url: "https://www.scrobblewall.art",
+    url: "https://scrobblewall.fun",
     siteName: "ScrobbleWall",
     type: "website",
     images: [
       {
-        url: "https://www.scrobblewall.art/og-image.png",
+        url: "https://scrobblewall.fun/og-image.png",
         width: 1200,
         height: 630,
         alt: "Exemplo de colagem do ScrobbleWall"
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ScrobbleWall – Sua música em forma de arte",
-    images: ["https://www.scrobblewall.art/logo-color.png"]
+    images: ["https://scrobblewall.fun/logo-color.png"]
   }
 };
 
