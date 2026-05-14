@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from '../page.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -12,7 +12,7 @@ interface CollageSectionProps {
   fetchAlbums: () => void;
   loading: boolean;
   error: string;
-  downloadImage: (includeInfo: boolean) => void;
+  downloadImage: () => void;
   albums: any[];
   includeInfo: boolean;
   setIncludeInfo: React.Dispatch<React.SetStateAction<boolean>>;

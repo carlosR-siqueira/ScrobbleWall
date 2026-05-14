@@ -3,7 +3,6 @@
 import React from 'react';
 import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
-import GoogleMobileAd from '../components/adsComponents/GoogleMobileAd';
 import PageWithSidebarAds from '../components/adsComponents/PageWithSidebarAds';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -43,7 +42,6 @@ const Sobre = () => {
           {t('about.thanks')}
         </p>
 
-        <GoogleMobileAd />
       </div>
     </PageWithSidebarAds>
   );

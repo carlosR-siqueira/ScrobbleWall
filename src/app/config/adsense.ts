@@ -21,7 +21,8 @@ export const ADSENSE_CONFIG = {
   BREAKPOINTS: {
     MOBILE: 768,
     TABLET: 1024,
-    DESKTOP: 1200
+    DESKTOP: 1200,
+    SIDEBAR_MIN: 1280
   },
   
   // Tamanhos de propaganda (corrigidos para horizontal)
@@ -44,8 +45,11 @@ export const isAdSenseAvailable = (): boolean => {
 };
 
 // Função para carregar propaganda
-export const loadAd = (): void => {
-  if (typeof window !== 'undefined' && window.adsbygoogle) {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+export const loadAd = (): boolean => {
+  if (typeof window === 'undefined' || !window.adsbygoogle) {
+    return false;
   }
+
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
+  return true;
 }; 

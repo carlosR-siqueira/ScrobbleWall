@@ -631,3 +631,19 @@ As seguintes páginas usam o wrapper `PageWithSidebarAds`:
 - Verificar breakpoints CSS
 - Verificar se os estilos mobile estão sendo aplicados
 - Confirmar se o slot mobile está sendo usado corretamente 
+## Política de Exibição (Atualizada em 14/05/2026)
+
+### Matriz por página
+- Home (`/`): 2 anúncios inline (`top` e `bottom`), sem sidebar.
+- Sobre (`/sobre`): 1 anúncio inline no conteúdo + sidebar apenas em desktop largo.
+- Conectar (`/conectar`): 1 anúncio inline no conteúdo + sidebar apenas em desktop largo.
+- Contato (`/contato`): 1 anúncio inline no final, sem sidebar.
+- Generate (`/generate`): 1 anúncio no formulário e 1 anúncio no resultado.
+
+### Regras de layout
+- Sidebar só é renderizada com viewport >= `1280px`.
+- Containers de anúncio usam reserva mínima de espaço para reduzir layout shift.
+- Estilos globais não forçam `iframe`/`adsbygoogle` com `!important`.
+
+### Auto Ads
+- Formatos automáticos `Anchor` e `Vignette` devem ficar desativados no painel do AdSense para evitar sobreposição de rodapé/formulários.

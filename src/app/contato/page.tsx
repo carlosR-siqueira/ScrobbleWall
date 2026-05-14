@@ -4,7 +4,6 @@ import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './page.module.css';
 import GoogleResponsiveAd from '../components/adsComponents/GoogleResponsiveAd';
-import PageWithSidebarAds from '../components/adsComponents/PageWithSidebarAds';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Contato = () => {
@@ -20,8 +19,7 @@ const Contato = () => {
   }
 
   return (
-    <PageWithSidebarAds>
-      <div className={styles.container}>
+    <div className={styles.container}>
         <h1 className={styles.title}>{t('contact.title')}</h1>
         <p className={styles.paragraph}>
           {t('contact.description')}
@@ -51,7 +49,6 @@ const Contato = () => {
         {/* Propaganda no final da página */}
         <GoogleResponsiveAd position="bottom" forceHorizontal={true} />
       </div>
-    </PageWithSidebarAds>
   );
 };
 

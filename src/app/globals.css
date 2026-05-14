@@ -30,11 +30,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('../../public/tijolo-brasil-edit.jpg');
   background-size: cover;
-  background-blend-mode:luminosity !important;
+  background-blend-mode: luminosity !important;
 }
 
-.containerPrincipal{
-  flex: 1;  
+.containerPrincipal {
+  flex: 1;
 }
 
 * {
@@ -55,241 +55,75 @@ a {
   }
 }
 
-/* Estilos globais para propagandas do AdSense */
+/* Ads - layout-safe defaults */
 .ad-container-responsive,
 .ad-container-multiplex,
 .ad-container-article,
 .ad-container,
-.ad-container-sidebar,
-.ad-container-mobile {
+.ad-container-mobile,
+.ad-container-vertical {
   width: 100%;
-  max-width: 728px;
   margin: 20px auto;
   text-align: center;
-  min-height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
-  overflow: visible;
-  position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
 
-/* Estilos específicos para anúncios da sidebar */
 .ad-container-sidebar {
+  width: 120px;
+  min-width: 120px;
   max-width: 120px;
   min-height: 500px;
   margin: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.adsbygoogle {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ad-slot-sidebar {
   width: 120px;
   height: 500px;
 }
 
-/* Estilos específicos para anúncios mobile */
-.ad-container-mobile {
-  max-width: 320px;
-  min-height: 50px;
-  margin: 15px auto;
+.ad-loading {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 8px;
 }
 
-.adsbygoogle {
-  display: block !important;
-  width: 100% !important;
-  max-width: 728px !important;
-  min-height: 90px !important;
-  margin: 0 auto !important;
-  overflow: visible !important;
-  position: relative !important;
-  z-index: 1 !important;
+.ad-error {
+  color: #ff6b6b;
+  font-size: 14px;
+  font-style: italic;
+  padding: 12px;
+  border: 1px solid #ff6b6b;
+  border-radius: 6px;
+  background-color: rgba(255, 245, 245, 0.95);
 }
 
-/* Estilos específicos para anúncios da sidebar */
-.ad-container-sidebar .adsbygoogle {
-  display: inline-block !important;
-  width: 120px !important;
-  height: 500px !important;
-  max-width: 120px !important;
-  min-height: 500px !important;
-  margin: 0 !important;
-}
-
-/* Estilos específicos para anúncios mobile */
-.ad-container-mobile .adsbygoogle {
-  display: block !important;
-  width: 100% !important;
-  max-width: 320px !important;
-  min-height: 50px !important;
-  margin: 0 auto !important;
-}
-
-/* Garantir que as propagandas não quebrem o layout */
-.adsbygoogle[data-ad-format="horizontal"] {
-  min-height: 90px !important;
-  max-height: 90px !important;
-}
-
-.adsbygoogle[data-ad-format="auto"] {
-  min-height: 90px !important;
-}
-
-.adsbygoogle[data-ad-format="autorelaxed"] {
-  min-height: 90px !important;
-}
-
-/* Responsividade para mobile */
 @media (max-width: 768px) {
   .ad-container-responsive,
   .ad-container-multiplex,
   .ad-container-article,
   .ad-container,
   .ad-container-mobile {
-    max-width: 320px;
-    min-height: 50px;
-    margin: 15px auto;
-    padding: 0 5px;
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
+    margin: 14px auto;
+    padding: 0 8px;
+    max-width: 336px;
   }
-  
+
   .ad-container-sidebar {
-    display: none !important;
-  }
-  
-  .adsbygoogle {
-    max-width: 320px !important;
-    min-height: 50px !important;
-    width: 100% !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Responsividade para mobile pequeno */
-@media (max-width: 480px) {
-  .ad-container-responsive,
-  .ad-container-multiplex,
-  .ad-container-article,
-  .ad-container,
-  .ad-container-mobile {
-    max-width: 300px;
-    min-height: 50px;
-    margin: 10px auto;
-    padding: 0 2px;
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-  }
-  
-  .adsbygoogle {
-    max-width: 300px !important;
-    min-height: 50px !important;
-    width: 100% !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Garantir que as propagandas não sejam afetadas por outros estilos */
-.adsbygoogle * {
-  box-sizing: border-box !important;
-}
-
-/* Evitar conflitos com outros estilos */
-.adsbygoogle iframe {
-  border: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-}
-
-/* Garantir que os containers não sejam cortados */
-.ad-container-responsive,
-.ad-container-multiplex,
-.ad-container-article,
-.ad-container,
-.ad-container-sidebar,
-.ad-container-mobile {
-  position: relative;
-  z-index: 1;
-}
-
-/* Forçar exibição em mobile */
-@media (max-width: 768px) {
-  .adsbygoogle {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  .ad-container-responsive,
-  .ad-container-multiplex,
-  .ad-container-article,
-  .ad-container,
-  .ad-container-mobile {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-/* Estilos específicos para a página principal */
-@media (max-width: 768px) {
-  .container .ad-container-responsive,
-  .container .ad-container-multiplex,
-  .container .ad-container-article,
-  .container .ad-container,
-  .container .ad-container-mobile {
-    margin: 15px auto !important;
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 320px !important;
-  }
-  
-  .container .adsbygoogle {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 320px !important;
-  }
-}
-
-/* Melhorias específicas para mobile - forçar display */
-@media (max-width: 768px) {
-  /* Forçar todos os containers de anúncio a aparecerem */
-  .ad-container-responsive,
-  .ad-container-multiplex,
-  .ad-container-article,
-  .ad-container,
-  .ad-container-mobile {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 320px !important;
-    margin: 15px auto !important;
-  }
-  
-  /* Forçar todos os anúncios a aparecerem */
-  .adsbygoogle {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 320px !important;
-  }
-  
-  /* Garantir que iframes dos anúncios apareçam */
-  .adsbygoogle iframe {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    display: none;
   }
 }

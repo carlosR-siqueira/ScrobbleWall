@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import GoogleSidebarAd from './GoogleSidebarAd';
+import { ADSENSE_CONFIG } from '../../config/adsense';
 
 interface PageWithSidebarAdsProps {
   children: React.ReactNode;
@@ -11,17 +12,31 @@ export default function PageWithSidebarAds({ children }: PageWithSidebarAdsProps
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+
     const checkDesktop = () => {
-      setIsDesktop(window.innerWidth > 768);
+      setIsDesktop(window.innerWidth >= ADSENSE_CONFIG.BREAKPOINTS.SIDEBAR_MIN);
     };
 
     // Verificar no carregamento inicial
     checkDesktop();
 
     // Adicionar listener para mudanças de tamanho
-    window.addEventListener('resize', checkDesktop);
+    const onResize = () => {
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(checkDesktop, 120);
+    };
 
-    return () => window.removeEventListener('resize', checkDesktop);
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+    };
   }, []);
 
   if (!isDesktop) {
@@ -34,11 +49,11 @@ export default function PageWithSidebarAds({ children }: PageWithSidebarAdsProps
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'flex-start',
-      gap: '15px',
-      maxWidth: '1400px',
+      gap: '24px',
+      maxWidth: '1500px',
       margin: '0 auto',
       padding: '0 20px',
-      minHeight: '100vh'
+      minHeight: '100vh',
     }}>
       {/* Anúncio lateral esquerdo */}
       <div style={{ 

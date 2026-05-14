@@ -37,7 +37,7 @@ const Header: React.FC = () => {
         </button>
 
         <nav className={styles.nav}>
-          <Link href="/" className={styles.navLink} onClick={() => (window.location.href = '/')}>{t('header.home')}</Link>
+          <Link href="/" className={styles.navLink}>{t('header.home')}</Link>
           <Link href="/sobre" className={styles.navLink}>{t('header.about')}</Link>
           <Link href="/contato" className={styles.navLink}>{t('header.contact')}</Link>
           <Link href="/conectar" className={styles.navLink}>{t('header.connectSpotify')}</Link>
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
             <Card variant="elevation" className={styles.dividerContainer}>
               <Divider />
             </Card>
-            <div onClick={() => { window.location.href = '/'; setIsMenuOpen(false); }} className={styles.navLink}>{t('header.home')}</div>
+            <Link href="/" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.home')}</Link>
             <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.about')}</Link>
             <Link href="/contato" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.contact')}</Link>
             <Link href="/conectar" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>{t('header.connectSpotify')}</Link>
