@@ -11,52 +11,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import styles from '../page.module.css';
 import { styled } from '@mui/material/styles';
+import type { Album } from '../../lib/covers/metadata';
+import { useCovers } from '../../lib/covers/useCovers';
+import { renderCollage } from '../../lib/covers/export';
 
-export default function GeneratePage() {
-  const { t } = useLanguage();
-  const [username, setUsername] = useState('');
-  const [period, setPeriod] = useState('7day');
-  const [gridSize, setGridSize] = useState(3);
-  const [albums, setAlbums] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [includeInfo, setIncludeInfo] = useState(false);
-  const [includePlayCount, setIncludePlayCount] = useState(false);
-  const [etapa, setEtapa] = useState<'formulario' | 'resultado'>('formulario');
-  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
-
-  const collageRef = useRef<HTMLDivElement>(null);
-  const allowNavigationRef = useRef(false);
-
-  const openSupportModal = (nextUrl?: string) => {
-    if (isSupportModalOpen) return;
-    setPendingNavigation(nextUrl ?? null);
-    setIsSupportModalOpen(true);
-  };
-
-  const fetchAlbums = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch(`/api/collage?username=${username}&period=${period}&limit=${gridSize * gridSize}`);
-      const data = await res.json();
-      if (data.albums) {
-        setAlbums(data.albums);
-        setEtapa('resultado');
-      } else {
-        setAlbums([]);
-        setError(t('generate.errorData'));
-      }
-    } catch (err) {
-      setAlbums([]);
-      setError(t('generate.errorNetwork'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const CustomSwitch = styled(Switch)(({ theme }) => ({
+const CustomSwitch = styled(Switch)({
     '& .MuiSwitch-switchBase': {
       color: '#ccc',
       '&.Mui-checked': {
@@ -69,91 +28,114 @@ export default function GeneratePage() {
     '& .MuiSwitch-track': {
       backgroundColor: '#444',
     },
-  }));
+});
 
-  const fallbackImage = '/fallback1.png';
+export default function GeneratePage() {
+  const { t } = useLanguage();
+  const [username, setUsername] = useState('');
+  const [period, setPeriod] = useState('7day');
+  const [gridSize, setGridSize] = useState(3);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [includeInfo, setIncludeInfo] = useState(false);
+  const [includePlayCount, setIncludePlayCount] = useState(false);
+  const [etapa, setEtapa] = useState<'formulario' | 'resultado'>('formulario');
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
 
-  const downloadImage = async () => {
-    const imageSize = 300;
-    const canvasSize = gridSize * imageSize;
-    const canvas = document.createElement('canvas');
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  const [downloading, setDownloading] = useState(false);
+  const [confirmFallback, setConfirmFallback] = useState(false);
+  const { session, states: covers } = useCovers(albums);
+  const pendingCovers = covers.filter(cover => ['loading', 'retrying'].includes(cover.status)).length;
+  const unavailableCovers = covers.filter(cover => ['fallback', 'failed'].includes(cover.status)).length;
+  const fetchController = useRef<AbortController | null>(null);
+  const mounted = useRef(true);
+  const downloadGuard = useRef(false);
 
-    const loadImage = (src: string): Promise<HTMLImageElement> =>
-      new Promise((resolve) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = () => {
-          const fallbackImg = new Image();
-          fallbackImg.src = fallbackImage;
-          fallbackImg.onload = () => resolve(fallbackImg);
-          fallbackImg.onerror = () => resolve(fallbackImg);
-        };
-        img.src = src || fallbackImage;
-      });
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; fetchController.current?.abort(); };
+  }, []);
 
+  const retryCover = (index: number) => {
+    if (downloading) return;
+    setConfirmFallback(false);
+    setError('');
+    session?.retry(index);
+  };
+
+  const collageRef = useRef<HTMLDivElement>(null);
+  const allowNavigationRef = useRef(false);
+
+  const openSupportModal = (nextUrl?: string) => {
+    if (isSupportModalOpen) return;
+    setPendingNavigation(nextUrl ?? null);
+    setIsSupportModalOpen(true);
+  };
+
+  const fetchAlbums = async () => {
+    fetchController.current?.abort();
+    const controller = new AbortController();
+    fetchController.current = controller;
+    setLoading(true);
+    setError('');
+    setConfirmFallback(false);
     try {
-      for (let i = 0; i < albums.length; i++) {
-        const album = albums[i];
-        const img = await loadImage(album.image);
-        const x = (i % gridSize) * imageSize;
-        const y = Math.floor(i / gridSize) * imageSize;
-        ctx.drawImage(img, x, y, imageSize, imageSize);
-
-        if (includeInfo || includePlayCount) {
-          let infoHeight = 0;
-          let currentY = y + imageSize;
-          
-          if (includeInfo) {
-            infoHeight += 50;
-            currentY -= infoHeight;
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-            ctx.fillRect(x, currentY, imageSize, infoHeight);
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 14px Arial';
-            ctx.fillText(album.name, x + 5, currentY + 20);
-            ctx.font = '12px Arial';
-            ctx.fillText(album.artist, x + 5, currentY + 35);
-          }
-          
-          if (includePlayCount) {
-            const playHeight = 30;
-            currentY -= playHeight;
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-            ctx.fillRect(x, currentY, imageSize, playHeight);
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 12px Arial';
-            ctx.fillText(`${album.playcount} plays`, x + 5, currentY + 20);
-          }
-        }
+      const params = new URLSearchParams({ username, period, limit: String(gridSize * gridSize) });
+      const res = await fetch(`/api/collage?${params}`, { signal: controller.signal });
+      const data = await res.json();
+      if (!mounted.current || controller.signal.aborted) return;
+      if (!res.ok || !Array.isArray(data.albums)) {
+        setError(t('generate.errorData'));
+      } else if (!data.albums.length) {
+        setAlbums([]);
+        setError(t('generate.noAlbums'));
+      } else {
+        setAlbums(data.albums);
+        setEtapa('resultado');
       }
+    } catch {
+      if (mounted.current && !controller.signal.aborted) setError(t('generate.errorNetwork'));
+    } finally {
+      if (mounted.current && !controller.signal.aborted) setLoading(false);
+    }
+  };
 
-      const formatPeriodName = (period: string): string => {
-        const mapping: Record<string, string> = {
-          '7day': t('generate.period7day'),
-          '1month': t('generate.period1month'),
-          '3month': t('generate.period3month'),
-          '12month': t('generate.period12month'),
-          'overall': t('generate.periodOverall')
-        };
-        return mapping[period] || period;
+  const downloadImage = async (allowFallback = false) => {
+    if (downloadGuard.current || !session || !albums.length) return;
+    downloadGuard.current = true;
+    setDownloading(true);
+    setError('');
+    try {
+      // Wait for this same session: export never loads a second set of images.
+      const assets = await session.wait();
+      if (!mounted.current) return;
+      if (session.states.some(cover => cover.status === 'fallback') && !allowFallback) {
+        setConfirmFallback(true);
+        return;
+      }
+      const data = renderCollage(albums, assets, gridSize, includeInfo, includePlayCount);
+      const mapping: Record<string, string> = {
+        '7day': t('generate.period7day'), '1month': t('generate.period1month'),
+        '3month': t('generate.period3month'), '12month': t('generate.period12month'),
+        'overall': t('generate.periodOverall'),
       };
-
-      const formattedPeriod = formatPeriodName(period);
-      const today = new Date();
-      const formattedDate = today.toISOString().split('T')[0];
-
+      const formattedDate = new Date().toISOString().split('T')[0];
       const link = document.createElement('a');
-      link.download = `ScrobbleWall - ${formattedPeriod} - ${formattedDate}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.download = `ScrobbleWall - ${mapping[period] || period} - ${formattedDate}.png`;
+      link.href = data;
       link.click();
+      setConfirmFallback(false);
       openSupportModal();
     } catch (error) {
-      console.error('Erro ao carregar imagens:', error);
+      if (mounted.current) {
+        setError(t('generate.errorExport'));
+        console.warn('[export]', error instanceof Error && error.name === 'SecurityError' ? 'canvas_cors' : 'export_failed');
+      }
+    } finally {
+      downloadGuard.current = false;
+      if (mounted.current) setDownloading(false);
     }
   };
 
@@ -228,7 +210,7 @@ export default function GeneratePage() {
             fetchAlbums={fetchAlbums}
             loading={loading}
             error={error}
-            downloadImage={downloadImage}
+            downloadImage={() => { void downloadImage(); }}
             albums={albums}
             includeInfo={includeInfo}
             setIncludeInfo={setIncludeInfo}
@@ -244,7 +226,8 @@ export default function GeneratePage() {
           <div className={styles.resultActions}>
             <div className={styles.VoltarButton}>
               <IconButton
-                onClick={() => setEtapa('formulario')}
+                onClick={() => { setEtapa('formulario'); setAlbums([]); setError(''); setConfirmFallback(false); }}
+                disabled={downloading}
                 aria-label={t('generate.backButton')}
                 sx={{ color: '#ff9f00', fontSize: '1.2rem' }}
               >
@@ -257,6 +240,7 @@ export default function GeneratePage() {
               <div className={styles.switchContainer}>
                 <CustomSwitch
                   checked={includePlayCount}
+                  disabled={downloading}
                   onChange={(e) => setIncludePlayCount(e.target.checked)}
                   inputProps={{ 'aria-label': t('generate.includePlayCount') }}
                 />
@@ -267,6 +251,7 @@ export default function GeneratePage() {
               <div className={styles.switchContainer}>
                 <CustomSwitch
                   checked={includeInfo}
+                  disabled={downloading}
                   onChange={(e) => setIncludeInfo(e.target.checked)}
                   inputProps={{ 'aria-label': t('generate.includeInfo') }}
                 />
@@ -274,16 +259,26 @@ export default function GeneratePage() {
               </div>
 
 
-              <button onClick={downloadImage} className={styles.button}>
-                {t('generate.downloadButton')}
+              <button onClick={() => { void downloadImage(); }} disabled={downloading || !session} className={styles.button}>
+                {downloading ? t('generate.waitingCovers') : t('generate.downloadButton')}
               </button>
             </div>
           </div>
           
+          <div className={styles.coverStatus} role="status" aria-live="polite">
+            {pendingCovers > 0 && <p>{t('generate.pendingCovers').replace('{count}', String(pendingCovers))}</p>}
+            {unavailableCovers > 0 && pendingCovers === 0 && <p>{t('generate.unavailableCovers').replace('{count}', String(unavailableCovers))}</p>}
+            {confirmFallback && <button type="button" className={styles.button} disabled={downloading}
+              onClick={() => { void downloadImage(true); }}>{t('generate.downloadFallback')}</button>}
+            {error && <p role="alert">{error}</p>}
+          </div>
           <AlbumGrid
             albums={albums}
             gridSize={gridSize}
             collageRef={collageRef}
+            covers={covers}
+            retry={retryCover}
+            onImageError={(index) => session?.previewFailed(index)}
           />
           
           <AdWrapper topMargin={20} bottomMargin={20} />

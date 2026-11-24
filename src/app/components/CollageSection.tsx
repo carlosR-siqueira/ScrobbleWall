@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styles from '../page.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
+import type { Album } from '../../lib/covers/metadata';
 
 interface CollageSectionProps {
   username: string;
@@ -13,7 +14,7 @@ interface CollageSectionProps {
   loading: boolean;
   error: string;
   downloadImage: () => void;
-  albums: any[];
+  albums: Album[];
   includeInfo: boolean;
   setIncludeInfo: React.Dispatch<React.SetStateAction<boolean>>;
   isGeneratePage?: boolean;
