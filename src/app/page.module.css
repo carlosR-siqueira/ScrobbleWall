@@ -541,6 +541,52 @@
   height: 100%;
 }
 
+.coverPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #252525;
+  color: #b6b6b6;
+  padding: 8px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.coverStatus {
+  color: #eee;
+  background: #000c;
+  border-radius: 8px;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  max-width: 100%;
+}
+
+.coverStatus:empty {
+  display: none;
+}
+
+.coverRetry {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 1;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+  padding: 4px;
+  color: #fff;
+  background: #252525e6;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 .albumInfo {
   position: absolute;
   bottom: 0;

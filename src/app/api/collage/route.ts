@@ -1,41 +1,17 @@
-import { NextRequest } from 'next/server';
+import { normalizeAlbums } from '../../../lib/covers/metadata';
+import { lastfm, metadataFailure } from '../../../lib/covers/lastfm.server';
 
-const API_KEY = process.env.LASTFM_API_KEY!;
+export const runtime = 'nodejs';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const username = searchParams.get('username');
-  const period = searchParams.get('period') || '7day';
-  const limit = searchParams.get('limit') || '9';
-
-  if (!username) {
-    return new Response(JSON.stringify({ error: 'Missing username' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&api_key=${API_KEY}&format=json&period=${period}&limit=${limit}&extended=1`;
-
+export async function GET(req: Request) {
+  const params = new URL(req.url).searchParams;
+  const username = params.get('username')?.trim();
+  const period = params.get('period') || '7day';
+  const limit = params.get('limit') || '9';
+  if (!username || username.length > 100 || !['7day', '1month', '3month', '6month', '12month', 'overall'].includes(period) ||
+      !['9', '16', '25'].includes(limit)) return Response.json({ error: 'invalid_parameters' }, { status: 400 });
   try {
-    const response = await fetch(url);
-    const json = await response.json();
-
-    const albums = json.topalbums?.album?.map((item: any) => ({
-      name: item.name,
-      artist: item.artist.name,
-      image: item.image[3]['#text'] || '',
-      playcount: item.playcount || 0,
-    })) || [];
-
-    return new Response(JSON.stringify({ albums }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: 'Erro ao buscar dados do Last.fm' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+    const albums = normalizeAlbums(await lastfm('user.gettopalbums', { user: username, period, limit, extended: '1' })).slice(0, Number(limit));
+    return Response.json({ albums }, { headers: { 'Cache-Control': 'no-store' } });
+  } catch (error) { return metadataFailure(error); }
 }
